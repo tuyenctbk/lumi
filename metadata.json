@@ -1,0 +1,6 @@
+{
+  "name": "Lumi",
+  "description": "A minimalist, game-focused language learning app with interactive mascot Lumi for Android TV, tablets, and mobile.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,651 @@
+package com.example.ui.screens
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.DirectionsRun
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Hearing
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.Palette
+import androidx.compose.material.icons.filled.QrCode
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.model.LearningCategory
+import com.example.model.MascotMood
+import com.example.model.TargetLanguage
+import com.example.ui.components.FocusableCard
+import com.example.ui.components.LumiMascot
+import com.example.ui.components.LumiQuestModal
+import com.example.ui.components.ParentalGate
+import com.example.ui.components.PhysicalBreakDialog
+import com.example.ui.components.TopBarHeader
+import com.example.ui.theme.SleekBackground
+import com.example.ui.theme.SleekCoral
+import com.example.ui.theme.SleekCoralDark
+import com.example.ui.theme.SleekEmerald
+import com.example.ui.theme.SleekEmeraldDark
+import com.example.ui.theme.SleekGold
+import com.example.ui.theme.SleekGoldDark
+import com.example.ui.theme.SleekOcean
+import com.example.ui.theme.SleekOceanDark
+import com.example.ui.theme.SleekPurple
+import com.example.ui.theme.SleekSurface
+import com.example.ui.theme.SleekSurfaceBorder
+import com.example.ui.theme.SleekTextDark
+import com.example.ui.theme.SleekTextMuted
+import com.example.ui.theme.SleekTextSubtle
+import com.example.ui.viewmodel.LumiViewModel
+
+data class GameShowItem(
+    val id: String,
+    val title: String,
+    val subtitle: String,
+    val icon: ImageVector,
+    val color: Color,
+    val colorDark: Color,
+    val badge: String
+)
+
+@Composable
+fun HomeScreen(
+    viewModel: LumiViewModel,
+    onNavigateCategory: (LearningCategory) -> Unit,
+    onNavigateGame: (String) -> Unit,
+    onNavigateParentHub: () -> Unit,
+    onOpenLanguagePicker: () -> Unit,
+    onNavigateWorldMap: () -> Unit = { onNavigateGame("world_map") },
+    onNavigateParentQrSync: () -> Unit = { onNavigateGame("parent_qr_sync") }
+) {
+    val targetLanguage by viewModel.targetLanguage.collectAsState()
+    val mascotMood by viewModel.mascotMood.collectAsState()
+    val mascotBubble by viewModel.mascotSpeechBubble.collectAsState()
+    val isSpeaking by viewModel.isSpeaking.collectAsState()
+    val bilingualMode by viewModel.bilingualMode.collectAsState()
+    val points by viewModel.points.collectAsState()
+    val streakDays by viewModel.streakDays.collectAsState()
+
+    val activeBreakQuest by viewModel.activePhysicalBreak.collectAsState()
+    val isBreakVisible by viewModel.isPhysicalBreakVisible.collectAsState()
+
+    var showParentGate by remember { mutableStateOf(false) }
+
+    val gameShows = remember {
+        listOf(
+            GameShowItem(
+                id = "mystery_spotlight",
+                title = "Mystery Spotlight",
+                subtitle = "Flashlight Discovery",
+                icon = Icons.Default.Search,
+                color = SleekGold,
+                colorDark = Color(0xFFD99B16),
+                badge = "Show #1"
+            ),
+            GameShowItem(
+                id = "sound_match",
+                title = "Sound & Word Match",
+                subtitle = "Listen & Pop!",
+                icon = Icons.Default.Hearing,
+                color = SleekEmerald,
+                colorDark = SleekEmeraldDark,
+                badge = "Show #2"
+            ),
+            GameShowItem(
+                id = "shadow_guess",
+                title = "Shadow Silhouette",
+                subtitle = "Guess the Creature",
+                icon = Icons.Default.Visibility,
+                color = SleekPurple,
+                colorDark = Color(0xFF5B1AA8),
+                badge = "Show #3"
+            ),
+            GameShowItem(
+                id = "movement_quest",
+                title = "Movement Quest",
+                subtitle = "Physical Fun Break",
+                icon = Icons.Default.DirectionsRun,
+                color = SleekOcean,
+                colorDark = SleekOceanDark,
+                badge = "Active!"
+            ),
+            GameShowItem(
+                id = "color_mixer",
+                title = "Color Magic Mixer",
+                subtitle = "Paint with Words",
+                icon = Icons.Default.Palette,
+                color = SleekCoral,
+                colorDark = SleekCoralDark,
+                badge = "Show #4"
+            ),
+            GameShowItem(
+                id = "find_it",
+                title = "Find It Audio Matching",
+                subtitle = "Listen to Lumi & Tap!",
+                icon = Icons.Default.Hearing,
+                color = SleekOcean,
+                colorDark = SleekOceanDark,
+                badge = "NEW!"
+            ),
+            GameShowItem(
+                id = "achievement_gallery",
+                title = "Digital Badges Gallery",
+                subtitle = "Milestones & Streaks",
+                icon = Icons.Default.EmojiEvents,
+                color = SleekGold,
+                colorDark = Color(0xFFD99B16),
+                badge = "Badges"
+            ),
+            GameShowItem(
+                id = "sticker_book",
+                title = "Sticker & Trophies",
+                subtitle = "Your Collection",
+                icon = Icons.Default.EmojiEvents,
+                color = SleekGold,
+                colorDark = Color(0xFFD99B16),
+                badge = "Rewards"
+            )
+        )
+    }
+
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(SleekBackground)
+    ) {
+        val isMobile = maxWidth < 600.dp
+        val isTv = maxWidth >= 840.dp
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = if (isMobile) 80.dp else 100.dp)
+        ) {
+            // Lean-back TV & Mobile Top Bar
+            TopBarHeader(
+                targetLanguage = targetLanguage,
+                points = points,
+                streakDays = streakDays,
+                bilingualMode = bilingualMode,
+                onToggleBilingual = { viewModel.toggleBilingualMode() },
+                onOpenLanguagePicker = onOpenLanguagePicker,
+                onOpenParentHub = { showParentGate = true },
+                onOpenWorldMap = onNavigateWorldMap
+            )
+
+            // Hero Interactive World Map Banner (Weighted row so "Open Map" button is never squeezed!)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
+            ) {
+                FocusableCard(
+                    onClick = onNavigateWorldMap,
+                    shape = RoundedCornerShape(26.dp),
+                    backgroundColor = Color(0xFFE3F2FD),
+                    unfocusedBorderColor = Color(0xFF90CAF9),
+                    focusedBorderColor = SleekOceanDark,
+                    focusedScale = 1.02f,
+                    elevation = 3.dp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("hero_world_map_card")
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = if (isMobile) 14.dp else 20.dp, vertical = 14.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = SleekOcean,
+                                modifier = Modifier.size(if (isMobile) 44.dp else 52.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.Map,
+                                        contentDescription = "World Map",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(if (isMobile) 24.dp else 28.dp)
+                                    )
+                                }
+                            }
+
+                            Column {
+                                Text(
+                                    text = "🗺️ Explore the Interactive World Map",
+                                    fontSize = if (isMobile) 14.sp else 18.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = SleekTextDark,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                                Text(
+                                    text = "Sail across Nature, Space, Food & Action Islands!",
+                                    fontSize = if (isMobile) 11.sp else 13.sp,
+                                    color = SleekOceanDark,
+                                    fontWeight = FontWeight.SemiBold,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = SleekOcean,
+                            modifier = Modifier.padding(start = 10.dp)
+                        ) {
+                            Text(
+                                text = "Open Map 🚀",
+                                fontSize = if (isMobile) 12.sp else 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                maxLines = 1,
+                                softWrap = false,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Streak Counter Banner Integrated with Room DB
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 4.dp)
+            ) {
+                com.example.ui.components.StreakCounter(
+                    currentStreakDays = streakDays,
+                    targetStreakGoal = 7,
+                    compact = true,
+                    modifier = Modifier.clickable { onNavigateGame("achievement_gallery") }
+                )
+            }
+
+            // Section 1: Explore Worlds & Islands
+            Column(modifier = Modifier.padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 8.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Surface(
+                            shape = CircleShape,
+                            color = Color(0xFFFFF0C2),
+                            modifier = Modifier.size(28.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Icon(
+                                    imageVector = Icons.Default.AutoAwesome,
+                                    contentDescription = null,
+                                    tint = SleekGoldDark,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+                        Column {
+                            Text(
+                                text = "World Explorer Islands",
+                                style = if (isMobile) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark
+                            )
+                            Text(
+                                text = "CHOOSE AN ISLAND TO START EXPLORING",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextSubtle,
+                                letterSpacing = 0.8.sp
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Responsive Architecture: TvLazyRow on TV / wide screens vs Multi-card scroll on mobile
+                LazyRow(
+                    contentPadding = PaddingValues(end = if (isMobile) 14.dp else 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(LearningCategory.entries.toList()) { category ->
+                        CategoryIslandCard(
+                            category = category,
+                            isMobile = isMobile,
+                            onClick = {
+                                viewModel.setActiveCategory(category)
+                                onNavigateCategory(category)
+                            }
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Section 2: Gamified Learning Shows
+            Column(modifier = Modifier.padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "The Lumi Game Shows",
+                            style = if (isMobile) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = SleekTextDark,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = "PLAY INTERACTIVE GAMES & WIN SHINING STARS",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = SleekTextSubtle,
+                            letterSpacing = 0.8.sp,
+                            maxLines = 1
+                        )
+                    }
+
+                    // Quick Physical Break Trigger
+                    FocusableCard(
+                        onClick = { viewModel.triggerPhysicalActivitySuggestion() },
+                        shape = RoundedCornerShape(14.dp),
+                        backgroundColor = SleekOcean,
+                        unfocusedBorderColor = SleekOceanDark,
+                        focusedBorderColor = SleekGold,
+                        testTag = "home_quick_physical_break"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DirectionsRun,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(14.dp)
+                            )
+                            Text(
+                                text = "Active Break 🏃",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                LazyRow(
+                    contentPadding = PaddingValues(end = if (isMobile) 14.dp else 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(gameShows) { show ->
+                        GameShowCard(
+                            item = show,
+                            isMobile = isMobile,
+                            onClick = { onNavigateGame(show.id) }
+                        )
+                    }
+                }
+            }
+        }
+
+        // Mascot Companion Pin in Bottom Corner
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = if (isMobile) 12.dp else 24.dp, bottom = if (isMobile) 10.dp else 16.dp)
+        ) {
+            LumiMascot(
+                mood = mascotMood,
+                isSpeaking = isSpeaking,
+                thoughtBubbleEmoji = mascotBubble,
+                size = if (isMobile) 86.dp else 125.dp,
+                onClick = {
+                    val greetings = listOf(
+                        "You are doing amazing!",
+                        "Which island should we visit next?",
+                        "I love learning new words with you!",
+                        "Tap the World Map to explore!"
+                    )
+                    viewModel.speakLumi(greetings.random(), MascotMood.HAPPY)
+                }
+            )
+        }
+
+        // Periodic Background Physical Activity (Lumi Quest) Dialog
+        if (isBreakVisible && activeBreakQuest != null) {
+            LumiQuestModal(
+                quest = activeBreakQuest!!,
+                onCompleted = { viewModel.completePhysicalActivity(activeBreakQuest!!) },
+                onDismiss = { viewModel.dismissPhysicalActivity() },
+                onReplayAudio = { viewModel.speakLumi(activeBreakQuest!!.spokenPrompt) }
+            )
+        }
+
+        // Parental Gate Modal
+        if (showParentGate) {
+            ParentalGate(
+                onDismiss = { showParentGate = false },
+                onSuccess = {
+                    showParentGate = false
+                    onNavigateParentHub()
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun CategoryIslandCard(
+    category: LearningCategory,
+    isMobile: Boolean = false,
+    onClick: () -> Unit
+) {
+    val categoryColor = Color(category.colorHex)
+
+    FocusableCard(
+        onClick = onClick,
+        shape = RoundedCornerShape(26.dp),
+        backgroundColor = SleekSurface,
+        unfocusedBorderColor = SleekSurfaceBorder,
+        focusedBorderColor = categoryColor,
+        focusedScale = 1.08f,
+        elevation = 3.dp,
+        modifier = Modifier
+            .width(if (isMobile) 155.dp else 190.dp)
+            .height(if (isMobile) 180.dp else 215.dp)
+            .testTag("island_${category.id}")
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(if (isMobile) 12.dp else 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Surface(
+                shape = RoundedCornerShape(20.dp),
+                color = categoryColor.copy(alpha = 0.12f),
+                border = BorderStroke(1.dp, categoryColor.copy(alpha = 0.25f)),
+                modifier = Modifier.size(if (isMobile) 64.dp else 80.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(text = category.emoji, fontSize = if (isMobile) 34.sp else 42.sp)
+                }
+            }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = category.title,
+                    fontSize = if (isMobile) 14.sp else 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = SleekTextDark,
+                    lineHeight = if (isMobile) 17.sp else 20.sp
+                )
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = categoryColor.copy(alpha = 0.15f),
+                    modifier = Modifier.padding(top = 4.dp)
+                ) {
+                    Text(
+                        text = "EXPLORE",
+                        fontSize = 10.sp,
+                        color = categoryColor,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 0.8.sp,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GameShowCard(
+    item: GameShowItem,
+    isMobile: Boolean = false,
+    onClick: () -> Unit
+) {
+    FocusableCard(
+        onClick = onClick,
+        shape = RoundedCornerShape(26.dp),
+        backgroundColor = SleekSurface,
+        unfocusedBorderColor = SleekSurfaceBorder,
+        focusedBorderColor = item.color,
+        focusedScale = 1.08f,
+        elevation = 3.dp,
+        modifier = Modifier
+            .width(if (isMobile) 170.dp else 210.dp)
+            .height(if (isMobile) 170.dp else 195.dp)
+            .testTag("game_card_${item.id}")
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(if (isMobile) 12.dp else 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = item.color,
+                    border = BorderStroke(1.dp, item.colorDark)
+                ) {
+                    Text(
+                        text = item.badge,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+
+                Surface(
+                    shape = CircleShape,
+                    color = item.color.copy(alpha = 0.14f),
+                    modifier = Modifier.size(if (isMobile) 36.dp else 40.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = item.icon,
+                            contentDescription = null,
+                            tint = item.colorDark,
+                            modifier = Modifier.size(if (isMobile) 18.dp else 20.dp)
+                        )
+                    }
+                }
+            }
+
+            Column {
+                Text(
+                    text = item.title,
+                    fontSize = if (isMobile) 15.sp else 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = SleekTextDark
+                )
+                Text(
+                    text = item.subtitle,
+                    fontSize = if (isMobile) 11.sp else 12.sp,
+                    color = SleekTextMuted,
+                    modifier = Modifier.padding(top = 1.dp)
+                )
+            }
+        }
+    }
+}

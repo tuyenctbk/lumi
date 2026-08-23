@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer Glow -->
+    <path
+        android:fillColor="#33FFD54F"
+        android:pathData="M54,20 C74,20 86,34 86,54 C86,74 74,88 54,88 C34,88 22,74 22,54 C22,34 34,20 54,20 Z" />
+
+    <!-- Lumi Main Soft Star-Blob Body -->
+    <path
+        android:fillColor="#FFFFD54F"
+        android:pathData="M54,25 C64,25 72,32 75,41 C82,45 84,54 81,62 C78,71 70,78 61,81 C58,82 50,82 47,81 C38,78 30,71 27,62 C24,54 26,45 33,41 C36,32 44,25 54,25 Z" />
+
+    <!-- Top Crown Light Sprout / Star Point -->
+    <path
+        android:fillColor="#FFFFEE58"
+        android:pathData="M54,17 C57,21 58,26 54,28 C50,26 51,21 54,17 Z" />
+
+    <!-- Rosy Cheeks -->
+    <path
+        android:fillColor="#FFFF8A80"
+        android:pathData="M35,59 C37.8,59 40,61 40,63.5 C40,66 37.8,68 35,68 C32.2,68 30,66 30,63.5 C30,61 32.2,59 35,59 Z" />
+    <path
+        android:fillColor="#FFFF8A80"
+        android:pathData="M73,59 C75.8,59 78,61 78,63.5 C78,66 75.8,68 73,68 C70.2,68 68,66 68,63.5 C68,61 70.2,59 73,59 Z" />
+
+    <!-- Big Cute Expressive Eyes -->
+    <!-- Left Eye -->
+    <path
+        android:fillColor="#FF212121"
+        android:pathData="M43,46 C47,46 50,49.5 50,54 C50,58.5 47,62 43,62 C39,62 36,58.5 36,54 C36,49.5 39,46 43,46 Z" />
+    <!-- Left Eye Sparkles -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M41.5,49 C43,49 44.5,50.5 44.5,52 C44.5,53.5 43,54.5 41.5,54.5 C40,54.5 39,53.5 39,52 C39,50.5 40,49 41.5,49 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M45,56 C45.8,56 46.5,56.7 46.5,57.5 C46.5,58.3 45.8,59 45,59 C44.2,59 43.5,58.3 43.5,57.5 C43.5,56.7 44.2,56 45,56 Z" />
+
+    <!-- Right Eye -->
+    <path
+        android:fillColor="#FF212121"
+        android:pathData="M65,46 C69,46 72,49.5 72,54 C72,58.5 69,62 65,62 C61,62 58,58.5 58,54 C58,49.5 61,46 65,46 Z" />
+    <!-- Right Eye Sparkles -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M63.5,49 C65,49 66.5,50.5 66.5,52 C66.5,53.5 65,54.5 63.5,54.5 C62,54.5 61,53.5 61,52 C61,50.5 62,49 63.5,49 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M67,56 C67.8,56 68.5,56.7 68.5,57.5 C68.5,58.3 67.8,59 67,59 C66.2,59 65.5,58.3 65.5,57.5 C65.5,56.7 66.2,56 67,56 Z" />
+
+    <!-- Cute Cheerful Smile -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF212121"
+        android:strokeWidth="2.8"
+        android:strokeLineCap="round"
+        android:pathData="M50,62 Q54,67 58,62" />
+
+    <!-- Magic Star Twinkles in Hand -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M78,35 Q78,40 73,40 Q78,40 78,45 Q78,40 83,40 Q78,40 78,35 Z" />
+</vector>

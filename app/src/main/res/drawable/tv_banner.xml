@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Gradient Background -->
+    <path
+        android:pathData="M0,0h320v180h-320z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="0"
+                android:startY="0"
+                android:endX="320"
+                android:endY="180"
+                android:type="linear">
+                <item android:color="#FF1E1B4B" android:offset="0.0" />
+                <item android:color="#FF312E81" android:offset="0.5" />
+                <item android:color="#FF0D9488" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Ambient Glow Circle behind Mascot -->
+    <path
+        android:fillColor="#25FDE047"
+        android:pathData="M90,90 m-65,0 a65,65 0 1,0 130,0 a65,65 0 1,0 -130,0" />
+
+    <!-- Lumi Star Mascot -->
+    <!-- Star Body -->
+    <path
+        android:fillColor="#FFFACC15"
+        android:pathData="M90,40 L102,68 L132,70 L108,90 L116,120 L90,104 L64,120 L72,90 L48,70 L78,68 Z" />
+
+    <!-- Star Mascot Crown Light -->
+    <path
+        android:fillColor="#FFFEF08A"
+        android:pathData="M90,28 L94,38 L86,38 Z" />
+
+    <!-- Cute Rosy Cheeks -->
+    <path
+        android:fillColor="#FFF87171"
+        android:pathData="M72,82 A4,3 0 1,0 80,82 A4,3 0 1,0 72,82" />
+    <path
+        android:fillColor="#FFF87171"
+        android:pathData="M100,82 A4,3 0 1,0 108,82 A4,3 0 1,0 100,82" />
+
+    <!-- Big Happy Eyes -->
+    <path
+        android:fillColor="#FF1F2937"
+        android:pathData="M78,74 A4,5 0 1,0 86,74 A4,5 0 1,0 78,74" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M80,72 A1.5,2 0 1,0 83,72 A1.5,2 0 1,0 80,72" />
+
+    <path
+        android:fillColor="#FF1F2937"
+        android:pathData="M94,74 A4,5 0 1,0 102,74 A4,5 0 1,0 94,74" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M96,72 A1.5,2 0 1,0 99,72 A1.5,2 0 1,0 96,72" />
+
+    <!-- Cute Cheerful Smile -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF1F2937"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M85,82 Q90,87 95,82" />
+
+    <!-- Magic Twinkle Sparkles -->
+    <path
+        android:fillColor="#FF38BDF8"
+        android:pathData="M230,35 Q230,43 222,43 Q230,43 230,51 Q230,43 238,43 Q230,43 230,35 Z" />
+    <path
+        android:fillColor="#FF4ADE80"
+        android:pathData="M270,130 Q270,136 264,136 Q270,136 270,142 Q270,136 276,136 Q270,136 270,130 Z" />
+    <path
+        android:fillColor="#FFFBBF24"
+        android:pathData="M150,140 Q150,145 145,145 Q150,145 150,150 Q150,145 155,145 Q150,145 150,140 Z" />
+
+    <!-- App Title Text Backdrop Card -->
+    <path
+        android:fillColor="#20FFFFFF"
+        android:pathData="M160,60 h130 a12,12 0 0,1 12,12 v36 a12,12 0 0,1 -12,12 h-130 a12,12 0 0,1 -12,-12 v-36 a12,12 0 0,1 12,-12 z" />
+
+    <!-- LUMI Brand Title Path Representation -->
+    <!-- L -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M175,75 v26 h14 v-6 h-8 v-20 z" />
+    <!-- U -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M198,75 v18 q0,8 8,8 q8,0 8,-8 v-18 h-6 v18 q0,3 -2,3 q-2,0 -2,-3 v-18 z" />
+    <!-- M -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M224,75 v26 h6 v-18 l5,10 h2 l5,-10 v18 h6 v-26 h-7 l-5,11 l-5,-11 z" />
+    <!-- I -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M258,75 v26 h6 v-26 z" />
+
+</vector>
