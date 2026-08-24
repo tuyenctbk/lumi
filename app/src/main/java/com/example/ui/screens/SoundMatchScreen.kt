@@ -117,7 +117,12 @@ fun SoundMatchScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
-                .padding(if (isMobile) 14.dp else 24.dp)
+                .padding(
+                    start = if (isMobile) 14.dp else 24.dp,
+                    end = if (isMobile) 14.dp else 24.dp,
+                    top = if (isMobile) 4.dp else 8.dp,
+                    bottom = if (isMobile) 14.dp else 24.dp
+                )
         ) {
             // Header
             Row(

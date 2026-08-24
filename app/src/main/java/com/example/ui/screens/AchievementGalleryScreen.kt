@@ -111,7 +111,7 @@ fun AchievementGalleryScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 16.dp)
         ) {
             // Top Header
             Row(

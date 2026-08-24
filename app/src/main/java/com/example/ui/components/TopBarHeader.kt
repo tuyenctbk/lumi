@@ -53,7 +53,12 @@ fun TopBarHeader(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 14.dp, vertical = 10.dp)
+            .padding(
+                start = 14.dp,
+                end = 14.dp,
+                top = 2.dp,
+                bottom = 10.dp
+            )
     ) {
         val isCompact = maxWidth < 600.dp
 

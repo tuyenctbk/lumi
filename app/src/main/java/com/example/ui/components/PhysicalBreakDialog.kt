@@ -3,6 +3,7 @@ package com.example.ui.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -73,46 +75,51 @@ fun PhysicalBreakDialog(
     }
 
     Dialog(onDismissRequest = onDismiss) {
-        Card(
-            shape = RoundedCornerShape(32.dp),
-            colors = CardDefaults.cardColors(containerColor = SleekSurface),
-            border = BorderStroke(2.dp, quest.color),
-            elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
-            modifier = Modifier
-                .fillMaxWidth(0.90f)
-                .padding(12.dp)
-                .testTag("physical_break_dialog")
-        ) {
-            Column(
-                modifier = Modifier.padding(26.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+        BoxWithConstraints {
+            val isCompact = maxWidth < 400.dp
+            Card(
+                shape = RoundedCornerShape(32.dp),
+                colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                border = BorderStroke(2.dp, quest.color),
+                elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
+                modifier = Modifier
+                    .fillMaxWidth(if (isCompact) 0.98f else 0.85f)
+                    .widthIn(max = 480.dp)
+                    .padding(if (isCompact) 4.dp else 16.dp)
+                    .testTag("physical_break_dialog")
             ) {
-                // Header Tag
-                Surface(
-                    shape = RoundedCornerShape(14.dp),
-                    color = quest.color.copy(alpha = 0.15f),
-                    border = BorderStroke(1.dp, quest.color.copy(alpha = 0.3f))
+                Column(
+                    modifier = Modifier.padding(if (isCompact) 16.dp else 26.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    // Header Tag
+                    Surface(
+                        shape = RoundedCornerShape(14.dp),
+                        color = quest.color.copy(alpha = 0.15f),
+                        border = BorderStroke(1.dp, quest.color.copy(alpha = 0.3f))
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.DirectionsRun,
-                            contentDescription = null,
-                            tint = quest.colorDark,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Text(
-                            text = "LUMI'S ACTIVE MOVEMENT BREAK",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Black,
-                            color = quest.colorDark,
-                            letterSpacing = 0.8.sp
-                        )
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DirectionsRun,
+                                contentDescription = null,
+                                tint = quest.colorDark,
+                                modifier = Modifier.size(14.dp)
+                            )
+                            Text(
+                                text = if (isCompact) "LUMI'S MOVEMENT BREAK" else "LUMI'S ACTIVE MOVEMENT BREAK",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Black,
+                                color = quest.colorDark,
+                                letterSpacing = 0.8.sp,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
                     }
-                }
 
                 Spacer(modifier = Modifier.height(14.dp))
 
@@ -278,4 +285,5 @@ fun PhysicalBreakDialog(
             }
         }
     }
+}
 }

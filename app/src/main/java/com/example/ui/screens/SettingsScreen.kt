@@ -118,7 +118,7 @@ fun SettingsScreen(
             .testTag("settings_screen")
     ) {
         LazyColumn(
-            contentPadding = PaddingValues(24.dp),
+            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             modifier = Modifier.fillMaxSize().statusBarsPadding()
         ) {

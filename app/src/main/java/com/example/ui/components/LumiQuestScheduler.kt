@@ -7,6 +7,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -83,66 +86,76 @@ fun LumiQuestModal(
     }
 
     Dialog(onDismissRequest = onDismiss) {
-        Card(
-            shape = RoundedCornerShape(32.dp),
-            colors = CardDefaults.cardColors(containerColor = SleekSurface),
-            border = BorderStroke(2.dp, quest.color.copy(alpha = 0.6f)),
-            elevation = CardDefaults.cardElevation(defaultElevation = 18.dp),
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .padding(10.dp)
-                .testTag("lumi_quest_dialog")
-        ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+        BoxWithConstraints {
+            val isCompact = maxWidth < 400.dp
+            Card(
+                shape = RoundedCornerShape(32.dp),
+                colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                border = BorderStroke(2.dp, quest.color.copy(alpha = 0.6f)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 18.dp),
+                modifier = Modifier
+                    .fillMaxWidth(if (isCompact) 0.98f else 0.85f)
+                    .widthIn(max = 480.dp)
+                    .padding(if (isCompact) 4.dp else 16.dp)
+                    .testTag("lumi_quest_dialog")
             ) {
-                // Header Icon & Title
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.padding(if (isCompact) 16.dp else 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Surface(
-                        shape = RoundedCornerShape(14.dp),
-                        color = quest.color.copy(alpha = 0.15f),
-                        border = BorderStroke(1.dp, quest.color.copy(alpha = 0.3f))
+                    // Header Icon & Title
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        Surface(
+                            shape = RoundedCornerShape(14.dp),
+                            color = quest.color.copy(alpha = 0.15f),
+                            border = BorderStroke(1.dp, quest.color.copy(alpha = 0.3f)),
+                            modifier = Modifier.weight(1f, fill = false)
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.DirectionsRun,
-                                contentDescription = null,
-                                tint = quest.colorDark,
-                                modifier = Modifier.size(16.dp)
-                            )
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.DirectionsRun,
+                                    contentDescription = null,
+                                    tint = quest.colorDark,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Text(
+                                    text = if (isCompact) "Lumi Quest! 🏃" else "Lumi Active Break Quest! 🏃",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = quest.colorDark,
+                                    maxLines = 1,
+                                    softWrap = false
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        // Reward badge
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = SleekGold.copy(alpha = 0.18f),
+                            border = BorderStroke(1.dp, SleekGoldDark.copy(alpha = 0.4f))
+                        ) {
                             Text(
-                                text = "Lumi Active Break Quest! 🏃",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = quest.colorDark
+                                text = "+${quest.rewardPoints} ⭐",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Black,
+                                color = SleekGoldDark,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                maxLines = 1,
+                                softWrap = false
                             )
                         }
                     }
-
-                    // Reward badge
-                    Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        color = SleekGold.copy(alpha = 0.18f),
-                        border = BorderStroke(1.dp, SleekGoldDark.copy(alpha = 0.4f))
-                    ) {
-                        Text(
-                            text = "+${quest.rewardPoints} ⭐",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Black,
-                            color = SleekGoldDark,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                        )
-                    }
-                }
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -285,4 +298,5 @@ fun LumiQuestModal(
             }
         }
     }
+}
 }

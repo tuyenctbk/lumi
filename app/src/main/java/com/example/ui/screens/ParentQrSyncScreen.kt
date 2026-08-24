@@ -131,7 +131,12 @@ fun ParentQrSyncScreen(
         val isMobile = maxWidth < 650.dp
 
         LazyColumn(
-            contentPadding = PaddingValues(if (isMobile) 16.dp else 24.dp),
+            contentPadding = PaddingValues(
+                start = if (isMobile) 16.dp else 24.dp,
+                end = if (isMobile) 16.dp else 24.dp,
+                top = if (isMobile) 6.dp else 8.dp,
+                bottom = if (isMobile) 16.dp else 24.dp
+            ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize().statusBarsPadding()
         ) {

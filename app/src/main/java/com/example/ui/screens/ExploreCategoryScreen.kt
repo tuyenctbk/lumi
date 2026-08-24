@@ -141,7 +141,12 @@ fun ExploreCategoryScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
-                .padding(if (isMobilePortrait) 14.dp else 24.dp)
+                .padding(
+                    start = if (isMobilePortrait) 14.dp else 24.dp,
+                    end = if (isMobilePortrait) 14.dp else 24.dp,
+                    top = if (isMobilePortrait) 4.dp else 8.dp,
+                    bottom = if (isMobilePortrait) 14.dp else 24.dp
+                )
         ) {
             // Header Bar
             Row(

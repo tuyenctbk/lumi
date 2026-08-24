@@ -213,7 +213,12 @@ fun WorldMapScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = if (isCompactScreen) 14.dp else 24.dp, vertical = 12.dp),
+                    .padding(
+                        start = if (isCompactScreen) 14.dp else 24.dp,
+                        end = if (isCompactScreen) 14.dp else 24.dp,
+                        top = if (isCompactScreen) 2.dp else 12.dp,
+                        bottom = if (isCompactScreen) 10.dp else 12.dp
+                    ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
