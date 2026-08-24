@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Seterusnya</string>
+    <string name="button_back">Kembali</string>
+    <string name="button_get_started">Mulakan</string>
+    <string name="button_skip">Langkau</string>
+    <string name="button_allow">Benarkan</string>
+    <string name="button_later">Nanti</string>
+    <string name="button_rate">Nilai Sekarang</string>
+    <string name="button_share">Kongsi Sekarang</string>
+    <string name="button_update">Kemas Kini</string>
+    <string name="onboarding_title_welcome">Selamat datang ke Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Rakan bermain berbilang bahasa interaktif anak anda. Belajar bahasa, kosa kata, dan main permainan fizikal bersama!</string>
+    <string name="onboarding_title_games">Bermain &amp;amp; Belajar Bersama 🎨</string>
+    <string name="onboarding_desc_games">Selesaikan kuiz, campur warna ajaib, padankan bayang, dan cari benda tersembunyi.</string>
+    <string name="onboarding_title_permissions">Permintaan Kebenaran 🎤</string>
+    <string name="onboarding_desc_permissions">Untuk pembelajaran magik, Lumi memerlukan kebenaran mikrofon dan menghantar notifikasi.</string>
+    <string name="permission_mic">Kebenaran Mikrofon</string>
+    <string name="permission_notif">Kebenaran Notifikasi</string>
+    <string name="permission_granted">Kebenaran diberikan!</string>
+    <string name="dialog_rate_title">Suka Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Sila beri kami penilaian 5 bintang di Play Store untuk menyokong penambahan permainan baru!</string>
+    <string name="dialog_share_title">Kongsi Keseronokan! 🎁</string>
+    <string name="dialog_share_desc">Kongsi Lumi dengan ibu bapa dan kanak-kanak lain untuk belajar dan bermain bersama!</string>
+    <string name="dialog_update_title">Kemas Kini Baru Tersedia! 🚀</string>
+    <string name="dialog_update_desc">Lumi mempunyai kosa kata baru, pelekat dan permainan interaktif. Muat turun sekarang!</string>
+</resources>

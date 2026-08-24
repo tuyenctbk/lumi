@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Dalej</string>
+    <string name="button_back">Wstecz</string>
+    <string name="button_get_started">Rozpocznij</string>
+    <string name="button_skip">Pomiń</string>
+    <string name="button_allow">Zezwól na dostęp</string>
+    <string name="button_later">Później</string>
+    <string name="button_rate">Oceń teraz</string>
+    <string name="button_share">Udostępnij teraz</string>
+    <string name="button_update">Zaktualizuj teraz</string>
+    <string name="onboarding_title_welcome">Witaj w Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Animowany, wielojęzyczny towarzysz zabaw Twojego dziecka. Uczymy się języków, słówek i bawimy się w ruchu!</string>
+    <string name="onboarding_title_games">Graj i ucz się razem 🎨</string>
+    <string name="onboarding_desc_games">Rozwiązuj quizy, mieszaj magiczne kolory, dopasowuj cienie i znajduj ukryte przedmioty.</string>
+    <string name="onboarding_title_permissions">Prośba o uprawnienia 🎤</string>
+    <string name="onboarding_desc_permissions">Aby nauka była magiczna, Lumi potrzebuje dostępu do mikrofonu oraz wysyłania powiadomień.</string>
+    <string name="permission_mic">Dostęp do mikrofonu</string>
+    <string name="permission_notif">Dostęp do powiadomień</string>
+    <string name="permission_granted">Uprawnienia udzielone!</string>
+    <string name="dialog_rate_title">Podoba Ci się Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Oceń nas na 5 gwiazdek w Play Store! To pomaga nam rozwijać aplikację dla dzieci.</string>
+    <string name="dialog_share_title">Dziel się zabawą! 🎁</string>
+    <string name="dialog_share_desc">Udostępnij Lumi znajomym rodzicom i dzieciom, aby wspólnie uczyć się i bawić!</string>
+    <string name="dialog_update_title">Nowa aktualizacja dostępna! 🚀</string>
+    <string name="dialog_update_desc">Lumi ma nowe, zabawne słowa, naklejki, gry i poprawki błędów. Pobierz najnowszę wersję!</string>
+</resources>

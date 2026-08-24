@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Επόμενο</string>
+    <string name="button_back">Πίσω</string>
+    <string name="button_get_started">Ξεκινήστε</string>
+    <string name="button_skip">Παράλειψη</string>
+    <string name="button_allow">Επιτρέψτε</string>
+    <string name="button_later">Αργότερα</string>
+    <string name="button_rate">Βαθμολογήστε</string>
+    <string name="button_share">Μοιραστείτε</string>
+    <string name="button_update">Ενημερώστε</string>
+    <string name="onboarding_title_welcome">Καλώς ήρθατε στο Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ο φίλος του παιδιού σας.</string>
+    <string name="onboarding_title_games">Παίξτε και Μάθετε 🎨</string>
+    <string name="onboarding_desc_games">Λύστε κουίζ και βρείτε αντικείμενα.</string>
+    <string name="onboarding_title_permissions">Αίτημα αδειών 🎤</string>
+    <string name="onboarding_desc_permissions">Το Lumi χρειάζεται άδεια για το μικρόφωνο.</string>
+    <string name="permission_mic">Άδεια μικροφώνου</string>
+    <string name="permission_notif">Άδεια ειδοποιήσεων</string>
+    <string name="permission_granted">Οι άδειες δόθηκαν!</string>
+    <string name="dialog_rate_title">Σας αρέσει το Lumi; ⭐</string>
+    <string name="dialog_rate_desc">Βαθμολογήστε μας με 5 αστέρια!</string>
+    <string name="dialog_share_title">Μοιραστείτε! 🎁</string>
+    <string name="dialog_share_desc">Μοιραστείτε το Lumi με άλλους γονείς!</string>
+    <string name="dialog_update_title">Ενημέρωση διαθέσιμη! 🚀</string>
+    <string name="dialog_update_desc">Κατεβάστε την τελευταία έκδοση!</string>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Nästa</string>
+    <string name="button_back">Bakåt</string>
+    <string name="button_get_started">Börja</string>
+    <string name="button_skip">Hoppa över</string>
+    <string name="button_allow">Tillåt</string>
+    <string name="button_later">Senare</string>
+    <string name="button_rate">Betygsätt</string>
+    <string name="button_share">Dela</string>
+    <string name="button_update">Uppdatera</string>
+    <string name="onboarding_title_welcome">Välkommen till Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ditt barns flerspråkiga lekkompis.</string>
+    <string name="onboarding_title_games">Lek &amp;amp; Lär 🎨</string>
+    <string name="onboarding_desc_games">Blanda färger och hitta gömda saker.</string>
+    <string name="onboarding_title_permissions">Behörighet 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi behöver tillgång till mikrofonen.</string>
+    <string name="permission_mic">Mikrofonbehörighet</string>
+    <string name="permission_notif">Aviseringsbehörighet</string>
+    <string name="permission_granted">Godkänt!</string>
+    <string name="dialog_rate_title">Gillar du Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Ge oss gärna 5 stjärnor!</string>
+    <string name="dialog_share_title">Dela glädjen! 🎁</string>
+    <string name="dialog_share_desc">Dela Lumi med andra föräldrar!</string>
+    <string name="dialog_update_title">Uppdatering tillgänglig! 🚀</string>
+    <string name="dialog_update_desc">Hämta den senaste versionen nu!</string>
+</resources>

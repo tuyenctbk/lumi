@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Seuraava</string>
+    <string name="button_back">Takaisin</string>
+    <string name="button_get_started">Aloita</string>
+    <string name="button_skip">Ohita</string>
+    <string name="button_allow">Salli</string>
+    <string name="button_later">Myöhemmin</string>
+    <string name="button_rate">Arvostele</string>
+    <string name="button_share">Jaa</string>
+    <string name="button_update">Päivitä</string>
+    <string name="onboarding_title_welcome">Tervetuloa Lumiin! ✨</string>
+    <string name="onboarding_desc_welcome">Lapsesi monikielinen leikkikaveri.</string>
+    <string name="onboarding_title_games">Leiki &amp;amp; Opi 🎨</string>
+    <string name="onboarding_desc_games">Ratkaise visoja ja yhdistä varjoja.</string>
+    <string name="onboarding_title_permissions">Lupapyyntö 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi tarvitsee mikrofonin käyttöoikeuden.</string>
+    <string name="permission_mic">Mikrofonin käyttöoikeus</string>
+    <string name="permission_notif">Ilmoitusoikeus</string>
+    <string name="permission_granted">Luvat myönnetty!</string>
+    <string name="dialog_rate_title">Pidätkö Lumista? ⭐</string>
+    <string name="dialog_rate_desc">Arvostele meidät Play Kaupassa!</string>
+    <string name="dialog_share_title">Jaa ilo! 🎁</string>
+    <string name="dialog_share_desc">Jaa Lumi muille vanhemmille!</string>
+    <string name="dialog_update_title">Päivitys saatavilla! 🚀</string>
+    <string name="dialog_update_desc">Lataa uusin versio heti!</string>
+</resources>

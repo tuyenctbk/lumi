@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">পরবর্তী</string>
+    <string name="button_back">ফিরে যান</string>
+    <string name="button_get_started">শুরু করুন</string>
+    <string name="button_skip">এড়িয়ে যান</string>
+    <string name="button_allow">অনুমতি দিন</string>
+    <string name="button_later">পরে</string>
+    <string name="button_rate">রেটিং দিন</string>
+    <string name="button_share">শেয়ার করুন</string>
+    <string name="button_update">আপডেট করুন</string>
+    <string name="onboarding_title_welcome">Lumi-তে আপনাকে স্বাগতম! ✨</string>
+    <string name="onboarding_desc_welcome">আপনার সন্তানের বহুমাত্রিক ভাষী খেলার সঙ্গী। আমরা ভাষা, নতুন শব্দ শিখি এবং ইন্টারেক্টিভ খেলা খেলি!</string>
+    <string name="onboarding_title_games">একসাথে খেলুন ও শিখুন 🎨</string>
+    <string name="onboarding_desc_games">কুইজ সমাধান করুন, জাদুকরী রঙ মেশান, ছায়া মেলান এবং লুকানো বস্তু খুঁজে বের করুন।</string>
+    <string name="onboarding_title_permissions">অনুমতির অনুরোধ 🎤</string>
+    <string name="onboarding_desc_permissions">শেখার প্রক্রিয়াকে সুন্দর করতে Lumi-র অডিও রেকর্ড করার এবং নোটিফিকেশন পাঠানোর অনুমতি প্রয়োজন।</string>
+    <string name="permission_mic">মাইক্রোফোন অনুমতি</string>
+    <string name="permission_notif">নোটিফিকেশন অনুমতি</string>
+    <string name="permission_granted">অনুমতি দেওয়া হয়েছে!</string>
+    <string name="dialog_rate_title">আপনি কি Lumi পছন্দ করেন? ⭐</string>
+    <string name="dialog_rate_desc">দয়া করে আমাদের Play Store-এ ৫ স্টার রেটিং দিন! এটি Lumi-কে শিশুদের জন্য আরও সুন্দর গেম আনতে সাহায্য করবে।</string>
+    <string name="dialog_share_title">আনন্দ ভাগ করে নিন! 🎁</string>
+    <string name="dialog_share_desc">অন্যান্য বাবা-মা এবং শিশুদের সাথে Lumi শেয়ার করুন যাতে সবাই একসাথে শিখতে পারে!</string>
+    <string name="dialog_update_title">নতুন আপডেট উপলব্ধ! 🚀</string>
+    <string name="dialog_update_desc">Lumi-তে নতুন মজাদার শব্দ, স্টিকার এবং গেম যোগ করা হয়েছে। এখনই আপডেট করে নিন!</string>
+</resources>

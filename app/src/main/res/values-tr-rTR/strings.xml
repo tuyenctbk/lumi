@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">İleri</string>
+    <string name="button_back">Geri</string>
+    <string name="button_get_started">Başla</string>
+    <string name="button_skip">Geç</string>
+    <string name="button_allow">İzin Ver</string>
+    <string name="button_later">Sonra</string>
+    <string name="button_rate">Puan Ver</string>
+    <string name="button_share">Paylaş</string>
+    <string name="button_update">Güncelle</string>
+    <string name="onboarding_title_welcome">Lumi\'ye Hoş Geldiniz! ✨</string>
+    <string name="onboarding_desc_welcome">Çocuğunuzun çok dilli oyun arkadaşı.</string>
+    <string name="onboarding_title_games">Oynayın &amp;amp; Öğrenin 🎨</string>
+    <string name="onboarding_desc_games">Bulmacalar çözün ve nesneleri bulun.</string>
+    <string name="onboarding_title_permissions">İzinler 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi\'nin ses ve bildirim izinlerine ihtiyacı var.</string>
+    <string name="permission_mic">Mikrofon İzni</string>
+    <string name="permission_notif">Bildirim İzni</string>
+    <string name="permission_granted">İzinler Verildi!</string>
+    <string name="dialog_rate_title">Lumi\'yi beğendiniz mi? ⭐</string>
+    <string name="dialog_rate_desc">Lütfen bizi derecelendirin!</string>
+    <string name="dialog_share_title">Paylaşın! 🎁</string>
+    <string name="dialog_share_desc">Lumi\'yi başkalarıyla paylaşın!</string>
+    <string name="dialog_update_title">Güncelleme Mevcut! 🚀</string>
+    <string name="dialog_update_desc">En yeni sürümü hemen indirin!</string>
+</resources>

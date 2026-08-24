@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">İleri</string>
+    <string name="button_back">Geri</string>
+    <string name="button_get_started">Başla</string>
+    <string name="button_skip">Geç</string>
+    <string name="button_allow">İzin Ver</string>
+    <string name="button_later">Daha Sonra</string>
+    <string name="button_rate">Puan Ver</string>
+    <string name="button_share">Paylaş</string>
+    <string name="button_update">Güncelle</string>
+    <string name="onboarding_title_welcome">Lumi\'ye Hoş Geldiniz! ✨</string>
+    <string name="onboarding_desc_welcome">Çocuğunuzun sevimli ve çok dilli oyun arkadaşı. Birlikte kelimeler, diller öğreniyor ve hareketli oyunlar oynuyoruz!</string>
+    <string name="onboarding_title_games">Birlikte Oynayın &amp;amp; Öğrenin 🎨</string>
+    <string name="onboarding_desc_games">Bulmacalar çözün, sihirli renkleri karıştırın, gölgeleri eşleştirin ve gizli nesneleri bulun.</string>
+    <string name="onboarding_title_permissions">İzin Talebi 🎤</string>
+    <string name="onboarding_desc_permissions">Eğitimi eğlenceli hale getirmek için Lumi\'nin ses kaydetme ve bildirim gönderme izinlerine ihtiyacı var.</string>
+    <string name="permission_mic">Mikrofon İzni</string>
+    <string name="permission_notif">Bildirim İzni</string>
+    <string name="permission_granted">İzinler Tanımlandı!</string>
+    <string name="dialog_rate_title">Lumi\'yi beğendiniz mi? ⭐</string>
+    <string name="dialog_rate_desc">Lütfen Play Store\'da bizi 5 yıldızla ödüllendirin! Bu, Lumi\'ye yeni oyunlar ekleme gücü verir.</string>
+    <string name="dialog_share_title">Eğlenceyi Paylaşın! 🎁</string>
+    <string name="dialog_share_desc">Birlikte öğrenmek ve eğlenmek için Lumi\'yi diğer ebeveynlerle ve çocuklarla paylaşın!</string>
+    <string name="dialog_update_title">Yeni Güncelleme Mevcut! 🚀</string>
+    <string name="dialog_update_desc">Lumi yeni eğlenceli kelimeler, çıkartmalar, oyunlar ve hata düzeltmeleri içeriyor. Şimdi indirin!</string>
+</resources>

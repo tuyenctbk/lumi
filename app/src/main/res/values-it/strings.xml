@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Avanti</string>
+    <string name="button_back">Indietro</string>
+    <string name="button_get_started">Inizia</string>
+    <string name="button_skip">Salta</string>
+    <string name="button_allow">Consenti permessi</string>
+    <string name="button_later">Più tardi</string>
+    <string name="button_rate">Valuta ora</string>
+    <string name="button_share">Condividi ora</string>
+    <string name="button_update">Aggiorna ora</string>
+    <string name="onboarding_title_welcome">Benvenuto su Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Il compagno di gioco multilingue animato per il tuo bambino. Impariamo lingue, parole e giochiamo insieme!</string>
+    <string name="onboarding_title_games">Gioca e impara insieme 🎨</string>
+    <string name="onboarding_desc_games">Risolvi quiz, mescola colori magici, indovina ombre e trova oggetti nascosti con feedback animati.</string>
+    <string name="onboarding_title_permissions">Richiesta permessi 🎤</string>
+    <string name="onboarding_desc_permissions">Per rendere l\'apprendimento magico, Lumi ha bisogno del permesso di registrare audio e inviare notifiche.</string>
+    <string name="permission_mic">Permesso microfono</string>
+    <string name="permission_notif">Permesso notifiche</string>
+    <string name="permission_granted">Permessi concessi!</string>
+    <string name="dialog_rate_title">Ti piace Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Valutaci con 5 stelle sul Play Store per aiutarci ad aggiungere altri giochi divertenti!</string>
+    <string name="dialog_share_title">Condividi il divertimento! 🎁</string>
+    <string name="dialog_share_desc">Condividi Lumi con altri genitori e bambini per giocare e imparare insieme!</string>
+    <string name="dialog_update_title">Nuovo aggiornamento disponibile! 🚀</string>
+    <string name="dialog_update_desc">Lumi ha nuove divertenti parole, adesivi e giochi. Scarica l\'ultima versione!</string>
+</resources>

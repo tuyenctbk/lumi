@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Tovább</string>
+    <string name="button_back">Vissza</string>
+    <string name="button_get_started">Kezdés</string>
+    <string name="button_skip">Kihagyás</string>
+    <string name="button_allow">Engedélyezés</string>
+    <string name="button_later">Később</string>
+    <string name="button_rate">Értékelés</string>
+    <string name="button_share">Megosztás</string>
+    <string name="button_update">Frissítés</string>
+    <string name="onboarding_title_welcome">Üdvözöl a Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Gyermeked többnyelvű játszótársa.</string>
+    <string name="onboarding_title_games">Játék &amp;amp; Tanulás 🎨</string>
+    <string name="onboarding_desc_games">Kvízek, varázslatos színek és árnyékok.</string>
+    <string name="onboarding_title_permissions">Engedélyek 🎤</string>
+    <string name="onboarding_desc_permissions">Luminek mikrofon és értesítési engedélyekre van szüksége.</string>
+    <string name="permission_mic">Mikrofon engedély</string>
+    <string name="permission_notif">Értesítési engedély</string>
+    <string name="permission_granted">Engedély megadva!</string>
+    <string name="dialog_rate_title">Tetszik a Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Kérjük, értékelj minket 5 csillaggal!</string>
+    <string name="dialog_share_title">Oszd meg! 🎁</string>
+    <string name="dialog_share_desc">Oszd meg a Lumit más szülőkkel!</string>
+    <string name="dialog_update_title">Frissítés érhető el! 🚀</string>
+    <string name="dialog_update_desc">A legújabb funkciókért töltsd le most!</string>
+</resources>

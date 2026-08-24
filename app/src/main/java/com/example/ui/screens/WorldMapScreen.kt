@@ -216,8 +216,8 @@ fun WorldMapScreen(
                     .padding(
                         start = if (isCompactScreen) 14.dp else 24.dp,
                         end = if (isCompactScreen) 14.dp else 24.dp,
-                        top = if (isCompactScreen) 2.dp else 12.dp,
-                        bottom = if (isCompactScreen) 10.dp else 12.dp
+                        top = if (isCompactScreen) 0.dp else 12.dp,
+                        bottom = if (isCompactScreen) 6.dp else 12.dp
                     ),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -260,7 +260,11 @@ fun WorldMapScreen(
                             )
                         }
                         Text(
-                            text = "SELECT AN ISLAND TO START YOUR LESSON IN ${targetLanguage.displayName.uppercase()}",
+                            text = if (isCompactScreen) {
+                                "CHOOSE AN ISLAND • ${targetLanguage.displayName.substringBefore(" ").uppercase()}"
+                            } else {
+                                "SELECT AN ISLAND TO START YOUR LESSON IN ${targetLanguage.displayName.uppercase()}"
+                            },
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             color = SleekTextSubtle,
@@ -346,7 +350,12 @@ fun WorldMapScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .padding(
+                            start = 12.dp,
+                            end = 12.dp,
+                            top = 2.dp,
+                            bottom = 6.dp
+                        )
                 ) {
                     // Archipelago Visual Map
                     Box(

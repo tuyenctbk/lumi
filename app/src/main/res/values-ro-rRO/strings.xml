@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Înainte</string>
+    <string name="button_back">Înapoi</string>
+    <string name="button_get_started">Începe</string>
+    <string name="button_skip">Omite</string>
+    <string name="button_allow">Permite</string>
+    <string name="button_later">Mai târziu</string>
+    <string name="button_rate">Evaluează</string>
+    <string name="button_share">Trimite</string>
+    <string name="button_update">Actualizează</string>
+    <string name="onboarding_title_welcome">Bun venit la Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Partenerul de joacă interactiv.</string>
+    <string name="onboarding_title_games">Joacă și învață 🎨</string>
+    <string name="onboarding_desc_games">Rezolvă teste și caută obiecte.</string>
+    <string name="onboarding_title_permissions">Permisiuni 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi are nevoie de permisiuni.</string>
+    <string name="permission_mic">Permisiune microfon</string>
+    <string name="permission_notif">Permisiune notificări</string>
+    <string name="permission_granted">Permisiuni acordate!</string>
+    <string name="dialog_rate_title">Îți place Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Te rugăm să ne oferi 5 stele!</string>
+    <string name="dialog_share_title">Trimite! 🎁</string>
+    <string name="dialog_share_desc">Trimite Lumi altor părinți!</string>
+    <string name="dialog_update_title">Actualizare disponibilă! 🚀</string>
+    <string name="dialog_update_desc">Descarcă noua versiune acum!</string>
+</resources>

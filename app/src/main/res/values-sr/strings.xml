@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Dalje</string>
+    <string name="button_back">Nazad</string>
+    <string name="button_get_started">Započni</string>
+    <string name="button_skip">Preskoči</string>
+    <string name="button_allow">Dozvoli</string>
+    <string name="button_later">Kasnije</string>
+    <string name="button_rate">Oceni sada</string>
+    <string name="button_share">Podeli</string>
+    <string name="button_update">Ažuriraj</string>
+    <string name="onboarding_title_welcome">Dobrodošli u Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Zabavan višejezični drugar vašeg deteta. Učimo jezike, reči i igramo aktivne igre zajedno!</string>
+    <string name="onboarding_title_games">Igrajte se i učite zajedno 🎨</string>
+    <string name="onboarding_desc_games">Rešavajte kvizove, mešajte čarobne boje, spajajte senke i tražite skrivene predmete.</string>
+    <string name="onboarding_title_permissions">Zahtev za dozvole 🎤</string>
+    <string name="onboarding_desc_permissions">Da bi učenje bilo magično, Lumi treba dozvolu za mikrofon i slanje obaveštenja.</string>
+    <string name="permission_mic">Dozvola za mikrofon</string>
+    <string name="permission_notif">Dozvola za obaveštenja</string>
+    <string name="permission_granted">Dozvole su uspešno date!</string>
+    <string name="dialog_rate_title">Da li vam se sviđa Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Molimo ocenite nas sa 5 zvezdica u Play prodavnici! To nam pomaže da dodamo nove igre.</string>
+    <string name="dialog_share_title">Podelite zabavu! 🎁</string>
+    <string name="dialog_share_desc">Podelite Lumi sa drugim roditeljima i decom kako bi učili i igrali se zajedno!</string>
+    <string name="dialog_update_title">Dostupno novo ažuriranje! 🚀</string>
+    <string name="dialog_update_desc">Lumi ima nove zabavne reči, nalepnice i igre. Preuzmite najnoviju verziju odmah!</string>
+</resources>

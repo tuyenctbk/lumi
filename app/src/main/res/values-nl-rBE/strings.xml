@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Volgende</string>
+    <string name="button_back">Terug</string>
+    <string name="button_get_started">Aan de slag</string>
+    <string name="button_skip">Overslaan</string>
+    <string name="button_allow">Toestaan</string>
+    <string name="button_later">Later</string>
+    <string name="button_rate">Nu beoordelen</string>
+    <string name="button_share">Nu delen</string>
+    <string name="button_update">Nu updaten</string>
+    <string name="onboarding_title_welcome">Welkom bij Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Het vrolijke meertalige speelmaatje van je kind. We leren talen, woorden en doen actieve spelletjes!</string>
+    <string name="onboarding_title_games">Samen spelen &amp;amp; leren 🎨</string>
+    <string name="onboarding_desc_games">Los quizzen op, meng magische kleuren, raad schaduwen en vind verborgen voorwerpen.</string>
+    <string name="onboarding_title_permissions">Machtigingen aanvragen 🎤</string>
+    <string name="onboarding_desc_permissions">Om het leren magisch te maken, heeft Lumi toestemming nodig voor microfoon en meldingen.</string>
+    <string name="permission_mic">Microfoonmachtiging</string>
+    <string name="permission_notif">Meldingsmachtiging</string>
+    <string name="permission_granted">Toestemming verleend!</string>
+    <string name="dialog_rate_title">Vind je Lumi leuk? ⭐</string>
+    <string name="dialog_rate_desc">Beoordeel ons met 5 sterren in de Google Play Store! Het helpt ons om meer leuke spelletjes te maken.</string>
+    <string name="dialog_share_title">Deel het plezier! 🎁</string>
+    <string name="dialog_share_desc">Deel Lumi met andere ouders en kinderen om samen te leren en te spelen!</string>
+    <string name="dialog_update_title">Nieuwe update beschikbaar! 🚀</string>
+    <string name="dialog_update_desc">Lumi heeft nieuwe leuke woorden, stickers en spelletjes. Installeer de nieuwste versie!</string>
+</resources>

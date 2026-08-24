@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Próximo</string>
+    <string name="button_back">Voltar</string>
+    <string name="button_get_started">Começar</string>
+    <string name="button_skip">Pular</string>
+    <string name="button_allow">Permitir acessos</string>
+    <string name="button_later">Mais tarde</string>
+    <string name="button_rate">Avaliar agora</string>
+    <string name="button_share">Compartilhar agora</string>
+    <string name="button_update">Atualizar agora</string>
+    <string name="onboarding_title_welcome">Bem-vindo ao Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">O companheiro de brincadeiras multilíngue animado do seu filho. Aprendemos idiomas, palavras e jogamos juntos!</string>
+    <string name="onboarding_title_games">Jogar e aprender juntos 🎨</string>
+    <string name="onboarding_desc_games">Resolva quizzes, misture cores mágicas, adivinhe sombras e encontre objetos ocultos.</string>
+    <string name="onboarding_title_permissions">Solicitação de permissões 🎤</string>
+    <string name="onboarding_desc_permissions">Para tornar o aprendizado mágico, o Lumi precisa de permissão para gravar áudio e enviar notificações.</string>
+    <string name="permission_mic">Permissão do microfone</string>
+    <string name="permission_notif">Permissão de notificações</string>
+    <string name="permission_granted">Permissões concedidas!</string>
+    <string name="dialog_rate_title">Gosta do Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Por favor, avalie-nos com 5 estrelas na Play Store para nos apoiar!</string>
+    <string name="dialog_share_title">Compartilhe a diversão! 🎁</string>
+    <string name="dialog_share_desc">Compartilhe o Lumi com outros pais e crianças para aprenderem juntos!</string>
+    <string name="dialog_update_title">Nova atualização disponível! 🚀</string>
+    <string name="dialog_update_desc">O Lumi tem novas palavras divertidas, adesivos e jogos. Instale a versão mais recente!</string>
+</resources>

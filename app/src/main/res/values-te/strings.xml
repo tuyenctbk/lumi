@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">తరువాత</string>
+    <string name="button_back">వెనుకకు</string>
+    <string name="button_get_started">ప్రారంభించు</string>
+    <string name="button_skip">వదిలివేయి</string>
+    <string name="button_allow">అనుమతించు</string>
+    <string name="button_later">తరువాత</string>
+    <string name="button_rate">రేటింగ్ ఇవ్వండి</string>
+    <string name="button_share">షేర్ చేయండి</string>
+    <string name="button_update">అప్‌డేట్ చేయండి</string>
+    <string name="onboarding_title_welcome">లూమికి స్వాగతం! ✨</string>
+    <string name="onboarding_desc_welcome">మీ పిల్లల బహుభాషా స్నేహితుడు. మనం భాషలు, కొత్త పదాలు నేర్చుకుందాం మరియు ఆడుకుందాం!</string>
+    <string name="onboarding_title_games">కలిసి ఆడుకుందాం &amp;amp; నేర్చుకుందాం 🎨</string>
+    <string name="onboarding_desc_games">పజిల్స్ పరిష్కరించండి, రంగులను కలపండి, నీడలను సరిపోల్చండి మరియు దాచిన వస్తువులను కనుగొనండి.</string>
+    <string name="onboarding_title_permissions">అనుమతి అభ్యర్థన 🎤</string>
+    <string name="onboarding_desc_permissions">నేర్చుకోవడం సులభతరం చేయడానికి లూమికి మైక్రోఫోన్ మరియు నోటిఫికేషన్ అనుమతులు అవసరం.</string>
+    <string name="permission_mic">మైక్రోఫోన్ అనుమతి</string>
+    <string name="permission_notif">నోటిఫికేషన్ల అనుమతి</string>
+    <string name="permission_granted">అనుమతులు లభించాయి!</string>
+    <string name="dialog_rate_title">లూమి నచ్చిందా? ⭐</string>
+    <string name="dialog_rate_desc">దయచేసి ప్లే స్టోర్‌లో మాకు 5 స్టార్ రేటింగ్ ఇవ్వండి! మరిన్ని ఆటలు తీసుకురావడానికి ఇది సహాయపడుతుంది.</string>
+    <string name="dialog_share_title">ఆనందాన్ని పంచుకోండి! 🎁</string>
+    <string name="dialog_share_desc">మరింత మంది తల్లిదండ్రులు మరియు పిల్లలతో లూమిని పంచుకోండి!</string>
+    <string name="dialog_update_title">కొత్త అప్‌డేట్ అందుబాటులో ఉంది! 🚀</string>
+    <string name="dialog_update_desc">లూమిలో కొత్త పదాలు, స్టిక్కర్లు మరియు ఆటలు జోడించబడ్డాయి. ఇప్పుడే అప్‌డేట్ చేయండి!</string>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">بعدی</string>
+    <string name="button_back">قبلی</string>
+    <string name="button_get_started">شروع کنیم</string>
+    <string name="button_skip">رد کردن</string>
+    <string name="button_allow">اجازه دادن</string>
+    <string name="button_later">بعدا</string>
+    <string name="button_rate">امتیاز دهید</string>
+    <string name="button_share">اشتراک گذاری</string>
+    <string name="button_update">بروزرسانی</string>
+    <string name="onboarding_title_welcome">به لومی خوش آمدید! ✨</string>
+    <string name="onboarding_desc_welcome">همبازی متحرک و چندزبانه کودک شما. ما زبان‌ها و کلمات جدید را یاد می‌گیریم و بازی حرکتی می‌کنیم!</string>
+    <string name="onboarding_title_games">بازی و یادگیری با هم 🎨</string>
+    <string name="onboarding_desc_games">حل کویزها، ترکیب رنگ‌های جادویی، حدس سایه‌ها و پیدا کردن اشیاء پنهان با بازخورد عالی.</string>
+    <string name="onboarding_title_permissions">درخواست مجوزها 🎤</string>
+    <string name="onboarding_desc_permissions">برای یادگیری شگفت‌انگیز، لومی به مجوز ضبط صدا و ارسال اعلان‌ها نیاز دارد.</string>
+    <string name="permission_mic">مجوز میکروفون</string>
+    <string name="permission_notif">مجوز اعلان‌ها</string>
+    <string name="permission_granted">مجوزها تایید شد!</string>
+    <string name="dialog_rate_title">لومی را دوست دارید؟ ⭐</string>
+    <string name="dialog_rate_desc">لطفاً با دادن ۵ ستاره در گوگل پلی از لومی حمایت کنید تا بازی‌های جدید بسازیم.</string>
+    <string name="dialog_share_title">شادی را به اشتراک بگذارید! 🎁</string>
+    <string name="dialog_share_desc">برنامه لومی را با والدین و کودکان دیگر به اشتراک بگذارید تا با هم بازی کنند و یاد بگیرند!</string>
+    <string name="dialog_update_title">بروزرسانی جدید در دسترس است! 🚀</string>
+    <string name="dialog_update_desc">لومی کلمات جدید، استیکرها و بازی‌های جذابی دریافت کرده است. هم‌اکنون دانلود کنید!</string>
+</resources>

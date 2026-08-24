@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Berikutnya</string>
+    <string name="button_back">Kembali</string>
+    <string name="button_get_started">Mulai</string>
+    <string name="button_skip">Lewati</string>
+    <string name="button_allow">Izinkan</string>
+    <string name="button_later">Nanti</string>
+    <string name="button_rate">Beri Nilai</string>
+    <string name="button_share">Bagikan</string>
+    <string name="button_update">Perbarui</string>
+    <string name="onboarding_title_welcome">Selamat datang di Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Teman bermain anak Anda yang multibahasa dan interaktif. Belajar bahasa, kosakata, dan main game fisik!</string>
+    <string name="onboarding_title_games">Bermain &amp;amp; Belajar Bersama 🎨</string>
+    <string name="onboarding_desc_games">Selesaikan kuis, campur warna ajaib, cocokkan bayangan, dan temukan benda tersembunyi.</string>
+    <string name="onboarding_title_permissions">Permintaan Izin 🎤</string>
+    <string name="onboarding_desc_permissions">Agar pembelajaran lebih interaktif, Lumi membutuhkan izin menggunakan mikrofon dan notifikasi.</string>
+    <string name="permission_mic">Izin Mikrofon</string>
+    <string name="permission_notif">Izin Notifikasi</string>
+    <string name="permission_granted">Izin diberikan!</string>
+    <string name="dialog_rate_title">Suka dengan Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Beri kami nilai 5 bintang di Play Store untuk membantu menghadirkan lebih banyak game seru!</string>
+    <string name="dialog_share_title">Bagikan Kesenangan! 🎁</string>
+    <string name="dialog_share_desc">Bagikan Lumi kepada orang tua dan anak-anak lainnya untuk bermain bersama!</string>
+    <string name="dialog_update_title">Pembaruan Baru Tersedia! 🚀</string>
+    <string name="dialog_update_desc">Lumi memiliki kosakata, stiker, dan game baru. Unduh versi terbaru sekarang!</string>
+</resources>

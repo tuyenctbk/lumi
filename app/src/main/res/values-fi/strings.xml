@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Seuraava</string>
+    <string name="button_back">Takaisin</string>
+    <string name="button_get_started">Aloita</string>
+    <string name="button_skip">Ohita</string>
+    <string name="button_allow">Salli luvat</string>
+    <string name="button_later">Myöhemmin</string>
+    <string name="button_rate">Arvostele</string>
+    <string name="button_share">Jaa nyt</string>
+    <string name="button_update">Päivitä</string>
+    <string name="onboarding_title_welcome">Tervetuloa Lumiin! ✨</string>
+    <string name="onboarding_desc_welcome">Lapsesi iloinen monikielinen leikkikaveri. Opimme kieliä, uusia sanoja ja leikimme aktiivisia leikkejä!</string>
+    <string name="onboarding_title_games">Leiki &amp;amp; Opi yhdessä 🎨</string>
+    <string name="onboarding_desc_games">Ratkaise visoja, sekoita taikavärejä, yhdistä varjoja ja etsi piilotettuja esineitä.</string>
+    <string name="onboarding_title_permissions">Lupapyyntö 🎤</string>
+    <string name="onboarding_desc_permissions">Tehdäkseen oppimisesta taianomaista, Lumi tarvitsee mikrofonin ja ilmoitusten käyttöoikeudet.</string>
+    <string name="permission_mic">Mikrofonin käyttöoikeus</string>
+    <string name="permission_notif">Ilmoitusoikeus</string>
+    <string name="permission_granted">Luvat myönnetty!</string>
+    <string name="dialog_rate_title">Pidätkö Lumista? ⭐</string>
+    <string name="dialog_rate_desc">Arvostele meidät 5 tähdellä Play Kaupassa! Se auttaa Lumia tuomaan lisää hauskuutta lapsille.</string>
+    <string name="dialog_share_title">Jaa ilo! 🎁</string>
+    <string name="dialog_share_desc">Jaa Lumi muille vanhemmille ja lapsille yhdessä opittavaksi ja leikittäväksi!</string>
+    <string name="dialog_update_title">Uusi päivitys saatavilla! 🚀</string>
+    <string name="dialog_update_desc">Lumissa on uusia sanoja, hienoja tarroja ja pelejä. Lataa uusin versio heti!</string>
+</resources>

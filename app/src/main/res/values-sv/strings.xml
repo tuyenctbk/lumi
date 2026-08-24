@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Nästa</string>
+    <string name="button_back">Bakåt</string>
+    <string name="button_get_started">Börja nu</string>
+    <string name="button_skip">Hoppa över</string>
+    <string name="button_allow">Tillåt behörighet</string>
+    <string name="button_later">Senare</string>
+    <string name="button_rate">Betygsätt nu</string>
+    <string name="button_share">Dela nu</string>
+    <string name="button_update">Uppdatera nu</string>
+    <string name="onboarding_title_welcome">Välkommen till Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ditt barns glada flerspråkiga lekkompis. Vi lär oss språk, nya ord och leker aktiva lekar!</string>
+    <string name="onboarding_title_games">Lek &amp;amp; Lär Tillsammans 🎨</string>
+    <string name="onboarding_desc_games">Lös klurigheter, blanda magiska färger, matcha skuggor och hitta gömda saker.</string>
+    <string name="onboarding_title_permissions">Behörighetsförfrågan 🎤</string>
+    <string name="onboarding_desc_permissions">För att göra lärandet magiskt behöver Lumi tillgång till mikrofonen och aviseringar.</string>
+    <string name="permission_mic">Mikrofonbehörighet</string>
+    <string name="permission_notif">Aviseringsbehörighet</string>
+    <string name="permission_granted">Behörigheter godkända!</string>
+    <string name="dialog_rate_title">Gillar du Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Ge oss gärna 5 stjärnor i Play Store! Det hjälper oss att skapa fler roliga spel för barn.</string>
+    <string name="dialog_share_title">Dela glädjen! 🎁</string>
+    <string name="dialog_share_desc">Dela Lumi med andra föräldrar och barn för att lära och leka tillsammans!</string>
+    <string name="dialog_update_title">Ny uppdatering tillgänglig! 🚀</string>
+    <string name="dialog_update_desc">Lumi har nya roliga ord, klistermärken och spel. Hämta den senaste versionen nu!</string>
+</resources>

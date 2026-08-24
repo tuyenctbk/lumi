@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Susunod</string>
+    <string name="button_back">Bumalik</string>
+    <string name="button_get_started">Magsimula</string>
+    <string name="button_skip">Laktawan</string>
+    <string name="button_allow">Ibigay ang Permisyon</string>
+    <string name="button_later">Mamaya na</string>
+    <string name="button_rate">I-rate Ngayon</string>
+    <string name="button_share">Ibahagi Ngayon</string>
+    <string name="button_update">I-update Ngayon</string>
+    <string name="onboarding_title_welcome">Maligayang Pagdating sa Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ang animated multilingual playmate ng iyong anak. Matuto ng wika, salita, at maglaro ng interactive physical games!</string>
+    <string name="onboarding_title_games">Maglaro &amp;amp; Matuto Nang Sama-sama 🎨</string>
+    <string name="onboarding_desc_games">Sagutin ang mga pagsusulit, maghalo ng mahiwagang kulay, itugma ang mga anino, at maghanap ng mga nakatagong bagay.</string>
+    <string name="onboarding_title_permissions">Kahilingan sa Permisyon 🎤</string>
+    <string name="onboarding_desc_permissions">Para maging kahanga-hanga ang pag-aaral, kailangan ng Lumi ng access sa mic at notifications.</string>
+    <string name="permission_mic">Permisyon sa Mikropono</string>
+    <string name="permission_notif">Permisyon sa Abiso</string>
+    <string name="permission_granted">Ipinagkaloob ang mga Permisyon!</string>
+    <string name="dialog_rate_title">Gusto mo ba ang Lumi? ⭐</string>
+    <string name="dialog_rate_desc">I-rate kami ng 5 bituin sa Google Play Store! Nakatutulong ito upang magdagdag pa ng laro.</string>
+    <string name="dialog_share_title">Ibahagi ang Saya! 🎁</string>
+    <string name="dialog_share_desc">Ibahagi ang Lumi sa ibang magulang at bata para matuto at maglaro nang sama-sama!</string>
+    <string name="dialog_update_title">May Bagong Update! 🚀</string>
+    <string name="dialog_update_desc">Ang Lumi ay may mga bagong masayang salita, sticker, at laro. I-download ang pinakabagong bersyon!</string>
+</resources>

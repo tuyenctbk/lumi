@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Επόμενο</string>
+    <string name="button_back">Πίσω</string>
+    <string name="button_get_started">Ξεκινήστε</string>
+    <string name="button_skip">Παράλειψη</string>
+    <string name="button_allow">Επιτρέψτε</string>
+    <string name="button_later">Αργότερα</string>
+    <string name="button_rate">Βαθμολογήστε</string>
+    <string name="button_share">Μοιραστείτε</string>
+    <string name="button_update">Ενημερώστε</string>
+    <string name="onboarding_title_welcome">Καλώς ήρθατε στο Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ο διαδραστικός πολύγλωσσος φίλος του παιδιού σας. Μαθαίνουμε γλώσσες, λέξεις και παίζουμε κινητικά παιχνίδια!</string>
+    <string name="onboarding_title_games">Παίξτε και Μάθετε Μαζί 🎨</string>
+    <string name="onboarding_desc_games">Λύστε κουίζ, αναμίξτε μαγικά χρώματα, ταιριάξτε σκιές και βρείτε κρυμμένα αντικείμενα.</string>
+    <string name="onboarding_title_permissions">Αίτημα αδειών 🎤</string>
+    <string name="onboarding_desc_permissions">Για να γίνει η μάθηση μαγική, το Lumi χρειάζεται άδεια για το μικρόφωνο και τις ειδοποιήσεις.</string>
+    <string name="permission_mic">Άδεια μικροφώνου</string>
+    <string name="permission_notif">Άδεια ειδοποιήσεων</string>
+    <string name="permission_granted">Οι άδειες δόθηκαν!</string>
+    <string name="dialog_rate_title">Σας αρέσει το Lumi; ⭐</string>
+    <string name="dialog_rate_desc">Παρακαλούμε βαθμολογήστε μας με 5 αστέρια στο Play Store! Βοηθά το Lumi να φέρει περισσότερα παιχνίδια.</string>
+    <string name="dialog_share_title">Μοιραστείτε τη χαρά! 🎁</string>
+    <string name="dialog_share_desc">Μοιραστείτε το Lumi με άλλους γονείς και παιδιά για να μάθετε και να παίξετε μαζί!</string>
+    <string name="dialog_update_title">Νέα ενημέρωση διαθέσιμη! 🚀</string>
+    <string name="dialog_update_desc">Το Lumi έχει νέες λέξεις, αυτοκόλλητα, παιχνίδια και διορθώσεις σφαλμάτων. Κατεβάστε το τώρα!</string>
+</resources>

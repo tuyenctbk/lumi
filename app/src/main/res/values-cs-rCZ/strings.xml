@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Další</string>
+    <string name="button_back">Zpět</string>
+    <string name="button_get_started">Začit</string>
+    <string name="button_skip">Přeskočit</string>
+    <string name="button_allow">Povolit</string>
+    <string name="button_later">Později</string>
+    <string name="button_rate">Ohodnotit</string>
+    <string name="button_share">Sdílet</string>
+    <string name="button_update">Aktualizovat</string>
+    <string name="onboarding_title_welcome">Vítejte v Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Animovaný vícejazyčný kamarád vašeho dítěte. Učíme se jazyky, slova a hrajeme pohybové hry!</string>
+    <string name="onboarding_title_games">Hrajte a učte se společně 🎨</string>
+    <string name="onboarding_desc_games">Řešte kvízy, míchejte barvy a hledejte skryté předměty.</string>
+    <string name="onboarding_title_permissions">Povolení 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi potřebuje přístup k mikrofonu a oznámením.</string>
+    <string name="permission_mic">Přístup k mikrofonu</string>
+    <string name="permission_notif">Upozornění</string>
+    <string name="permission_granted">Povoleno!</string>
+    <string name="dialog_rate_title">Máte rádi Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Ohodnoťte nás prosím 5 hvězdičkami!</string>
+    <string name="dialog_share_title">Sdílejte zábavu! 🎁</string>
+    <string name="dialog_share_desc">Sdílejte Lumiho s ostatními rodiči!</string>
+    <string name="dialog_update_title">Nová aktualizace! 🚀</string>
+    <string name="dialog_update_desc">Lumi má nová zábavná slova a hry. Aktualizujte nyní!</string>
+</resources>

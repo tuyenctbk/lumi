@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">הבא</string>
+    <string name="button_back">חזור</string>
+    <string name="button_get_started">מתחילים</string>
+    <string name="button_skip">דלג</string>
+    <string name="button_allow">אפשר הרשאות</string>
+    <string name="button_later">מאוחר יותר</string>
+    <string name="button_rate">דרג עכשיו</string>
+    <string name="button_share">שתף עכשיו</string>
+    <string name="button_update">עדכן עכשיו</string>
+    <string name="onboarding_title_welcome">ברוכים הבאים ל-Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">חבר המשחקים הרב-לשוני המונפש של ילדכם. לומדים שפות, מילים ומשחקים יחד!</string>
+    <string name="onboarding_title_games">משחקים ולומדים יחד 🎨</string>
+    <string name="onboarding_desc_games">פתרו חידונים, ערבבו צבעים קסומים, התאימו צלליות ומצאו חפצים נסתרים.</string>
+    <string name="onboarding_title_permissions">בקשת הרשאות 🎤</string>
+    <string name="onboarding_desc_permissions">כדי להפוך את הלמידה לקסומה, Lumi זקוק לגישה למיקרופון ולהתראות.</string>
+    <string name="permission_mic">הרשאת מיקרופון</string>
+    <string name="permission_notif">הרשאת התראות</string>
+    <string name="permission_granted">הרשאות הוענקו!</string>
+    <string name="dialog_rate_title">אוהבים את Lumi? ⭐</string>
+    <string name="dialog_rate_desc">אנא דרגו אותנו ב-5 כוכבים בחנות האפליקציות! זה עוזר לנו להביא עוד משחקים.</string>
+    <string name="dialog_share_title">שתפו את הכיף! 🎁</string>
+    <string name="dialog_share_desc">שתפו את Lumi עם הורים וילדים אחרים כדי ללמוד ולשחק ביחד!</string>
+    <string name="dialog_update_title">עדכון חדש זמין! 🚀</string>
+    <string name="dialog_update_desc">ל-Lumi יש מילים חדשות, מדבקות ומשחקים מעולים. הורידו את הגרסה החדשה ביותר!</string>
+</resources>

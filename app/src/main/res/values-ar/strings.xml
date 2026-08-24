@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">التالي</string>
+    <string name="button_back">رجوع</string>
+    <string name="button_get_started">ابدأ الآن</string>
+    <string name="button_skip">تخطي</string>
+    <string name="button_allow">سماح بالصلاحيات</string>
+    <string name="button_later">لاحقاً</string>
+    <string name="button_rate">قيمنا الآن</string>
+    <string name="button_share">شارك الآن</string>
+    <string name="button_update">تحديث الآن</string>
+    <string name="onboarding_title_welcome">مرحباً بك في لومي! ✨</string>
+    <string name="onboarding_desc_welcome">صديق طفلك اللغوي التفاعلي. نتعلم اللغات والكلمات ونلعب ألعاباً حركية معاً!</string>
+    <string name="onboarding_title_games">العب وتعلم معاً 🎨</string>
+    <string name="onboarding_desc_games">حل الألغاز، امزج الألوان السحرية، طابق الظلال، وابحث عن الأشياء المخفية بمؤثرات ممتعة.</string>
+    <string name="onboarding_title_permissions">طلب الصلاحيات 🎤</string>
+    <string name="onboarding_desc_permissions">لتجربة تعلم مذهلة، يحتاج لومي إلى صلاحية تسجيل الصوت لتصحيح النطق وإرسال إشعارات الفواصل النشطة.</string>
+    <string name="permission_mic">صلاحية الميكروفون</string>
+    <string name="permission_notif">صلاحية الإشعارات</string>
+    <string name="permission_granted">تم منح الصلاحيات بنجاح!</string>
+    <string name="dialog_rate_title">هل أعجبك لومي؟ ⭐</string>
+    <string name="dialog_rate_desc">يرجى تقييمنا بـ 5 نجوم على متجر التطبيقات لمساعدة لومي في تقديم المزيد من الألعاب المفيدة والأدوات الممتعة.</string>
+    <string name="dialog_share_title">شارك المرح! 🎁</string>
+    <string name="dialog_share_desc">شارك تطبيق لومي مع الآباء والأمهات الآخرين ليستمتع أطفالهم بالتعلم واللعب معاً!</string>
+    <string name="dialog_update_title">يتوفر تحديث جديد! 🚀</string>
+    <string name="dialog_update_desc">يحتوي لومي على كلمات جديدة رائعة، ملصقات جديدة، وألعاب ممتعة مضافة حديثاً. احصل على التحديث الآن!</string>
+</resources>

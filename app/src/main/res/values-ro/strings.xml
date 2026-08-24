@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Înainte</string>
+    <string name="button_back">Înapoi</string>
+    <string name="button_get_started">Începe</string>
+    <string name="button_skip">Omite</string>
+    <string name="button_allow">Permite</string>
+    <string name="button_later">Mai târziu</string>
+    <string name="button_rate">Evaluează</string>
+    <string name="button_share">Trimite</string>
+    <string name="button_update">Actualizează</string>
+    <string name="onboarding_title_welcome">Bun venit la Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Partenerul de joacă interactiv al copilului tău. Învățăm limbi, cuvinte și ne jucăm jocuri de mișcare!</string>
+    <string name="onboarding_title_games">Joacă și învață împreună 🎨</string>
+    <string name="onboarding_desc_games">Rezolvă teste, amestecă culori magice, potrivește umbre și caută obiecte ascunse.</string>
+    <string name="onboarding_title_permissions">Solicitare permisiuni 🎤</string>
+    <string name="onboarding_desc_permissions">Pentru a face învățarea magică, Lumi are nevoie de permisiuni pentru microfon și notificări.</string>
+    <string name="permission_mic">Permisiune microfon</string>
+    <string name="permission_notif">Permisiune notificări</string>
+    <string name="permission_granted">Permisiuni acordate!</string>
+    <string name="dialog_rate_title">Îți place Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Te rugăm să ne oferi 5 stele în Play Store! Ne ajută să aducem jocuri noi și distractive.</string>
+    <string name="dialog_share_title">Trimite distracția! 🎁</string>
+    <string name="dialog_share_desc">Trimite Lumi altor părinți și copii pentru a se juca și învăța împreună!</string>
+    <string name="dialog_update_title">Actualizare disponibilă! 🚀</string>
+    <string name="dialog_update_desc">Lumi are cuvinte distractive noi, stickere și jocuri interactive. Descarcă noua versiune!</string>
+</resources>

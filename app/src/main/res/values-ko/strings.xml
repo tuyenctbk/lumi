@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">다음</string>
+    <string name="button_back">이전</string>
+    <string name="button_get_started">시작하기</string>
+    <string name="button_skip">건너뛰기</string>
+    <string name="button_allow">권한 허용</string>
+    <string name="button_later">나중에</string>
+    <string name="button_rate">평가하기</string>
+    <string name="button_share">공유하기</string>
+    <string name="button_update">업데이트</string>
+    <string name="onboarding_title_welcome">루미에 오신 것을 환영합니다! ✨</string>
+    <string name="onboarding_desc_welcome">아이를 위한 생동감 넘치는 다국어 놀이 친구. 언어와 단어를 배우고, 함께 움직이며 즐기는 신나는 게임을 경험하세요!</string>
+    <string name="onboarding_title_games">함께 놀며 배우기 🎨</string>
+    <string name="onboarding_desc_games">퀴즈 풀기, 신기한 색 혼합, 그림자 맞추기, 숨은 그림 찾기 등 아이가 좋아하는 재미있는 게임을 만나보세요.</string>
+    <string name="onboarding_title_permissions">권한 요청 🎤</string>
+    <string name="onboarding_desc_permissions">더 마법 같은 학습을 위해 루미에게 마이크(발음 게임용) 및 알림(휴식 알림용) 권한을 허용해 주세요.</string>
+    <string name="permission_mic">마이크 권한</string>
+    <string name="permission_notif">알림 권한</string>
+    <string name="permission_granted">권한 허용 완료!</string>
+    <string name="dialog_rate_title">루미가 마음에 드시나요? ⭐</string>
+    <string name="dialog_rate_desc">Play 스토어에서 별 5개 평점을 남겨주세요! 루미가 아이들을 위한 더 재밌는 게임을 만드는 데 큰 힘이 됩니다.</string>
+    <string name="dialog_share_title">즐거움을 공유하세요! 🎁</string>
+    <string name="dialog_share_desc">다른 학부모와 아이들에게 루미를 추천하고 함께 신나게 배우고 놀아보세요!</string>
+    <string name="dialog_update_title">새로운 업데이트 가능! 🚀</string>
+    <string name="dialog_update_desc">루미에 새로운 재미있는 단어, 예쁜 스티커, 새로운 미니게임이 추가되었습니다. 지금 업데이트 하세요!</string>
+</resources>

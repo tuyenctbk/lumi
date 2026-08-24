@@ -1,5 +1,4 @@
 <resources>
-    <!-- General -->
     <string name="app_name">Lumi</string>
     <string name="button_next">Siguiente</string>
     <string name="button_back">Atrás</string>
@@ -10,31 +9,19 @@
     <string name="button_rate">Calificar ahora</string>
     <string name="button_share">Compartir ahora</string>
     <string name="button_update">Actualizar ahora</string>
-
-    <!-- Onboarding Page 1 -->
     <string name="onboarding_title_welcome">¡Te damos la bienvenida a Lumi! ✨</string>
     <string name="onboarding_desc_welcome">El compañero de juego interactivo y multilingüe para tu hijo. ¡Aprendemos idiomas, palabras y jugamos juntos!</string>
-
-    <!-- Onboarding Page 2 -->
     <string name="onboarding_title_games">Jugar y aprender juntos 🎨</string>
     <string name="onboarding_desc_games">Resuelve acertijos, mezcla colores mágicos, adivina sombras y encuentra objetos ocultos con comentarios divertidos.</string>
-
-    <!-- Onboarding Page 3 -->
     <string name="onboarding_title_permissions">Solicitud de permisos 🎤</string>
     <string name="onboarding_desc_permissions">Para que el aprendizaje sea mágico, Lumi necesita permiso para grabar audio (para juegos de pronunciación) y enviar notificaciones (para descansos divertidos).</string>
     <string name="permission_mic">Permiso de micrófono</string>
     <string name="permission_notif">Permiso de notificaciones</string>
     <string name="permission_granted">¡Permisos concedidos!</string>
-
-    <!-- Smart Suggestions / Dialogs -->
     <string name="dialog_rate_title">¿Te gusta Lumi? ⭐</string>
     <string name="dialog_rate_desc">¡Por favor califícanos con 5 estrellas en Play Store! Ayuda a Lumi a traer más juegos divertidos para los niños.</string>
-
-    <!-- Share Suggestion -->
     <string name="dialog_share_title">¡Comparte la diversión! 🎁</string>
     <string name="dialog_share_desc">¡Comparte Lumi con otros padres y niños para aprender y jugar juntos!</string>
-
-    <!-- Update Suggestion -->
     <string name="dialog_update_title">¡Nueva actualización disponible! 🚀</string>
     <string name="dialog_update_desc">Lumi tiene nuevas palabras divertidas, calcomanías, juegos y correcciones. ¡Consigue la última versión ahora!</string>
 </resources>

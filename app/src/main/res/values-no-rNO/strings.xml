@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Neste</string>
+    <string name="button_back">Tilbake</string>
+    <string name="button_get_started">Start</string>
+    <string name="button_skip">Hopp over</string>
+    <string name="button_allow">Tillat</string>
+    <string name="button_later">Senere</string>
+    <string name="button_rate">Vurder</string>
+    <string name="button_share">Del</string>
+    <string name="button_update">Oppdater</string>
+    <string name="onboarding_title_welcome">Velkommen til Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Ditt barns lekekamerat.</string>
+    <string name="onboarding_title_games">Lek &amp;amp; Lær 🎨</string>
+    <string name="onboarding_desc_games">Løs quizer og finn skjulte objekter.</string>
+    <string name="onboarding_title_permissions">Tillatelse 🎤</string>
+    <string name="onboarding_desc_permissions">Lumi trenger tilgang til mikrofon.</string>
+    <string name="permission_mic">Mikrofontilgang</string>
+    <string name="permission_notif">Varslingstilgang</string>
+    <string name="permission_granted">Innvilget!</string>
+    <string name="dialog_rate_title">Liker du Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Gi oss 5 stjerner i Play Store!</string>
+    <string name="dialog_share_title">Del gleden! 🎁</string>
+    <string name="dialog_share_desc">Del Lumi med andre!</string>
+    <string name="dialog_update_title">Oppdatering klar! 🚀</string>
+    <string name="dialog_update_desc">Last ned siste versjon nå!</string>
+</resources>

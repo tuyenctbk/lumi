@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">ถัดไป</string>
+    <string name="button_back">ย้อนกลับ</string>
+    <string name="button_get_started">เริ่มกันเลย</string>
+    <string name="button_skip">ข้าม</string>
+    <string name="button_allow">อนุญาต</string>
+    <string name="button_later">ไว้ทีหลัง</string>
+    <string name="button_rate">ให้คะแนนตอนนี้</string>
+    <string name="button_share">แชร์ตอนนี้</string>
+    <string name="button_update">อัปเดตตอนนี้</string>
+    <string name="onboarding_title_welcome">ยินดีต้อนรับสู่ Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">เพื่อนเล่นแอนิเมชันหลายภาษาสำหรับลูกของคุณ มาเรียนรู้ภาษา คำศัพท์ และเล่นเกมเคลื่อนไหวไปด้วยกัน!</string>
+    <string name="onboarding_title_games">เล่นและเรียนรู้ไปด้วยกัน 🎨</string>
+    <string name="onboarding_desc_games">ไขปริศนา, ผสมสีวิเศษ, จับคู่เงา และค้นหาวัตถุที่ซ่อนอยู่ด้วยแอนิเมชันแสนสนุก</string>
+    <string name="onboarding_title_permissions">การขออนุญาตสิทธิ์ 🎤</string>
+    <string name="onboarding_desc_permissions">เพื่อให้การเรียนรู้น่ามหัศจรรย์ Lumi ต้องการสิทธิ์การเข้าถึงไมโครโฟนและการส่งการแจ้งเตือน</string>
+    <string name="permission_mic">การขอสิทธิ์ไมโครโฟน</string>
+    <string name="permission_notif">การขอสิทธิ์แจ้งเตือน</string>
+    <string name="permission_granted">อนุญาตสิทธิ์เรียบร้อย!</string>
+    <string name="dialog_rate_title">คุณชอบ Lumi ไหม? ⭐</string>
+    <string name="dialog_rate_desc">โปรดให้คะแนนเรา 5 ดาวบน Play Store! เพื่อช่วยให้ Lumi มีเกมสนุกๆ เพิ่มเติมสำหรับเด็กๆ</string>
+    <string name="dialog_share_title">แบ่งปันความสนุก! 🎁</string>
+    <string name="dialog_share_desc">แชร์ Lumi กับพ่อแม่และเด็กๆ คนอื่น เพื่อเรียนรู้และเล่นสนุกไปด้วยกัน!</string>
+    <string name="dialog_update_title">มีอัปเดตใหม่พร้อมใช้งาน! 🚀</string>
+    <string name="dialog_update_desc">Lumi มีคำศัพท์สนุกๆ, สติกเกอร์ใหม่ และเกมเพิ่มเข้ามา ดาวน์โหลดเวอร์ชันล่าสุดเลย!</string>
+</resources>

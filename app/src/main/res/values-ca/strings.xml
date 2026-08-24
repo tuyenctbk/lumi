@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Següent</string>
+    <string name="button_back">Enrere</string>
+    <string name="button_get_started">Començar</string>
+    <string name="button_skip">Ometre</string>
+    <string name="button_allow">Permetre</string>
+    <string name="button_later">Més tard</string>
+    <string name="button_rate">Valorar ara</string>
+    <string name="button_share">Compartir</string>
+    <string name="button_update">Actualitzar</string>
+    <string name="onboarding_title_welcome">Benvinguts a Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">El company de jocs multilingüe interactiu del teu fill. Aprenem idiomes, paraules i juguem junts a jocs físics!</string>
+    <string name="onboarding_title_games">Jugar i aprendre junts 🎨</string>
+    <string name="onboarding_desc_games">Resol endevinalles, barreja colors màgics, endevina ombres i troba objectes ocults.</string>
+    <string name="onboarding_title_permissions">Petició de permisos 🎤</string>
+    <string name="onboarding_desc_permissions">Per fer l\'aprenentatge màgic, Lumi necessita permís per gravar àudio i enviar notificacions.</string>
+    <string name="permission_mic">Permís de micròfon</string>
+    <string name="permission_notif">Permís de notificacions</string>
+    <string name="permission_granted">Permisos concedits!</string>
+    <string name="dialog_rate_title">T\'agrada Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Si us plau, valora\'ns amb 5 estrelles a la Play Store per ajudar-nos a portar més jocs per als nens.</string>
+    <string name="dialog_share_title">Comparteix la diversió! 🎁</string>
+    <string name="dialog_share_desc">Comparteix Lumi amb altres pares i nens per jugar i aprendre junts!</string>
+    <string name="dialog_update_title">Nova actualització disponible! 🚀</string>
+    <string name="dialog_update_desc">Lumi té noves paraules, adhesius i jocs. Descarrega la darrera versió ara!</string>
+</resources>
