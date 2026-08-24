@@ -1,0 +1,40 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Weiter</string>
+    <string name="button_back">Zurück</string>
+    <string name="button_get_started">Loslegen</string>
+    <string name="button_skip">Überspringen</string>
+    <string name="button_allow">Berechtigungen erlauben</string>
+    <string name="button_later">Später</string>
+    <string name="button_rate">Jetzt bewerten</string>
+    <string name="button_share">Jetzt teilen</string>
+    <string name="button_update">Jetzt aktualisieren</string>
+
+    <!-- Onboarding Page 1 -->
+    <string name="onboarding_title_welcome">Willkommen bei Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Der animierte, mehrsprachige Spielkamerad deines Kindes. Wir lernen Sprachen, Wörter und spielen interaktive Bewegungsspiele!</string>
+
+    <!-- Onboarding Page 2 -->
+    <string name="onboarding_title_games">Gemeinsam spielen &amp; lernen 🎨</string>
+    <string name="onboarding_desc_games">Löse Quizze, mische magische Farben, errate Schatten und finde versteckte Objekte mit lustigen Animationen.</string>
+
+    <!-- Onboarding Page 3 -->
+    <string name="onboarding_title_permissions">Berechtigungen anfordern 🎤</string>
+    <string name="onboarding_desc_permissions">Damit das Lernen magisch wird, benötigt Lumi die Erlaubnis, Audio aufzunehmen (für Aussprache-Spiele) und Benachrichtigungen zu senden (für aktive Pausen).</string>
+    <string name="permission_mic">Mikrofon-Berechtigung</string>
+    <string name="permission_notif">Benachrichtigungs-Berechtigung</string>
+    <string name="permission_granted">Berechtigungen erteilt!</string>
+
+    <!-- Smart Suggestions / Dialogs -->
+    <string name="dialog_rate_title">Gefällt dir Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Bitte bewerte uns mit 5 Sternen im Play Store! Es hilft Lumi, noch mehr tolle Spiele für Kinder anzubieten.</string>
+
+    <!-- Share Suggestion -->
+    <string name="dialog_share_title">Teile den Spaß! 🎁</string>
+    <string name="dialog_share_desc">Teile Lumi mit anderen Eltern und Kindern, um gemeinsam zu lernen und zu spielen!</string>
+
+    <!-- Update Suggestion -->
+    <string name="dialog_update_title">Neues Update verfügbar! 🚀</string>
+    <string name="dialog_update_desc">Lumi hat neue lustige Wörter, Sticker, Spiele und Fehlerbehebungen. Hol dir jetzt die neueste Version!</string>
+</resources>

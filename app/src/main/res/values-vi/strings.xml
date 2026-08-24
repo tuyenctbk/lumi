@@ -1,0 +1,40 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Lumi</string>
+    <string name="button_next">Tiếp theo</string>
+    <string name="button_back">Quay lại</string>
+    <string name="button_get_started">Bắt đầu ngay</string>
+    <string name="button_skip">Bỏ qua</string>
+    <string name="button_allow">Cấp quyền truy cập</string>
+    <string name="button_later">Để sau</string>
+    <string name="button_rate">Đánh giá ngay</string>
+    <string name="button_share">Chia sẻ ngay</string>
+    <string name="button_update">Cập nhật ngay</string>
+
+    <!-- Onboarding Page 1 -->
+    <string name="onboarding_title_welcome">Chào mừng bạn đến với Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Người bạn học đa ngôn ngữ đầy sinh động của bé. Chúng ta sẽ cùng học từ vựng và chơi các trò chơi tương tác bổ ích!</string>
+
+    <!-- Onboarding Page 2 -->
+    <string name="onboarding_title_games">Cùng chơi &amp; Cùng học 🎨</string>
+    <string name="onboarding_desc_games">Giải câu đố, pha trộn sắc màu kỳ diệu, đoán bóng và tìm đồ vật ẩn giấu cùng các hoạt ảnh tương tác vui nhộn.</string>
+
+    <!-- Onboarding Page 3 -->
+    <string name="onboarding_title_permissions">Yêu cầu quyền truy cập 🎤</string>
+    <string name="onboarding_desc_permissions">Để hành trình học tập thêm phần kỳ diệu, bé cần cho phép Lumi ghi âm (để tập phát âm) và gửi thông báo (để nhắc bé giải lao).</string>
+    <string name="permission_mic">Quyền sử dụng Micro</string>
+    <string name="permission_notif">Quyền gửi thông báo</string>
+    <string name="permission_granted">Đã cấp quyền thành công!</string>
+
+    <!-- Smart Suggestions / Dialogs -->
+    <string name="dialog_rate_title">Bé có yêu thích Lumi không? ⭐</string>
+    <string name="dialog_rate_desc">Hãy dành tặng Lumi 5 sao trên Google Play Store nhé! Điều này giúp Lumi có thêm nhiều bài học và trò chơi bổ ích hơn cho bé.</string>
+
+    <!-- Share Suggestion -->
+    <string name="dialog_share_title">Chia sẻ niềm vui! 🎁</string>
+    <string name="dialog_share_desc">Chia sẻ Lumi với các phụ huynh và bạn nhỏ khác để cùng nhau khám phá thế giới từ vựng thú vị!</string>
+
+    <!-- Update Suggestion -->
+    <string name="dialog_update_title">Đã có phiên bản mới! 🚀</string>
+    <string name="dialog_update_desc">Lumi đã được bổ sung thêm nhiều từ vựng mới, sticker dễ thương và sửa lỗi. Tải ngay phiên bản mới nhất nhé!</string>
+</resources>

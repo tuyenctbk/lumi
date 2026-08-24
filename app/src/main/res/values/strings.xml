@@ -1,3 +1,40 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Lumi</string>
+    <string name="button_next">Next</string>
+    <string name="button_back">Back</string>
+    <string name="button_get_started">Get Started</string>
+    <string name="button_skip">Skip</string>
+    <string name="button_allow">Allow Permissions</string>
+    <string name="button_later">Later</string>
+    <string name="button_rate">Rate Now</string>
+    <string name="button_share">Share Now</string>
+    <string name="button_update">Update Now</string>
+
+    <!-- Onboarding Page 1 -->
+    <string name="onboarding_title_welcome">Welcome to Lumi! ✨</string>
+    <string name="onboarding_desc_welcome">Your child\'s animated multilingual playmate. We learn languages, words, and play physical interactive games!</string>
+
+    <!-- Onboarding Page 2 -->
+    <string name="onboarding_title_games">Play &amp; Learn Together 🎨</string>
+    <string name="onboarding_desc_games">Solve quizzes, mix magical colors, match shadows, and find hidden objects with animated feedback.</string>
+
+    <!-- Onboarding Page 3 -->
+    <string name="onboarding_title_permissions">Permission Request 🎤</string>
+    <string name="onboarding_desc_permissions">To make learning magical, Lumi needs permission to record audio (for pronunciation games) and send notifications (for fun screen breaks).</string>
+    <string name="permission_mic">Microphone Permission</string>
+    <string name="permission_notif">Notification Permission</string>
+    <string name="permission_granted">Permissions Granted!</string>
+
+    <!-- Smart Suggestions / Dialogs -->
+    <string name="dialog_rate_title">Do you like Lumi? ⭐</string>
+    <string name="dialog_rate_desc">Please rate us 5 stars on Google Play Store! It helps Lumi bring more fun games to kids.</string>
+
+    <!-- Share Suggestion -->
+    <string name="dialog_share_title">Share the Fun! 🎁</string>
+    <string name="dialog_share_desc">Share Lumi with other parents and kids to learn and play together!</string>
+
+    <!-- Update Suggestion -->
+    <string name="dialog_update_title">New Update Available! 🚀</string>
+    <string name="dialog_update_desc">Lumi has new fun words, stickers, games, and bug fixes. Get the latest version now!</string>
 </resources>

@@ -1,0 +1,40 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Lumi</string>
+    <string name="button_next">つぎへ</string>
+    <string name="button_back">もどる</string>
+    <string name="button_get_started">スタート</string>
+    <string name="button_skip">スキップ</string>
+    <string name="button_allow">きょかする</string>
+    <string name="button_later">あとで</string>
+    <string name="button_rate">評価する</string>
+    <string name="button_share">シェアする</string>
+    <string name="button_update">アップデート</string>
+
+    <!-- Onboarding Page 1 -->
+    <string name="onboarding_title_welcome">ルミへようこそ！ ✨</string>
+    <string name="onboarding_desc_welcome">お子様のためのアニメーション多言語お友達。言葉や言語を学び、体を動かすインタラクティブなゲームを一緒に遊びましょう！</string>
+
+    <!-- Onboarding Page 2 -->
+    <string name="onboarding_title_games">いっしょにあそんで、まなぼう 🎨</string>
+    <string name="onboarding_desc_games">クイズを解いたり、不思議な色を混ぜたり、影当てをしたり、隠れたアイテムを探したり、楽しいアニメーションフィードバックで遊べます。</string>
+
+    <!-- Onboarding Page 3 -->
+    <string name="onboarding_title_permissions">アクセスきょかのお願い 🎤</string>
+    <string name="onboarding_desc_permissions">学びをより魔法のようにするために、ルミは音声の録音（発音ゲーム用）と通知の送信（楽しい休憩リマインダー用）の許可を必要としています。</string>
+    <string name="permission_mic">マイクの許可</string>
+    <string name="permission_notif">通知の許可</string>
+    <string name="permission_granted">きょかされました！</string>
+
+    <!-- Smart Suggestions / Dialogs -->
+    <string name="dialog_rate_title">ルミはたのしいですか？ ⭐</string>
+    <string name="dialog_rate_desc">Google Play ストアで5つ星の評価をお願いします！ルミが子どもたちのためにもっと楽しいゲームを作れるようになります。</string>
+
+    <!-- Share Suggestion -->
+    <string name="dialog_share_title">楽しさをシェアしよう！ 🎁</string>
+    <string name="dialog_share_desc">他の保護者やお友達にルミを教えてあげて、みんなで一緒に学び、遊びましょう！</string>
+
+    <!-- Update Suggestion -->
+    <string name="dialog_update_title">新しいアップデートがあります！ 🚀</string>
+    <string name="dialog_update_desc">ルミに新しい言葉、かわいいステッカー、ゲーム、そしていくつかの修正が追加されました。最新バージョンをダウンロードしてください！</string>
+</resources>

@@ -44,6 +44,13 @@ import com.example.ui.screens.StickerBookScreen
 import com.example.ui.screens.WorldMapScreen
 import com.example.ui.theme.MyApplicationTheme
 import com.example.ui.viewmodel.LumiViewModel
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import com.example.util.SmartEngagementManager
+import com.example.util.SmartSuggestionType
+import com.example.ui.components.SmartEngagementDialog
+import com.example.ui.screens.OnboardingScreen
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
 
@@ -77,12 +84,41 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun LumiApp(viewModel: LumiViewModel) {
+    val context = LocalContext.current
+    val engagementManager = remember { SmartEngagementManager(context) }
     val navController = rememberNavController()
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     var showLanguagePicker by remember { mutableStateOf(false) }
 
     val activeBreakQuest by viewModel.activePhysicalBreak.collectAsState()
     val isBreakVisible by viewModel.isPhysicalBreakVisible.collectAsState()
+
+    var activeEngagementSuggestion by remember { mutableStateOf<SmartSuggestionType?>(null) }
+
+    LaunchedEffect(Unit) {
+        engagementManager.recordAppLaunch()
+    }
+
+    LaunchedEffect(navController.currentBackStackEntryFlow) {
+        navController.currentBackStackEntryFlow.collect { backStackEntry ->
+            if (backStackEntry.destination.route == "home" && engagementManager.isOnboardingCompleted) {
+                delay(2000)
+                activeEngagementSuggestion = engagementManager.calculateBestTimeSuggestion()
+            }
+        }
+    }
+
+    val recentSessions by viewModel.recentSessions.collectAsState()
+    var lastSessionsCount by remember { mutableStateOf(-1) }
+
+    LaunchedEffect(recentSessions) {
+        if (lastSessionsCount == -1) {
+            lastSessionsCount = recentSessions.size
+        } else if (recentSessions.size > lastSessionsCount) {
+            engagementManager.recordGameCompleted()
+            lastSessionsCount = recentSessions.size
+        }
+    }
 
     SharedTransitionLayout {
         NavHost(
@@ -96,8 +132,24 @@ fun LumiApp(viewModel: LumiViewModel) {
             composable("splash") {
                 com.example.ui.screens.SplashScreen(
                     onSplashFinished = {
+                        if (engagementManager.isOnboardingCompleted) {
+                            navController.navigate("home") {
+                                popUpTo("splash") { inclusive = true }
+                            }
+                        } else {
+                            navController.navigate("onboarding") {
+                                popUpTo("splash") { inclusive = true }
+                            }
+                        }
+                    }
+                )
+            }
+
+            composable("onboarding") {
+                OnboardingScreen(
+                    onOnboardingFinished = {
                         navController.navigate("home") {
-                            popUpTo("splash") { inclusive = true }
+                            popUpTo("onboarding") { inclusive = true }
                         }
                     }
                 )
@@ -298,6 +350,25 @@ fun LumiApp(viewModel: LumiViewModel) {
             onCompleted = { viewModel.completePhysicalActivity(activeBreakQuest!!) },
             onDismiss = { viewModel.dismissPhysicalActivity() },
             onReplayAudio = { viewModel.speakLumi(activeBreakQuest!!.spokenPrompt) }
+        )
+    }
+
+    // Smart Engagement suggestion dialog
+    if (activeEngagementSuggestion != null) {
+        SmartEngagementDialog(
+            suggestionType = activeEngagementSuggestion!!,
+            onConfirm = {
+                when (activeEngagementSuggestion!!) {
+                    com.example.util.SmartSuggestionType.SHARE_APP -> engagementManager.executeShareApp()
+                    com.example.util.SmartSuggestionType.RATE_APP -> engagementManager.executeRateApp()
+                    com.example.util.SmartSuggestionType.UPDATE_APP -> engagementManager.executeUpdateApp()
+                }
+                activeEngagementSuggestion = null
+            },
+            onDismiss = {
+                engagementManager.recordPromptDismissed()
+                activeEngagementSuggestion = null
+            }
         )
     }
 }
