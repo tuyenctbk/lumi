@@ -94,54 +94,7 @@ fun QuizScreen(
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()
 
-    var selectedDifficulty by remember { mutableStateOf<QuizDifficulty?>(null) }
-    
-    if (selectedDifficulty == null) {
-        Box(
-            modifier = Modifier.fillMaxSize().background(SleekBackground).padding(24.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(R.string.quiz_select_difficulty),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Black,
-                    color = SleekTextDark
-                )
-                
-                QuizDifficulty.values().forEach { diff ->
-                    Button(
-                        onClick = { selectedDifficulty = diff },
-                        modifier = Modifier.fillMaxWidth().height(60.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = SleekOcean)
-                    ) {
-                        Text(
-                            text = "${diff.title} (${diff.timeLimit}s)",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp
-                        )
-                    }
-                }
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                Button(
-                    onClick = onBack,
-                    modifier = Modifier.fillMaxWidth().height(50.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = SleekCoral)
-                ) {
-                    Text(stringResource(R.string.quiz_go_back), fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                }
-            }
-        }
-        return
-    }
+    var selectedDifficulty by remember { mutableStateOf<QuizDifficulty>(QuizDifficulty.EASY) }
 
     // Generate 5 multiple-choice questions based on difficulty
     val questions: List<QuizQuestion> = remember(wordProgressList, targetLanguage, selectedDifficulty) {

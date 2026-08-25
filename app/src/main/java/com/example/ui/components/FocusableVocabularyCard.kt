@@ -10,6 +10,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -203,7 +204,8 @@ fun FocusableVocabularyCard(
                 // Visual Asset Area (Emoji, Pixabay Real Photo, or Giphy Motion GIF)
                 Box(
                     modifier = Modifier
-                        .size(96.dp)
+                        .fillMaxWidth(0.65f)
+                        .aspectRatio(1f)
                         .padding(top = 4.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -251,7 +253,7 @@ fun FocusableVocabularyCard(
                     // Target Language Word
                     Text(
                         text = targetWord,
-                        fontSize = 20.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.Black,
                         color = SleekTextDark,
                         textAlign = TextAlign.Center,

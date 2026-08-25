@@ -210,93 +210,7 @@ fun ExploreCategoryScreen(
                     }
                 }
 
-                // Media Visual Mode Selector Tabs (Emoji / Pixabay Photo / Giphy GIF)
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(16.dp),
-                        color = if (visualMode == CardVisualMode.EMOJI) categoryColor else SleekSurface,
-                        border = BorderStroke(1.dp, if (visualMode == CardVisualMode.EMOJI) categoryColor else SleekSurfaceBorder),
-                        modifier = Modifier.clickable { visualMode = CardVisualMode.EMOJI }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Mood,
-                                contentDescription = null,
-                                tint = if (visualMode == CardVisualMode.EMOJI) Color.White else SleekTextMuted,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            if (!isMobilePortrait) {
-                                Text(
-                                    text = "Emoji",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (visualMode == CardVisualMode.EMOJI) Color.White else SleekTextDark
-                                )
-                            }
-                        }
-                    }
 
-                    Surface(
-                        shape = RoundedCornerShape(16.dp),
-                        color = if (visualMode == CardVisualMode.REAL_PHOTO) SleekOcean else SleekSurface,
-                        border = BorderStroke(1.dp, if (visualMode == CardVisualMode.REAL_PHOTO) SleekOceanDark else SleekSurfaceBorder),
-                        modifier = Modifier.clickable { visualMode = CardVisualMode.REAL_PHOTO }
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Image,
-                                contentDescription = null,
-                                tint = if (visualMode == CardVisualMode.REAL_PHOTO) Color.White else SleekTextMuted,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Text(
-                                text = if (isMobilePortrait) "Photo" else "Pixabay Photo",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = if (visualMode == CardVisualMode.REAL_PHOTO) Color.White else SleekTextDark
-                            )
-                        }
-                    }
-
-                    if (category == LearningCategory.ACTIONS || !isMobilePortrait) {
-                        Surface(
-                            shape = RoundedCornerShape(16.dp),
-                            color = if (visualMode == CardVisualMode.ACTION_GIF) Color(0xFFE91E63) else SleekSurface,
-                            border = BorderStroke(1.dp, if (visualMode == CardVisualMode.ACTION_GIF) Color(0xFFC2185B) else SleekSurfaceBorder),
-                            modifier = Modifier.clickable { visualMode = CardVisualMode.ACTION_GIF }
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Animation,
-                                    contentDescription = null,
-                                    tint = if (visualMode == CardVisualMode.ACTION_GIF) Color.White else SleekTextMuted,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Text(
-                                    text = if (isMobilePortrait) "GIF" else "Giphy Motion",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (visualMode == CardVisualMode.ACTION_GIF) Color.White else SleekTextDark
-                                )
-                            }
-                        }
-                    }
-                }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -328,7 +242,7 @@ fun ExploreCategoryScreen(
                             gifUrl = gifsMap[item.id],
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(210.dp),
+                                .height(170.dp),
                             onClick = {
                                 selectedWord = item
                                 viewModel.speakWord(item)
@@ -380,102 +294,6 @@ fun ExploreCategoryScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Surface(
-                shape = RoundedCornerShape(20.dp),
-                color = SleekSurface,
-                border = BorderStroke(1.5.dp, SleekSurfaceBorder),
-                shadowElevation = 2.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 2.dp)
-            ) {
-                Row(
-                    modifier = Modifier.padding(
-                        start = 14.dp,
-                        end = if (isMobilePortrait) 105.dp else 14.dp,
-                        top = 10.dp,
-                        bottom = 10.dp
-                    ),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = if (isMobilePortrait) "💡 Tap cards to hear & learn!" else "💡 Tip: Select any card to hear Lumi pronounce it out loud!",
-                        color = SleekTextMuted,
-                        fontWeight = FontWeight.Medium,
-                        fontSize = if (isMobilePortrait) 12.sp else 14.sp,
-                        modifier = Modifier.weight(1f, fill = false)
-                    )
-
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        // Freesound FX button
-                        FocusableCard(
-                            onClick = {
-                                selectedWord?.let { viewModel.playRealSoundEffect(it.id) }
-                            },
-                            shape = RoundedCornerShape(14.dp),
-                            backgroundColor = SleekOcean,
-                            unfocusedBorderColor = SleekOceanDark,
-                            focusedBorderColor = SleekGold,
-                            testTag = "freesound_fx_button"
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.GraphicEq,
-                                    contentDescription = "Real Sound",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Text(
-                                    text = "Real Sound",
-                                    color = Color.White,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 12.sp
-                                )
-                            }
-                        }
-
-                        if (!isMobilePortrait) {
-                            // Listen Again Pronunciation
-                            FocusableCard(
-                                onClick = {
-                                    selectedWord?.let { viewModel.speakWord(it) }
-                                },
-                                shape = RoundedCornerShape(14.dp),
-                                backgroundColor = SleekGold,
-                                unfocusedBorderColor = SleekGoldDark,
-                                focusedBorderColor = SleekEmerald,
-                                testTag = "repeat_audio_button"
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.VolumeUp,
-                                        contentDescription = "Listen",
-                                        tint = SleekTextDark,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                    Text(
-                                        text = "Pronounce",
-                                        color = SleekTextDark,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 12.sp
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         // Animated Lumi in Corner (scaled neatly on mobile)

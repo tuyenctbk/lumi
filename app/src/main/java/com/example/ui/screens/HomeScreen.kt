@@ -134,8 +134,6 @@ fun HomeScreen(
     val isLoading by viewModel.isLoading.collectAsState()
     val errorMessage by viewModel.errorMessage.collectAsState()
 
-    var showParentGate by remember { mutableStateOf(false) }
-
     val gameShows = remember {
         listOf(
             GameShowItem(
@@ -193,15 +191,6 @@ fun HomeScreen(
                 badge = "NEW!"
             ),
             GameShowItem(
-                id = "achievement_gallery",
-                title = "Digital Badges Gallery",
-                subtitle = "Milestones & Streaks",
-                icon = Icons.Default.EmojiEvents,
-                color = SleekGold,
-                colorDark = Color(0xFFD99B16),
-                badge = "Badges"
-            ),
-            GameShowItem(
                 id = "quiz",
                 title = "Quiz Challenge",
                 subtitle = "Multiple-Choice Fun",
@@ -218,24 +207,6 @@ fun HomeScreen(
                 color = SleekOcean,
                 colorDark = SleekOceanDark,
                 badge = "MIC"
-            ),
-            GameShowItem(
-                id = "dashboard",
-                title = "Progress Dashboard",
-                subtitle = "Recharts Analytics",
-                icon = Icons.Default.Insights,
-                color = SleekPurple,
-                colorDark = Color(0xFF5B1AA8),
-                badge = "STATS"
-            ),
-            GameShowItem(
-                id = "sticker_book",
-                title = "Sticker & Trophies",
-                subtitle = "Your Collection",
-                icon = Icons.Default.EmojiEvents,
-                color = SleekGold,
-                colorDark = Color(0xFFD99B16),
-                badge = "Rewards"
             )
         )
     }
@@ -265,196 +236,10 @@ fun HomeScreen(
                 targetLanguage = targetLanguage,
                 points = points,
                 streakDays = streakDays,
-                bilingualMode = bilingualMode,
-                onToggleBilingual = { viewModel.toggleBilingualMode() },
-                onOpenLanguagePicker = onOpenLanguagePicker,
-                onOpenParentHub = { showParentGate = true },
-                onOpenWorldMap = onNavigateWorldMap
+                onOpenLanguagePicker = onOpenLanguagePicker
             )
 
-            // Hero Interactive World Map Banner (Weighted row so "Open Map" button is never squeezed!)
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
-            ) {
-                FocusableCard(
-                    onClick = onNavigateWorldMap,
-                    shape = RoundedCornerShape(26.dp),
-                    backgroundColor = Color(0xFFE3F2FD),
-                    unfocusedBorderColor = Color(0xFF90CAF9),
-                    focusedBorderColor = SleekOceanDark,
-                    focusedScale = 1.02f,
-                    elevation = 3.dp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .testTag("hero_world_map_card")
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = if (isMobile) 14.dp else 20.dp, vertical = 14.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(
-                            modifier = Modifier.weight(1f),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = SleekOcean,
-                                modifier = Modifier.size(if (isMobile) 44.dp else 52.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Default.Map,
-                                        contentDescription = "World Map",
-                                        tint = Color.White,
-                                        modifier = Modifier.size(if (isMobile) 24.dp else 28.dp)
-                                    )
-                                }
-                            }
-
-                            Column {
-                                Text(
-                                    text = "🗺️ Explore the Interactive World Map",
-                                    fontSize = if (isMobile) 14.sp else 18.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = SleekTextDark,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                                Text(
-                                    text = "Sail across Nature, Space, Food & Action Islands!",
-                                    fontSize = if (isMobile) 11.sp else 13.sp,
-                                    color = SleekOceanDark,
-                                    fontWeight = FontWeight.SemiBold,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                        }
-
-                        Surface(
-                            shape = RoundedCornerShape(14.dp),
-                            color = SleekOcean,
-                            modifier = Modifier.padding(start = 10.dp)
-                        ) {
-                            Text(
-                                text = "Open Map 🚀",
-                                fontSize = if (isMobile) 12.sp else 13.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White,
-                                maxLines = 1,
-                                softWrap = false,
-                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Custom Compose Canvas Daily Learning Streak Visualization
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
-            ) {
-                DailyLearningStreakCanvas(
-                    dailyStats = dailyStats,
-                    currentStreakDays = streakDays,
-                    targetStreakGoal = 7,
-                    dailyGoalWords = 12,
-                    onDaySelected = { stat ->
-                        viewModel.speakLumi("${stat.dayLabel}: Practiced ${stat.wordsPracticed} words with ${(stat.accuracy * 100).toInt()}% accuracy!")
-                    },
-                    onViewMilestonesClick = {
-                        viewModel.triggerMilestone(
-                            if (streakDays >= 7) LearningMilestoneType.STREAK_7_DAYS
-                            else LearningMilestoneType.STREAK_3_DAYS
-                        )
-                    }
-                )
-            }
-
-            // Daily Learning Goal Progress Card
-            val todayKey = remember { java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date()) }
-            val todayStat = remember(dailyStats, todayKey) { dailyStats.find { it.dateString == todayKey } }
-            val todayMinutes = todayStat?.minutesPracticed ?: 0
-            val goalMinutes = userPreferences.dailyGoalMinutes
-            val progressFraction = (todayMinutes.toFloat() / goalMinutes.coerceAtLeast(1).toFloat()).coerceIn(0f, 1f)
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
-            ) {
-                Card(
-                    shape = RoundedCornerShape(22.dp),
-                    colors = CardDefaults.cardColors(containerColor = SleekSurface),
-                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.padding(18.dp)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(10.dp)
-                            ) {
-                                Text("🎯", fontSize = 20.sp)
-                                Column {
-                                    Text(
-                                        text = stringResource(R.string.home_daily_goal, todayMinutes, goalMinutes),
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.Bold,
-                                        color = SleekTextDark
-                                    )
-                                    Text(
-                                        text = if (progressFraction >= 1f) stringResource(R.string.home_daily_target_achieved) else stringResource(R.string.home_mins_remaining, ((1f - progressFraction) * goalMinutes).toInt().coerceAtLeast(1)),
-                                        fontSize = 12.sp,
-                                        color = if (progressFraction >= 1f) SleekEmeraldDark else SleekTextMuted,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-                                }
-                            }
-
-                            Surface(
-                                shape = CircleShape,
-                                color = SleekCoral.copy(alpha = 0.15f)
-                            ) {
-                                Text(
-                                    text = "${(progressFraction * 100).toInt()}%",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = SleekCoral,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        // Custom Progress Bar
-                        androidx.compose.material3.LinearProgressIndicator(
-                            progress = { progressFraction },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(10.dp)
-                                .testTag("daily_goal_progress_bar"),
-                            color = SleekCoral,
-                            trackColor = SleekSurfaceBorder,
-                            strokeCap = androidx.compose.ui.graphics.StrokeCap.Round
-                        )
-                    }
-                }
-            }
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Review Mistakes Quick Banner (Extracts Room DB weak points)
             if (missedWords.isNotEmpty()) {
@@ -697,17 +482,6 @@ fun HomeScreen(
                 milestone = activeMilestone!!,
                 onDismiss = { viewModel.dismissMilestone() },
                 onSpeak = { speechText -> viewModel.speakLumi(speechText, MascotMood.SUPERSTAR) }
-            )
-        }
-
-        // Parental Gate Modal
-        if (showParentGate) {
-            ParentalGate(
-                onDismiss = { showParentGate = false },
-                onSuccess = {
-                    showParentGate = false
-                    onNavigateParentHub()
-                }
             )
         }
     }
