@@ -75,3 +75,43 @@ data class UserPreferencesEntity(
     val isNotificationsEnabled: Boolean = true
 )
 
+/**
+ * Lesson
+ *
+ * Room Database entity storing individual language learning lessons, categories,
+ * target language, exercise counts, and completion status.
+ */
+@Entity(tableName = "lessons")
+data class Lesson(
+    @PrimaryKey val id: String,
+    val title: String,
+    val category: String,
+    val languageCode: String,
+    val totalExercises: Int = 5,
+    val completedExercises: Int = 0,
+    val isCompleted: Boolean = false,
+    val score: Int = 0,
+    val lastAccessedAt: Long = System.currentTimeMillis()
+)
+typealias LessonEntity = Lesson
+
+/**
+ * Progress
+ *
+ * Room Database entity storing user's exercise-level and lesson-level progress,
+ * scores, accuracy rates, and completion history.
+ */
+@Entity(tableName = "progress")
+data class Progress(
+    @PrimaryKey val id: String,
+    val lessonId: String,
+    val exerciseId: String = "",
+    val languageCode: String,
+    val score: Int = 0,
+    val accuracy: Float = 1.0f,
+    val isCompleted: Boolean = true,
+    val completedAt: Long = System.currentTimeMillis(),
+    val attemptsCount: Int = 1
+)
+typealias ProgressEntity = Progress
+

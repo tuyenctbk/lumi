@@ -58,6 +58,7 @@ import com.example.ui.components.CardVisualMode
 import com.example.ui.components.ConfettiCanvas
 import com.example.ui.components.FocusableVocabularyCard
 import com.example.ui.components.GameOverView
+import com.example.ui.components.LumiLottieReaction
 import com.example.ui.components.LumiMascot
 import com.example.ui.theme.SleekEmerald
 import com.example.ui.theme.SleekGold
@@ -209,15 +210,12 @@ fun FindItGameScreen(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    LumiMascot(
-                        mood = mascotMood,
-                        speechBubble = mascotBubble,
+                    val isOptionCorrect = if (isAnswered && selectedItem != null && currentTarget != null) (selectedItem?.id == currentTarget.id) else null
+                    LumiLottieReaction(
+                        isCorrect = isOptionCorrect,
+                        streakCount = correctCount,
                         size = if (isLandscape) 90.dp else 110.dp,
-                        onClick = {
-                            if (currentTarget != null) {
-                                viewModel.speakLumi("Find $targetTranslation!", MascotMood.HAPPY)
-                            }
-                        }
+                        customSpeech = if (isOptionCorrect == true) "Super! 🌟" else if (isOptionCorrect == false) "Almost! 💪" else mascotBubble
                     )
 
                     Spacer(modifier = Modifier.width(16.dp))

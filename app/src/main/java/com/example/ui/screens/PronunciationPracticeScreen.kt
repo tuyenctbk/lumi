@@ -64,7 +64,7 @@ import androidx.core.content.ContextCompat
 import com.example.model.MascotMood
 import com.example.model.VocabularyItem
 import com.example.ui.components.FocusableCard
-import com.example.ui.components.LumiMascot
+import com.example.ui.components.LumiLottieReaction
 import com.example.ui.theme.SleekBackground
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekCoralDark
@@ -341,10 +341,11 @@ fun PronunciationPracticeScreen(
             }
 
             // Mascot Companion Reaction
-            LumiMascot(
-                mood = if (isCorrect == true) MascotMood.HAPPY else if (isListening) MascotMood.THINKING else MascotMood.ENCOURAGING,
-                speechBubble = if (isListening) "I'm listening! Speak now..." else if (isCorrect == true) "Spot on! Perfect!" else "Tap the Mic to speak!",
-                size = 110.dp
+            LumiLottieReaction(
+                isCorrect = isCorrect,
+                streakCount = if (isCorrect == true) 1 else 0,
+                size = 110.dp,
+                customSpeech = if (isListening) "I'm listening! Speak now..." else if (isCorrect == true) "Spot on! Perfect! 🌟" else if (isCorrect == false) "Almost! Try once more! 💪" else "Tap the Mic to speak!"
             )
 
             // Spoken Transcription & Mic Trigger

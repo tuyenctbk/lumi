@@ -91,4 +91,36 @@ interface LumiDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUserPreferences(preferences: UserPreferencesEntity)
+
+    // Lesson Queries & Operations
+    @Query("SELECT * FROM lessons WHERE languageCode = :langCode ORDER BY lastAccessedAt DESC")
+    fun getAllLessons(langCode: String): Flow<List<Lesson>>
+
+    @Query("SELECT * FROM lessons WHERE id = :id LIMIT 1")
+    suspend fun getLessonById(id: String): Lesson?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLesson(lesson: Lesson)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLessons(lessons: List<Lesson>)
+
+    @Update
+    suspend fun updateLesson(lesson: Lesson)
+
+    @Query("SELECT COUNT(*) FROM lessons WHERE languageCode = :langCode AND isCompleted = 1")
+    fun getCompletedLessonsCount(langCode: String): Flow<Int>
+
+    // Progress Queries & Operations
+    @Query("SELECT * FROM progress WHERE languageCode = :langCode ORDER BY completedAt DESC")
+    fun getAllProgressHistory(langCode: String): Flow<List<Progress>>
+
+    @Query("SELECT * FROM progress WHERE lessonId = :lessonId ORDER BY completedAt DESC")
+    fun getProgressForLesson(lessonId: String): Flow<List<Progress>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun recordProgress(progress: Progress)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun recordProgressList(list: List<Progress>)
 }

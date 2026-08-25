@@ -48,6 +48,7 @@ import com.example.model.VocabularyItem
 import com.example.ui.components.ConfettiCanvas
 import com.example.ui.components.FocusableCard
 import com.example.ui.components.GameOverView
+import com.example.ui.components.LumiLottieReaction
 import com.example.ui.components.LumiMascot
 import com.example.ui.theme.SleekBackground
 import com.example.ui.theme.SleekCoral
@@ -363,12 +364,12 @@ fun SoundMatchScreen(
                 .align(Alignment.BottomEnd)
                 .padding(end = if (isMobile) 10.dp else 24.dp, bottom = if (isMobile) 8.dp else 12.dp)
         ) {
-            LumiMascot(
-                mood = mascotMood,
-                isSpeaking = isSpeaking,
-                thoughtBubbleEmoji = mascotBubble,
-                size = if (isMobile) 75.dp else 110.dp,
-                onClick = { viewModel.speakWord(targetItem) }
+            val isSelectedCorrect = if (isRevealed && selectedOptionId != null) (selectedOptionId == targetItem.id) else null
+            LumiLottieReaction(
+                isCorrect = isSelectedCorrect,
+                streakCount = correctCount,
+                size = if (isMobile) 80.dp else 110.dp,
+                customSpeech = if (isSpeaking) "Listen closely!" else if (isSelectedCorrect == true) "Super Job! 🌟" else if (isSelectedCorrect == false) "Good Try! 💪" else null
             )
         }
 

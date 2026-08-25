@@ -77,6 +77,7 @@ import com.example.ui.components.LumiMilestoneCelebrationDialog
 import com.example.ui.components.LumiQuestModal
 import com.example.ui.components.ParentalGate
 import com.example.ui.components.PhysicalBreakDialog
+import com.example.ui.components.ProgressSummary
 import com.example.ui.components.TopBarHeader
 import com.example.ui.components.TvFocusableCard
 import com.example.ui.components.TvShelfRow
@@ -239,7 +240,25 @@ fun HomeScreen(
                 onOpenLanguagePicker = onOpenLanguagePicker
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Daily Progress Summary (Visual Canvas & Progress Metrics)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 4.dp)
+            ) {
+                ProgressSummary(
+                    dailyStats = dailyStats,
+                    completedLessonsCount = (points / 50).coerceAtMost(3),
+                    targetDailyLessons = 3,
+                    streakDays = streakDays,
+                    accuracyPercent = 96,
+                    onViewAnalyticsClick = { onNavigateGame("analytics") }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Review Mistakes Quick Banner (Extracts Room DB weak points)
             if (missedWords.isNotEmpty()) {

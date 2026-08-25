@@ -3,7 +3,9 @@ package com.example.data.repository
 import com.example.data.db.BadgeEntity
 import com.example.data.db.DailyLearningStatsEntity
 import com.example.data.db.LearningSessionEntity
+import com.example.data.db.Lesson
 import com.example.data.db.LumiDao
+import com.example.data.db.Progress
 import com.example.data.db.VocabularyDao
 import com.example.data.db.VocabularyItemEntity
 import com.example.data.db.WordProgressEntity
@@ -722,6 +724,19 @@ class VocabularyRepository(
     fun getUserPreferencesFlow(): Flow<UserPreferencesEntity?> = dao.getUserPreferencesFlow()
     suspend fun getUserPreferencesSnapshot(): UserPreferencesEntity? = dao.getUserPreferencesSnapshot()
     suspend fun saveUserPreferences(preferences: UserPreferencesEntity) = dao.saveUserPreferences(preferences)
+
+    // Lessons & Progress Room DB API
+    fun getAllLessons(languageCode: String): Flow<List<Lesson>> = dao.getAllLessons(languageCode)
+    suspend fun getLessonById(id: String): Lesson? = dao.getLessonById(id)
+    suspend fun saveLesson(lesson: Lesson) = dao.insertLesson(lesson)
+    suspend fun saveLessons(lessons: List<Lesson>) = dao.insertLessons(lessons)
+    suspend fun updateLesson(lesson: Lesson) = dao.updateLesson(lesson)
+    fun getCompletedLessonsCount(languageCode: String): Flow<Int> = dao.getCompletedLessonsCount(languageCode)
+
+    fun getAllProgressHistory(languageCode: String): Flow<List<Progress>> = dao.getAllProgressHistory(languageCode)
+    fun getProgressForLesson(lessonId: String): Flow<List<Progress>> = dao.getProgressForLesson(lessonId)
+    suspend fun recordProgress(progress: Progress) = dao.recordProgress(progress)
+    suspend fun recordProgressList(list: List<Progress>) = dao.recordProgressList(list)
 
     fun calculateConsecutiveStreak(statsList: List<DailyLearningStatsEntity>): Int {
         if (statsList.isEmpty()) return 0

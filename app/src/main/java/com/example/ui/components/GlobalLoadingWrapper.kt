@@ -141,47 +141,10 @@ private fun LoadingView(message: String) {
             .padding(24.dp)
             .testTag("global_loading_view")
     ) {
-        Card(
-            shape = RoundedCornerShape(28.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-            modifier = Modifier.fillMaxWidth(0.88f)
-        ) {
-            Column(
-                modifier = Modifier.padding(28.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                LumiMascot(
-                    mood = MascotMood.THINKING,
-                    speechBubble = "Thinking...",
-                    size = 110.dp
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Text(
-                    text = message,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    textAlign = TextAlign.Center
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                LinearProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .height(8.dp)
-                        .testTag("global_loading_progress_bar"),
-                    color = SleekOcean,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                    strokeCap = StrokeCap.Round
-                )
-            }
-        }
+        ConsistentLoadingIndicator(
+            message = message,
+            subMessage = "Curating vocabulary & interactive exercises"
+        )
     }
 }
 

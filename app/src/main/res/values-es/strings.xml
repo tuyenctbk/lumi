@@ -24,4 +24,62 @@
     <string name="dialog_share_desc">¡Comparte Lumi con otros padres y niños para aprender y jugar juntos!</string>
     <string name="dialog_update_title">¡Nueva actualización disponible! 🚀</string>
     <string name="dialog_update_desc">Lumi tiene nuevas palabras divertidas, calcomanías, juegos y correcciones. ¡Consigue la última versión ahora!</string>
+
+    <!-- Quiz Screen -->
+    <string name="quiz_select_difficulty">Seleccionar Dificultad</string>
+    <string name="quiz_go_back">Volver</string>
+    <string name="quiz_vocabulary_quiz">Cuestionario de Vocabulario</string>
+    <string name="quiz_question_counter">Pregunta %1$d de %2$d</string>
+    <string name="quiz_choose_translation">Elige la traducción correcta de %1$s:</string>
+    <string name="quiz_listen_audio">Escuchar audio</string>
+    <string name="quiz_next_question">Siguiente pregunta ➔</string>
+    <string name="quiz_see_results">Ver resultados 🎉</string>
+
+    <!-- Home Screen -->
+    <string name="home_daily_goal">Meta diaria: %1$d / %2$d minutos</string>
+    <string name="home_daily_target_achieved">🎉 ¡Meta diaria alcanzada! ¡Excelente trabajo!</string>
+    <string name="home_mins_remaining">Quedan %1$d minutos hoy</string>
+    <string name="home_world_explorer_islands">Islas del Explorador</string>
+    <string name="home_choose_island_subtitle">ELIGE UNA ISLA PARA COMENZAR A EXPLORAR</string>
+    <string name="home_lumi_game_shows">Espectáculos de Juegos Lumi</string>
+    <string name="home_play_games_subtitle">JUEGA JUEGOS INTERACTIVOS Y GANA ESTRELLAS</string>
+
+    <!-- Celebration & Summary Screen -->
+    <string name="celebration_lesson_completed">¡LECCIÓN COMPLETADA!</string>
+    <string name="celebration_fantastic_job">¡Trabajo Fantástico!</string>
+    <string name="celebration_subtitle">¡Has ganado nuevas estrellas y ampliado tu vocabulario!</string>
+    <string name="celebration_results_title">Resultados y Estadísticas</string>
+    <string name="celebration_progress_visualization">Progreso y Tendencias</string>
+    <string name="celebration_accuracy">Precisión</string>
+    <string name="celebration_score">Puntuación</string>
+    <string name="celebration_streak">Racha</string>
+    <string name="celebration_words_mastered">Palabras Dominadas</string>
+    <string name="celebration_home">Inicio</string>
+    <string name="celebration_next_lesson">Siguiente Lección</string>
+    <string name="celebration_toggle_charts">Gráfico de Progreso</string>
+    <string name="celebration_toggle_summary">Resumen</string>
+    <string name="celebration_tab_session_bar">Gráfico de Barras</string>
+    <string name="celebration_tab_weekly_curve">Curva de 7 Días</string>
+    <string name="celebration_tab_volume">Volumen Diario</string>
+    <string name="celebration_badge_earned">🚀 +%1$d palabras dominadas en esta sesión</string>
+    <string name="celebration_superstar_speech">¡Eres una superestrella de los idiomas!</string>
+    <string name="celebration_momentum_speech">¡Hurra! ¡Sigue con este gran ritmo!</string>
+
+    <!-- Lumi Mascot Reactions -->
+    <string name="lumi_reaction_correct">¡Súper Trabajo! 🌟</string>
+    <string name="lumi_reaction_correct_sub">¡+10 Estrellas Ganadas!</string>
+    <string name="lumi_reaction_streak">¡Racha Increíble! 🔥</string>
+    <string name="lumi_reaction_streak_sub">¡3 seguidas! ¡Estás en racha!</string>
+    <string name="lumi_reaction_try_again">¡Buen intento! 💪</string>
+    <string name="lumi_reaction_try_again_sub">¡Escucha con atención y prueba de nuevo!</string>
+    <string name="lumi_speech_great_job">¡Gran trabajo!</string>
+    <string name="lumi_speech_keep_practicing">¡Sigue practicando!</string>
+    <string name="lumi_speech_high_five">¡Correcto! ¡Choca esos cinco!</string>
+    <string name="lumi_speech_tap_answer">¡Toca la respuesta correcta!</string>
+
+    <!-- General Game Labels -->
+    <string name="game_sound_match_prompt">¿Qué imagen coincide con el sonido que escuchaste?</string>
+    <string name="game_round_counter">Ronda %1$d / %2$d</string>
+    <string name="game_finish">Finalizar Juego 🎉</string>
+    <string name="game_play_again">Jugar de Nuevo 🔄</string>
 </resources>

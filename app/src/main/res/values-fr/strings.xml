@@ -24,4 +24,62 @@
     <string name="dialog_share_desc">Partagez Lumi avec d\'autres parents et enfants pour apprendre et jouer ensemble !</string>
     <string name="dialog_update_title">Nouvelle mise à jour disponible ! 🚀</string>
     <string name="dialog_update_desc">Lumi propose de nouveaux mots amusants, des autocollants, des jeux et des corrections. Téléchargez la dernière version !</string>
+
+    <!-- Quiz Screen -->
+    <string name="quiz_select_difficulty">Choisir la difficulté</string>
+    <string name="quiz_go_back">Retour</string>
+    <string name="quiz_vocabulary_quiz">Quiz de Vocabulaire</string>
+    <string name="quiz_question_counter">Question %1$d sur %2$d</string>
+    <string name="quiz_choose_translation">Choisissez la bonne traduction de %1$s :</string>
+    <string name="quiz_listen_audio">Écouter la prononciation</string>
+    <string name="quiz_next_question">Question suivante ➔</string>
+    <string name="quiz_see_results">Voir les résultats 🎉</string>
+
+    <!-- Home Screen -->
+    <string name="home_daily_goal">Objectif du jour : %1$d / %2$d minutes</string>
+    <string name="home_daily_target_achieved">🎉 Objectif du jour atteint ! Bravo !</string>
+    <string name="home_mins_remaining">%1$d minutes restantes aujourd\'hui</string>
+    <string name="home_world_explorer_islands">Îles d\'Exploration</string>
+    <string name="home_choose_island_subtitle">CHOISISSEZ UNE ÎLE POUR COMMENCER</string>
+    <string name="home_lumi_game_shows">Les Jeux de Lumi</string>
+    <string name="home_play_games_subtitle">JOUEZ ET GAGNEZ DES ÉTOILES BRILLANTES</string>
+
+    <!-- Celebration & Summary Screen -->
+    <string name="celebration_lesson_completed">LEÇON TERMINÉE !</string>
+    <string name="celebration_fantastic_job">Excellent Travail !</string>
+    <string name="celebration_subtitle">Vous avez gagné de nouvelles étoiles et enrichi votre vocabulaire !</string>
+    <string name="celebration_results_title">Résultats de la Leçon &amp; Statistiques</string>
+    <string name="celebration_progress_visualization">Progression &amp; Tendances</string>
+    <string name="celebration_accuracy">Précision</string>
+    <string name="celebration_score">Score</string>
+    <string name="celebration_streak">Série</string>
+    <string name="celebration_words_mastered">Mots Maîtrisés</string>
+    <string name="celebration_home">Accueil</string>
+    <string name="celebration_next_lesson">Leçon Suivante</string>
+    <string name="celebration_toggle_charts">Graphique de Progression</string>
+    <string name="celebration_toggle_summary">Résumé</string>
+    <string name="celebration_tab_session_bar">Graphique en Barres</string>
+    <string name="celebration_tab_weekly_curve">Courbe sur 7 Jours</string>
+    <string name="celebration_tab_volume">Volume Quotidien</string>
+    <string name="celebration_badge_earned">🚀 +%1$d mots maîtrisés dans cette session</string>
+    <string name="celebration_superstar_speech">Tu es une Superstar des Langues !</string>
+    <string name="celebration_momentum_speech">Hourra ! Continue sur cette belle lancée !</string>
+
+    <!-- Lumi Mascot Reactions -->
+    <string name="lumi_reaction_correct">Super Travail ! 🌟</string>
+    <string name="lumi_reaction_correct_sub">+10 Étoiles Gagnées !</string>
+    <string name="lumi_reaction_streak">Incroyable Série ! 🔥</string>
+    <string name="lumi_reaction_streak_sub">3 d\'affilée ! C\'est formidable !</string>
+    <string name="lumi_reaction_try_again">Bien essayé ! 💪</string>
+    <string name="lumi_reaction_try_again_sub">Écoute attentivement et réessaie !</string>
+    <string name="lumi_speech_great_job">Bravo !</string>
+    <string name="lumi_speech_keep_practicing">Continue à t\'entraîner !</string>
+    <string name="lumi_speech_high_five">C\'est exact ! Tape m\'en cinq !</string>
+    <string name="lumi_speech_tap_answer">Touche la bonne réponse !</string>
+
+    <!-- General Game Labels -->
+    <string name="game_sound_match_prompt">Quelle image correspond au son entendu ?</string>
+    <string name="game_round_counter">Manche %1$d / %2$d</string>
+    <string name="game_finish">Terminer la Partie 🎉</string>
+    <string name="game_play_again">Rejouer 🔄</string>
 </resources>

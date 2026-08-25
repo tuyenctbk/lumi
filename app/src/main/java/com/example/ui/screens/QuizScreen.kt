@@ -46,7 +46,7 @@ import com.example.R
 import com.example.model.MascotMood
 import com.example.model.VocabularyItem
 import com.example.ui.components.FocusableCard
-import com.example.ui.components.LumiMascot
+import com.example.ui.components.LumiLottieReaction
 import com.example.ui.theme.SleekBackground
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
@@ -365,10 +365,16 @@ fun QuizScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                LumiMascot(
-                    mood = if (isAnswered && selectedOption == currentQuestion?.correctAnswer) MascotMood.HAPPY else MascotMood.ENCOURAGING,
-                    speechBubble = if (isAnswered) (if (selectedOption == currentQuestion?.correctAnswer) "Great job!" else "Keep practicing!") else "Tap the correct answer!",
-                    size = 90.dp
+                val isAnswerCorrect = if (isAnswered) (selectedOption == currentQuestion?.correctAnswer) else null
+                LumiLottieReaction(
+                    isCorrect = isAnswerCorrect,
+                    streakCount = if (isAnswerCorrect == true) (score / 20) else 0,
+                    size = 96.dp,
+                    customSpeech = when {
+                        !isAnswered -> stringResource(R.string.lumi_speech_tap_answer)
+                        isAnswerCorrect == true -> stringResource(R.string.lumi_speech_great_job)
+                        else -> stringResource(R.string.lumi_speech_keep_practicing)
+                    }
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))

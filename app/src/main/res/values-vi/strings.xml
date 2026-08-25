@@ -24,4 +24,62 @@
     <string name="dialog_share_desc">Chia sẻ ứng dụng Lumi cho bạn bè và các phụ huynh khác để cùng bé chơi và học nhé!</string>
     <string name="dialog_update_title">Có bản cập nhật mới! 🚀</string>
     <string name="dialog_update_desc">Lumi có thêm từ vựng mới, nhãn dán đáng yêu và trò chơi mới. Hãy cập nhật ngay hôm nay!</string>
+
+    <!-- Quiz Screen -->
+    <string name="quiz_select_difficulty">Chọn Độ Khó</string>
+    <string name="quiz_go_back">Quay lại</string>
+    <string name="quiz_vocabulary_quiz">Câu Đố Từ Vựng</string>
+    <string name="quiz_question_counter">Câu hỏi %1$d / %2$d</string>
+    <string name="quiz_choose_translation">Chọn bản dịch đúng cho %1$s:</string>
+    <string name="quiz_listen_audio">Nghe phát âm</string>
+    <string name="quiz_next_question">Câu tiếp theo ➔</string>
+    <string name="quiz_see_results">Xem kết quả 🎉</string>
+
+    <!-- Home Screen -->
+    <string name="home_daily_goal">Mục tiêu ngày: %1$d / %2$d phút</string>
+    <string name="home_daily_target_achieved">🎉 Đã đạt mục tiêu hôm nay! Quá tuyệt vời!</string>
+    <string name="home_mins_remaining">Còn %1$d phút hôm nay</string>
+    <string name="home_world_explorer_islands">Đảo Khám Phá Thế Giới</string>
+    <string name="home_choose_island_subtitle">CHỌN MỘT HÒN ĐẢO ĐỂ BẮT ĐẦU KHÁM PHÁ</string>
+    <string name="home_lumi_game_shows">Gameshow Cùng Lumi</string>
+    <string name="home_play_games_subtitle">CHƠI TRÒ CHƠI TƯƠNG TÁC VÀ GIÀNH SAO SÁNG</string>
+
+    <!-- Celebration & Summary Screen -->
+    <string name="celebration_lesson_completed">HOÀN THÀNH BÀI HỌC!</string>
+    <string name="celebration_fantastic_job">Làm Tốt Lắm Bé Ơi!</string>
+    <string name="celebration_subtitle">Bé đã giành thêm sao sáng và mở rộng vốn từ vựng!</string>
+    <string name="celebration_results_title">Kết Quả Bài Học &amp; Phân Tích</string>
+    <string name="celebration_progress_visualization">Biểu Đồ Tiến Độ Học Tập</string>
+    <string name="celebration_accuracy">Độ Chính Xác</string>
+    <string name="celebration_score">Điểm Số</string>
+    <string name="celebration_streak">Chuỗi Ngày</string>
+    <string name="celebration_words_mastered">Từ Đã Thành Thạo</string>
+    <string name="celebration_home">Trang Chủ</string>
+    <string name="celebration_next_lesson">Bài Tiếp Theo</string>
+    <string name="celebration_toggle_charts">Biểu Đồ Tiến Bộ</string>
+    <string name="celebration_toggle_summary">Thống Kê</string>
+    <string name="celebration_tab_session_bar">Biểu Đồ Cột Phiên Học</string>
+    <string name="celebration_tab_weekly_curve">Đường Tăng Trưởng 7 Ngày</string>
+    <string name="celebration_tab_volume">Số Lượng Hàng Ngày</string>
+    <string name="celebration_badge_earned">🚀 +%1$d từ vựng đã thành thạo trong phiên này</string>
+    <string name="celebration_superstar_speech">Bé là Siêu Sao Ngôn Ngữ!</string>
+    <string name="celebration_momentum_speech">Hoan hô! Tiếp tục phát huy nhé!</string>
+
+    <!-- Lumi Mascot Reactions -->
+    <string name="lumi_reaction_correct">Tuyệt Vời! 🌟</string>
+    <string name="lumi_reaction_correct_sub">+10 Ngôi Sao Thưởng!</string>
+    <string name="lumi_reaction_streak">Chuỗi Bất Bại! 🔥</string>
+    <string name="lumi_reaction_streak_sub">3 câu đúng liên tiếp! Bé siêu quá!</string>
+    <string name="lumi_reaction_try_again">Cố Lên Nhé! 💪</string>
+    <string name="lumi_reaction_try_again_sub">Lắng nghe kỹ và thử lại nào!</string>
+    <string name="lumi_speech_great_job">Giỏi quá đi!</string>
+    <string name="lumi_speech_keep_practicing">Tiếp tục luyện tập nhé!</string>
+    <string name="lumi_speech_high_five">Chính xác! Đập tay nào!</string>
+    <string name="lumi_speech_tap_answer">Chạm vào đáp án đúng nhé!</string>
+
+    <!-- General Game Labels -->
+    <string name="game_sound_match_prompt">Hình ảnh nào khớp với âm thanh bé vừa nghe?</string>
+    <string name="game_round_counter">Vòng %1$d / %2$d</string>
+    <string name="game_finish">Hoàn Thành Trò Chơi 🎉</string>
+    <string name="game_play_again">Chơi Lại 🔄</string>
 </resources>
