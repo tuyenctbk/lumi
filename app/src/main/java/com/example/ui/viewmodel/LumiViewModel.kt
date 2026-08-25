@@ -9,15 +9,23 @@ import com.example.data.api.FreesoundRepository
 import com.example.data.api.GiphyRepository
 import com.example.data.api.PixabayRepository
 import com.example.data.db.BadgeEntity
+import com.example.data.db.DailyLearningStatsEntity
 import com.example.data.db.LearningSessionEntity
 import com.example.data.db.WordProgressEntity
+import com.example.data.db.UserPreferencesEntity
 import com.example.data.repository.VocabularyRepository
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import com.example.model.LearningCategory
 import com.example.model.MascotMood
 import com.example.model.PhysicalBreakCatalog
 import com.example.model.PhysicalBreakQuest
 import com.example.model.TargetLanguage
 import com.example.model.VocabularyItem
+import com.example.ui.components.LearningMilestoneType
+import com.example.util.DifficultyConfig
+import com.example.util.DynamicDifficultyManager
+import com.example.util.HapticFeedbackHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,6 +48,18 @@ class LumiViewModel(
     private val _targetLanguage = MutableStateFlow(TargetLanguage.SPANISH)
     val targetLanguage: StateFlow<TargetLanguage> = _targetLanguage.asStateFlow()
 
+    private val _isDarkMode = MutableStateFlow(false)
+    val isDarkMode: StateFlow<Boolean> = _isDarkMode.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
+    private val _isDailyReminderEnabled = MutableStateFlow(true)
+    val isDailyReminderEnabled: StateFlow<Boolean> = _isDailyReminderEnabled.asStateFlow()
+
     private val _mascotMood = MutableStateFlow(MascotMood.IDLE)
     val mascotMood: StateFlow<MascotMood> = _mascotMood.asStateFlow()
 
@@ -60,6 +80,24 @@ class LumiViewModel(
     private val _streakDays = MutableStateFlow(3)
     val streakDays: StateFlow<Int> = _streakDays.asStateFlow()
 
+    private val _activeMilestone = MutableStateFlow<LearningMilestoneType?>(null)
+    val activeMilestone: StateFlow<LearningMilestoneType?> = _activeMilestone.asStateFlow()
+
+    private val _unlockedBadgeEvent = MutableStateFlow<BadgeEntity?>(null)
+    val unlockedBadgeEvent: StateFlow<BadgeEntity?> = _unlockedBadgeEvent.asStateFlow()
+
+    private val _quizFeedbackEvent = MutableStateFlow<com.example.ui.components.QuizFeedbackType?>(null)
+    val quizFeedbackEvent: StateFlow<com.example.ui.components.QuizFeedbackType?> = _quizFeedbackEvent.asStateFlow()
+
+    private var currentQuizStreak = 0
+
+    val userPreferences: StateFlow<UserPreferencesEntity> = repository.getUserPreferencesFlow()
+        .map { it ?: UserPreferencesEntity() }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserPreferencesEntity())
+
+    val dailyStats: StateFlow<List<DailyLearningStatsEntity>> = repository.getRecent7DaysStats()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
     val isSpeaking: StateFlow<Boolean> = speechHelper.isSpeaking
 
     val badges: StateFlow<List<BadgeEntity>> = repository.getAllBadges()
@@ -72,6 +110,29 @@ class LumiViewModel(
     val wordProgressList: StateFlow<List<WordProgressEntity>> = _targetLanguage
         .flatMapLatest { lang -> repository.getWordProgressStream(lang.code) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val proficiencyScore: StateFlow<Int> = combine(
+        wordProgressList,
+        _streakDays,
+        dailyStats
+    ) { progressList, streak, stats ->
+        val mastered = progressList.count { it.isMastered }
+        val totalTracked = progressList.size
+        val avgAccuracy = if (stats.isNotEmpty()) stats.map { it.accuracy }.average().toFloat() else 0.9f
+        DynamicDifficultyManager.calculateProficiencyScore(mastered, totalTracked, avgAccuracy, streak)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 10)
+
+    val difficultyConfig: StateFlow<DifficultyConfig> = combine(
+        wordProgressList,
+        _streakDays,
+        dailyStats
+    ) { progressList, streak, stats ->
+        val mastered = progressList.count { it.isMastered }
+        val totalTracked = progressList.size
+        val avgAccuracy = if (stats.isNotEmpty()) stats.map { it.accuracy }.average().toFloat() else 0.9f
+        val score = DynamicDifficultyManager.calculateProficiencyScore(mastered, totalTracked, avgAccuracy, streak)
+        DynamicDifficultyManager.getDifficultyConfig(score)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DynamicDifficultyManager.getDifficultyConfig(10))
 
     // SRS: List of missed words that need re-practicing
     val missedWords: StateFlow<List<VocabularyItem>> = combine(
@@ -116,6 +177,25 @@ class LumiViewModel(
         viewModelScope.launch {
             delay(600)
             speakLumi("Hi! I'm Lumi! Let's explore the world map together!")
+        }
+
+        // Observe Room DB User Preferences for language and audio settings
+        viewModelScope.launch {
+            userPreferences.collect { pref ->
+                val lang = TargetLanguage.fromCode(pref.activeLanguageCode)
+                if (_targetLanguage.value != lang) {
+                    _targetLanguage.value = lang
+                }
+                SoundFxHelper.setSoundEffectsEnabled(pref.isSoundEnabled)
+            }
+        }
+
+        // Dynamically track and update consecutive daily learning streak from Room DB
+        viewModelScope.launch {
+            repository.getAllDailyStats().collect { statsList ->
+                val streak = repository.calculateConsecutiveStreak(statsList)
+                _streakDays.value = streak.coerceAtLeast(1)
+            }
         }
 
         // Start periodic physical break timer (checks every 2.5 minutes of active session)
@@ -174,6 +254,25 @@ class LumiViewModel(
         _targetLanguage.value = language
         SoundFxHelper.playPop()
         speakLumi("We are learning ${language.displayName} now! Let's go!")
+        viewModelScope.launch {
+            val current = repository.getUserPreferencesSnapshot() ?: UserPreferencesEntity()
+            repository.saveUserPreferences(current.copy(activeLanguageCode = language.code))
+        }
+    }
+
+    fun setDailyGoalMinutes(minutes: Int) {
+        viewModelScope.launch {
+            val current = repository.getUserPreferencesSnapshot() ?: UserPreferencesEntity()
+            repository.saveUserPreferences(current.copy(dailyGoalMinutes = minutes))
+        }
+    }
+
+    fun setSoundEffectsEnabled(enabled: Boolean) {
+        SoundFxHelper.setSoundEffectsEnabled(enabled)
+        viewModelScope.launch {
+            val current = repository.getUserPreferencesSnapshot() ?: UserPreferencesEntity()
+            repository.saveUserPreferences(current.copy(isSoundEnabled = enabled))
+        }
     }
 
     fun setActiveCategory(category: LearningCategory?) {
@@ -242,21 +341,41 @@ class LumiViewModel(
      */
     fun onAnswerGiven(wordId: String, isCorrect: Boolean) {
         viewModelScope.launch {
-            repository.recordAnswer(wordId, _targetLanguage.value.code, isCorrect)
+            val newlyUnlocked = repository.recordAnswer(wordId, _targetLanguage.value.code, isCorrect)
             val masteredCount = wordProgressList.value.count { it.isMastered }
-            repository.evaluateAndUnlockAchievements(
+            val evalUnlocked = repository.evaluateAndUnlockAchievements(
                 masteredCount = masteredCount,
                 streakDays = streakDays.value,
                 physicalBreaks = _physicalBreaksCompleted.value,
                 totalSessions = recentSessions.value.size
             )
+
+            val allNewBadges = newlyUnlocked + evalUnlocked
+            if (allNewBadges.isNotEmpty() && _unlockedBadgeEvent.value == null) {
+                _unlockedBadgeEvent.value = allNewBadges.first()
+                _points.value += 50
+            }
+
             if (isCorrect) {
+                currentQuizStreak++
                 _points.value += 10
+                HapticFeedbackHelper.vibrateCorrect()
                 SoundFxHelper.playCorrectChime()
-                setMascotMood(MascotMood.HAPPY, 2500)
+
+                if (currentQuizStreak >= 3) {
+                    _quizFeedbackEvent.value = com.example.ui.components.QuizFeedbackType.PERFECT_STREAK
+                    setMascotMood(MascotMood.SUPERSTAR, 2500)
+                    SoundFxHelper.playStarBurst()
+                } else {
+                    _quizFeedbackEvent.value = com.example.ui.components.QuizFeedbackType.SUCCESS
+                    setMascotMood(MascotMood.CELEBRATING, 2200)
+                }
             } else {
+                currentQuizStreak = 0
+                HapticFeedbackHelper.vibrateIncorrect()
                 SoundFxHelper.playWrongOops()
-                setMascotMood(MascotMood.ENCOURAGING, 2500)
+                _quizFeedbackEvent.value = com.example.ui.components.QuizFeedbackType.ENCOURAGEMENT
+                setMascotMood(MascotMood.ENCOURAGING, 2200)
             }
 
             // Every 5 answers, suggest a physical active break to reduce TV sedentary time
@@ -276,16 +395,88 @@ class LumiViewModel(
         viewModelScope.launch {
             repository.logSession(gameType, practicedCount, accuracy, durationSeconds)
             _points.value += correctCount * 15
+            HapticFeedbackHelper.vibrateCelebration()
             val masteredCount = wordProgressList.value.count { it.isMastered }
-            repository.evaluateAndUnlockAchievements(
+            val newlyUnlocked = repository.evaluateAndUnlockAchievements(
                 masteredCount = masteredCount,
                 streakDays = streakDays.value,
                 physicalBreaks = _physicalBreaksCompleted.value,
                 totalSessions = recentSessions.value.size
             )
+
+            if (newlyUnlocked.isNotEmpty() && _unlockedBadgeEvent.value == null) {
+                _unlockedBadgeEvent.value = newlyUnlocked.first()
+                _points.value += 50
+            }
+
+            _quizFeedbackEvent.value = com.example.ui.components.QuizFeedbackType.CELEBRATION
             SoundFxHelper.playLessonCompleteFanfare()
             setMascotMood(MascotMood.SUPERSTAR, 4000)
             speakLumi("Hooray! You completed the lesson! Look at all your stars!", MascotMood.SUPERSTAR)
+        }
+    }
+
+    fun toggleDarkMode() {
+        _isDarkMode.value = !_isDarkMode.value
+    }
+
+    fun setDarkMode(dark: Boolean) {
+        _isDarkMode.value = dark
+    }
+
+    fun toggleDailyReminder(context: android.content.Context) {
+        val next = !_isDailyReminderEnabled.value
+        _isDailyReminderEnabled.value = next
+        if (next) {
+            com.example.service.LumiDailyReminderScheduler.scheduleDailyReminder(context, 18, 0)
+        } else {
+            com.example.service.LumiDailyReminderScheduler.cancelDailyReminder(context)
+        }
+    }
+
+    fun testDailyReminder(context: android.content.Context) {
+        com.example.service.LumiDailyReminderScheduler.showDailyStreakReminderNotification(
+            context = context,
+            currentStreak = streakDays.value,
+            targetLanguageName = _targetLanguage.value.displayName
+        )
+    }
+
+    fun speakQuizPrompt(prompt: String) {
+        speakLumi(prompt, MascotMood.TALKING)
+    }
+
+    fun speakPhraseAloud(phrase: String, targetLanguage: TargetLanguage = _targetLanguage.value) {
+        speechHelper.speakWord(phrase, targetLanguage)
+    }
+
+    fun dismissUnlockedBadgeEvent() {
+        _unlockedBadgeEvent.value = null
+    }
+
+    fun dismissQuizFeedback() {
+        _quizFeedbackEvent.value = null
+    }
+
+    fun triggerAchievementBadge(badge: BadgeEntity) {
+        _unlockedBadgeEvent.value = badge
+        _points.value += 50
+    }
+
+    fun recordDailyPractice(wordsPracticed: Int, accuracy: Float, durationSeconds: Int) {
+        viewModelScope.launch {
+            repository.recordDailyActivity(wordsPracticed, accuracy, durationSeconds)
+            val masteredCount = wordProgressList.value.count { it.isMastered }
+            val newlyUnlocked = repository.evaluateAndUnlockAchievements(
+                masteredCount = masteredCount,
+                streakDays = streakDays.value,
+                physicalBreaks = _physicalBreaksCompleted.value,
+                totalSessions = recentSessions.value.size
+            )
+            if (newlyUnlocked.isNotEmpty() && _unlockedBadgeEvent.value == null) {
+                _unlockedBadgeEvent.value = newlyUnlocked.first()
+                _points.value += 50
+            }
         }
     }
 
@@ -354,6 +545,43 @@ class LumiViewModel(
     }
 
     fun getAllWords(): List<VocabularyItem> = repository.allVocabulary
+
+    fun triggerMilestone(milestone: LearningMilestoneType) {
+        _activeMilestone.value = milestone
+        _points.value += milestone.bonusStars
+        setMascotMood(MascotMood.SUPERSTAR, 5000L)
+        _mascotSpeechBubble.value = "🎉"
+    }
+
+    fun dismissMilestone() {
+        _activeMilestone.value = null
+        setMascotMood(MascotMood.HAPPY, 2000L)
+        _mascotSpeechBubble.value = null
+    }
+
+    val allVocabulary: List<VocabularyItem>
+        get() = repository.allVocabulary
+
+    val currentCategoryWords: List<VocabularyItem>
+        get() {
+            val cat = _activeCategory.value
+            return if (cat != null) repository.allVocabulary.filter { it.category == cat } else repository.allVocabulary
+        }
+
+    fun reloadContent() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _errorMessage.value = null
+            try {
+                repository.seedInitialDataIfNeeded()
+                kotlinx.coroutines.delay(300)
+            } catch (e: Exception) {
+                _errorMessage.value = e.localizedMessage ?: "Failed to load content"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
 
     override fun onCleared() {
         super.onCleared()

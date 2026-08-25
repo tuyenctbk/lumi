@@ -128,7 +128,7 @@ fun FindItGameScreen(
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
-            .background(SleekSurface)
+            .background(MaterialTheme.colorScheme.background)
             .testTag("find_it_game_screen")
     ) {
         val isLandscape = maxWidth > maxHeight
@@ -152,7 +152,7 @@ fun FindItGameScreen(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
-                        tint = SleekTextDark
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
 

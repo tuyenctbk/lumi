@@ -25,6 +25,9 @@ class SoundManager private constructor(private val context: Context) {
     private val scope = CoroutineScope(Dispatchers.Default)
     private var activeMediaPlayer: MediaPlayer? = null
 
+    @Volatile
+    var isSoundEnabled: Boolean = true
+
     companion object {
         private const val TAG = "SoundManager"
 
@@ -43,6 +46,7 @@ class SoundManager private constructor(private val context: Context) {
      * whenever a child answers correctly.
      */
     fun playPositiveAnswerChime() {
+        if (!isSoundEnabled) return
         scope.launch {
             playTones(
                 listOf(
@@ -59,6 +63,7 @@ class SoundManager private constructor(private val context: Context) {
      * Plays a grand, triumphant high-pitched celebration fanfare when completing a lesson or island!
      */
     fun playLessonCompleteFanfare() {
+        if (!isSoundEnabled) return
         scope.launch {
             playTones(
                 listOf(
@@ -78,6 +83,7 @@ class SoundManager private constructor(private val context: Context) {
      * Plays a playful bubble pop sound for UI interactions.
      */
     fun playPop() {
+        if (!isSoundEnabled) return
         scope.launch {
             playTones(
                 listOf(
@@ -92,6 +98,7 @@ class SoundManager private constructor(private val context: Context) {
      * Plays a gentle, encouraging descent when an answer is incorrect to keep spirits high.
      */
     fun playEncouragingOops() {
+        if (!isSoundEnabled) return
         scope.launch {
             playTones(
                 listOf(
@@ -106,6 +113,7 @@ class SoundManager private constructor(private val context: Context) {
      * Plays a star collection burst with high-frequency shimmer.
      */
     fun playStarBurst() {
+        if (!isSoundEnabled) return
         scope.launch {
             playTones(
                 listOf(

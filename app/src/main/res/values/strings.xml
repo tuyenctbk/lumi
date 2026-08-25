@@ -37,4 +37,23 @@
     <!-- Update Suggestion -->
     <string name="dialog_update_title">New Update Available! 🚀</string>
     <string name="dialog_update_desc">Lumi has new fun words, stickers, games, and bug fixes. Get the latest version now!</string>
+
+    <!-- Quiz Screen -->
+    <string name="quiz_select_difficulty">Select Difficulty</string>
+    <string name="quiz_go_back">Go Back</string>
+    <string name="quiz_vocabulary_quiz">Vocabulary Quiz</string>
+    <string name="quiz_question_counter">Question %1$d of %2$d</string>
+    <string name="quiz_choose_translation">Choose the correct %1$s translation:</string>
+    <string name="quiz_listen_audio">Listen Audio Prompt</string>
+    <string name="quiz_next_question">Next Question ➔</string>
+    <string name="quiz_see_results">See Quiz Results 🎉</string>
+
+    <!-- Home Screen -->
+    <string name="home_daily_goal">Daily Goal: %1$d / %2$d Minutes</string>
+    <string name="home_daily_target_achieved">🎉 Daily target achieved! Fantastic effort!</string>
+    <string name="home_mins_remaining">%1$d mins remaining today</string>
+    <string name="home_world_explorer_islands">World Explorer Islands</string>
+    <string name="home_choose_island_subtitle">CHOOSE AN ISLAND TO START EXPLORING</string>
+    <string name="home_lumi_game_shows">The Lumi Game Shows</string>
+    <string name="home_play_games_subtitle">PLAY INTERACTIVE GAMES &amp; WIN SHINING STARS</string>
 </resources>

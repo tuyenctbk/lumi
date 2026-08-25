@@ -439,13 +439,16 @@ fun WorldMapScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 16.dp, bottom = 12.dp)
+                .padding(
+                    end = if (isCompactScreen) 10.dp else 16.dp,
+                    bottom = if (isCompactScreen) 8.dp else 12.dp
+                )
         ) {
             LumiMascot(
                 mood = mascotMood,
                 isSpeaking = isSpeaking,
                 thoughtBubbleEmoji = mascotBubble ?: selectedIsland.category.emoji,
-                size = if (isCompactScreen) 90.dp else 115.dp,
+                size = if (isCompactScreen) 75.dp else 115.dp,
                 onClick = {
                     viewModel.speakLumi("Tap any island on the map to explore lessons in ${targetLanguage.displayName}!")
                 }

@@ -1,16 +1,27 @@
 package com.example.data.repository
 
 import com.example.data.db.BadgeEntity
+import com.example.data.db.DailyLearningStatsEntity
 import com.example.data.db.LearningSessionEntity
 import com.example.data.db.LumiDao
+import com.example.data.db.VocabularyDao
+import com.example.data.db.VocabularyItemEntity
 import com.example.data.db.WordProgressEntity
+import com.example.data.db.UserPreferencesEntity
 import com.example.model.LearningCategory
 import com.example.model.TargetLanguage
 import com.example.model.VocabularyItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
-class VocabularyRepository(private val dao: LumiDao) {
+class VocabularyRepository(
+    private val dao: LumiDao,
+    private val vocabularyDao: VocabularyDao? = null
+) {
 
     val allVocabulary: List<VocabularyItem> = listOf(
         // ANIMALS
@@ -500,7 +511,7 @@ class VocabularyRepository(private val dao: LumiDao) {
         return dao.getAllProgress(langCode)
     }
 
-    suspend fun recordAnswer(wordId: String, langCode: String, isCorrect: Boolean) {
+    suspend fun recordAnswer(wordId: String, langCode: String, isCorrect: Boolean): List<BadgeEntity> {
         val existing = dao.getProgressForWord(wordId) ?: WordProgressEntity(
             wordId = wordId,
             languageCode = langCode
@@ -531,27 +542,34 @@ class VocabularyRepository(private val dao: LumiDao) {
         )
         dao.saveProgress(updated)
 
+        val newlyUnlockedBadges = mutableListOf<BadgeEntity>()
+
         // Check for badge unlocks
         if (isMastered) {
-            dao.unlockBadge(
-                BadgeEntity(
-                    id = "master_${wordId}",
-                    title = "Word Star!",
-                    description = "Mastered word #${wordId}",
-                    iconEmoji = "⭐"
-                )
+            val badge = BadgeEntity(
+                id = "master_${wordId}",
+                title = "Word Star!",
+                description = "Mastered word #${wordId}",
+                iconEmoji = "⭐"
             )
+            if (dao.getBadgeById(badge.id) == null) {
+                dao.unlockBadge(badge)
+                newlyUnlockedBadges.add(badge)
+            }
         }
         if (newCorrect == 1) {
-            dao.unlockBadge(
-                BadgeEntity(
-                    id = "first_step",
-                    title = "First Words Explorer",
-                    description = "Answered your first question correctly!",
-                    iconEmoji = "🌟"
-                )
+            val badge = BadgeEntity(
+                id = "first_step",
+                title = "First Words Explorer",
+                description = "Answered your first question correctly!",
+                iconEmoji = "🌟"
             )
+            if (dao.getBadgeById(badge.id) == null) {
+                dao.unlockBadge(badge)
+                newlyUnlockedBadges.add(badge)
+            }
         }
+        return newlyUnlockedBadges
     }
 
     suspend fun evaluateAndUnlockAchievements(
@@ -559,24 +577,29 @@ class VocabularyRepository(private val dao: LumiDao) {
         streakDays: Int,
         physicalBreaks: Int,
         totalSessions: Int
-    ) {
+    ): List<BadgeEntity> {
+        val newlyUnlocked = mutableListOf<BadgeEntity>()
         val catalog = com.example.model.AchievementCatalog.ALL_ACHIEVEMENTS
         for (achievement in catalog) {
             val progress = achievement.progressExtractor(masteredCount, streakDays, physicalBreaks, totalSessions)
             if (progress >= achievement.targetGoal) {
-                dao.unlockBadge(
-                    BadgeEntity(
+                val existing = dao.getBadgeById(achievement.id)
+                if (existing == null) {
+                    val badge = BadgeEntity(
                         id = achievement.id,
                         title = achievement.title,
                         description = achievement.description,
                         iconEmoji = achievement.iconEmoji
                     )
-                )
+                    dao.unlockBadge(badge)
+                    newlyUnlocked.add(badge)
+                }
             }
         }
+        return newlyUnlocked
     }
 
-    suspend fun logSession(gameType: String, wordsPracticed: Int, accuracy: Float, durationSeconds: Int) {
+    suspend fun logSession(gameType: String, wordsPracticed: Int, accuracy: Float, durationSeconds: Int): DailyLearningStatsEntity {
         dao.logSession(
             LearningSessionEntity(
                 gameType = gameType,
@@ -585,9 +608,156 @@ class VocabularyRepository(private val dao: LumiDao) {
                 durationSeconds = durationSeconds
             )
         )
+        return recordDailyActivity(wordsPracticed, accuracy, durationSeconds)
+    }
+
+    suspend fun recordDailyActivity(wordsPracticed: Int, accuracy: Float, durationSeconds: Int): DailyLearningStatsEntity {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dayLabelFormat = SimpleDateFormat("EEE", Locale.getDefault())
+        val now = Date()
+        val dateString = dateFormat.format(now)
+        val dayLabel = dayLabelFormat.format(now)
+
+        val existing = dao.getDailyStatForDate(dateString)
+        val newWords = (existing?.wordsPracticed ?: 0) + wordsPracticed
+        val newMinutes = (existing?.minutesPracticed ?: 0) + (durationSeconds / 60).coerceAtLeast(1)
+        val newSessions = (existing?.sessionsCompleted ?: 0) + 1
+        val isGoalMet = newWords >= 10 || (existing?.isGoalMet == true)
+
+        val updated = DailyLearningStatsEntity(
+            dateString = dateString,
+            dayLabel = dayLabel,
+            wordsPracticed = newWords,
+            correctCount = (existing?.correctCount ?: 0) + (wordsPracticed * accuracy).toInt(),
+            minutesPracticed = newMinutes,
+            sessionsCompleted = newSessions,
+            accuracy = accuracy,
+            isGoalMet = isGoalMet,
+            timestamp = System.currentTimeMillis()
+        )
+        dao.saveDailyStat(updated)
+        return updated
+    }
+
+    suspend fun seedInitialDataIfNeeded() {
+        // Seed Vocabulary Items into Room DB if empty
+        vocabularyDao?.let { vDao ->
+            val total = vDao.getTotalCount("es")
+            // Seed all default vocabulary items for all languages
+            val entities = mutableListOf<VocabularyItemEntity>()
+            for (item in allVocabulary) {
+                for ((lang, trans) in item.translations) {
+                    entities.add(
+                        VocabularyItemEntity(
+                            id = "${item.id}_${lang}",
+                            englishWord = item.englishWord,
+                            categoryId = item.category.id,
+                            emoji = item.emoji,
+                            phonetic = item.phonetic,
+                            soundPrompt = item.soundPrompt,
+                            translation = trans,
+                            languageCode = lang,
+                            colorHex = item.colorHex
+                        )
+                    )
+                }
+            }
+            vDao.insertVocabularyList(entities)
+        }
+
+        // Seed 7-day initial stats for a realistic streak preview
+        val cal = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dayLabelFormat = SimpleDateFormat("EEE", Locale.getDefault())
+
+        val mockDays = listOf(
+            Triple(12, 10, 0.92f),
+            Triple(16, 14, 0.95f),
+            Triple(10, 8, 0.88f),
+            Triple(14, 12, 0.94f),
+            Triple(18, 15, 0.96f),
+            Triple(20, 18, 0.98f),
+            Triple(15, 13, 0.95f)
+        )
+
+        val initialStats = mutableListOf<DailyLearningStatsEntity>()
+        for (i in 6 downTo 0) {
+            val dateCal = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -i) }
+            val dateStr = dateFormat.format(dateCal.time)
+            val dayLbl = dayLabelFormat.format(dateCal.time)
+            val stat = mockDays[6 - i]
+
+            val existing = dao.getDailyStatForDate(dateStr)
+            if (existing == null) {
+                initialStats.add(
+                    DailyLearningStatsEntity(
+                        dateString = dateStr,
+                        dayLabel = dayLbl,
+                        wordsPracticed = stat.first,
+                        minutesPracticed = stat.second,
+                        accuracy = stat.third,
+                        sessionsCompleted = 2,
+                        isGoalMet = true,
+                        timestamp = dateCal.timeInMillis
+                    )
+                )
+            }
+        }
+        if (initialStats.isNotEmpty()) {
+            dao.insertDailyStatsList(initialStats)
+        }
     }
 
     fun getAllBadges(): Flow<List<BadgeEntity>> = dao.getAllBadges()
     fun getRecentSessions(): Flow<List<LearningSessionEntity>> = dao.getRecentSessions()
     fun getMasteredCount(langCode: String): Flow<Int> = dao.getMasteredCount(langCode)
+    fun getRecent7DaysStats(): Flow<List<DailyLearningStatsEntity>> = dao.getRecent7DaysStats()
+    fun getAllDailyStats(): Flow<List<DailyLearningStatsEntity>> = dao.getAllDailyStats()
+    suspend fun getDailyStat(dateString: String): DailyLearningStatsEntity? = dao.getDailyStatForDate(dateString)
+    suspend fun getAllDailyStatsSnapshot(): List<DailyLearningStatsEntity> = dao.getAllDailyStatsSnapshot()
+    fun getStoredVocabularyFlow(langCode: String): Flow<List<VocabularyItemEntity>>? =
+        vocabularyDao?.getAllVocabulary(langCode)
+
+    // User Preferences
+    fun getUserPreferencesFlow(): Flow<UserPreferencesEntity?> = dao.getUserPreferencesFlow()
+    suspend fun getUserPreferencesSnapshot(): UserPreferencesEntity? = dao.getUserPreferencesSnapshot()
+    suspend fun saveUserPreferences(preferences: UserPreferencesEntity) = dao.saveUserPreferences(preferences)
+
+    fun calculateConsecutiveStreak(statsList: List<DailyLearningStatsEntity>): Int {
+        if (statsList.isEmpty()) return 0
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val cal = Calendar.getInstance()
+        var streak = 0
+
+        // Check today
+        val todayStr = dateFormat.format(cal.time)
+        val todayStat = statsList.find { it.dateString == todayStr }
+        val hasActivityToday = todayStat != null && todayStat.wordsPracticed > 0
+
+        if (hasActivityToday) {
+            streak++
+            cal.add(Calendar.DAY_OF_YEAR, -1)
+        } else {
+            // Check yesterday
+            cal.add(Calendar.DAY_OF_YEAR, -1)
+            val yesterdayStr = dateFormat.format(cal.time)
+            val yesterdayStat = statsList.find { it.dateString == yesterdayStr }
+            if (yesterdayStat == null || yesterdayStat.wordsPracticed == 0) {
+                return 0
+            }
+        }
+
+        // Count previous consecutive days
+        while (true) {
+            val dateStr = dateFormat.format(cal.time)
+            val stat = statsList.find { it.dateString == dateStr }
+            if (stat != null && stat.wordsPracticed > 0) {
+                streak++
+                cal.add(Calendar.DAY_OF_YEAR, -1)
+            } else {
+                break
+            }
+        }
+        return streak
+    }
 }

@@ -15,6 +15,10 @@ object SoundFxHelper {
         soundManager = SoundManager.getInstance(context)
     }
 
+    fun setSoundEffectsEnabled(enabled: Boolean) {
+        soundManager?.isSoundEnabled = enabled
+    }
+
     fun playCorrectChime() {
         soundManager?.playPositiveAnswerChime()
     }

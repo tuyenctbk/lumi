@@ -37,11 +37,15 @@ import androidx.compose.material.icons.filled.Hearing
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.QrCode
+import androidx.compose.material.icons.filled.RecordVoiceOver
+import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -55,19 +59,27 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.model.LearningCategory
 import com.example.model.MascotMood
 import com.example.model.TargetLanguage
+import com.example.ui.components.DailyLearningStreakCanvas
 import com.example.ui.components.FocusableCard
+import com.example.ui.components.LearningMilestoneType
+import com.example.ui.components.GlobalLoadingWrapper
 import com.example.ui.components.LumiMascot
+import com.example.ui.components.LumiMilestoneCelebrationDialog
 import com.example.ui.components.LumiQuestModal
 import com.example.ui.components.ParentalGate
 import com.example.ui.components.PhysicalBreakDialog
 import com.example.ui.components.TopBarHeader
+import com.example.ui.components.TvFocusableCard
+import com.example.ui.components.TvShelfRow
 import com.example.ui.theme.SleekBackground
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekCoralDark
@@ -112,9 +124,15 @@ fun HomeScreen(
     val bilingualMode by viewModel.bilingualMode.collectAsState()
     val points by viewModel.points.collectAsState()
     val streakDays by viewModel.streakDays.collectAsState()
+    val dailyStats by viewModel.dailyStats.collectAsState()
+    val activeMilestone by viewModel.activeMilestone.collectAsState()
 
     val activeBreakQuest by viewModel.activePhysicalBreak.collectAsState()
     val isBreakVisible by viewModel.isPhysicalBreakVisible.collectAsState()
+    val userPreferences by viewModel.userPreferences.collectAsState()
+    val missedWords by viewModel.missedWords.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val errorMessage by viewModel.errorMessage.collectAsState()
 
     var showParentGate by remember { mutableStateOf(false) }
 
@@ -184,6 +202,33 @@ fun HomeScreen(
                 badge = "Badges"
             ),
             GameShowItem(
+                id = "quiz",
+                title = "Quiz Challenge",
+                subtitle = "Multiple-Choice Fun",
+                icon = Icons.Default.AutoAwesome,
+                color = SleekEmerald,
+                colorDark = SleekEmeraldDark,
+                badge = "HOT!"
+            ),
+            GameShowItem(
+                id = "pronunciation",
+                title = "Pronunciation Lab",
+                subtitle = "Practice Speaking",
+                icon = Icons.Default.RecordVoiceOver,
+                color = SleekOcean,
+                colorDark = SleekOceanDark,
+                badge = "MIC"
+            ),
+            GameShowItem(
+                id = "dashboard",
+                title = "Progress Dashboard",
+                subtitle = "Recharts Analytics",
+                icon = Icons.Default.Insights,
+                color = SleekPurple,
+                colorDark = Color(0xFF5B1AA8),
+                badge = "STATS"
+            ),
+            GameShowItem(
                 id = "sticker_book",
                 title = "Sticker & Trophies",
                 subtitle = "Your Collection",
@@ -195,11 +240,16 @@ fun HomeScreen(
         )
     }
 
-    BoxWithConstraints(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(SleekBackground)
+    GlobalLoadingWrapper(
+        isLoading = isLoading,
+        errorMessage = errorMessage,
+        onRetry = { viewModel.reloadContent() }
     ) {
+        BoxWithConstraints(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(SleekBackground)
+        ) {
         val isMobile = maxWidth < 600.dp
         val isTv = maxWidth >= 840.dp
 
@@ -306,18 +356,164 @@ fun HomeScreen(
                 }
             }
 
-            // Streak Counter Banner Integrated with Room DB
+            // Custom Compose Canvas Daily Learning Streak Visualization
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 4.dp)
+                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
             ) {
-                com.example.ui.components.StreakCounter(
+                DailyLearningStreakCanvas(
+                    dailyStats = dailyStats,
                     currentStreakDays = streakDays,
                     targetStreakGoal = 7,
-                    compact = true,
-                    modifier = Modifier.clickable { onNavigateGame("achievement_gallery") }
+                    dailyGoalWords = 12,
+                    onDaySelected = { stat ->
+                        viewModel.speakLumi("${stat.dayLabel}: Practiced ${stat.wordsPracticed} words with ${(stat.accuracy * 100).toInt()}% accuracy!")
+                    },
+                    onViewMilestonesClick = {
+                        viewModel.triggerMilestone(
+                            if (streakDays >= 7) LearningMilestoneType.STREAK_7_DAYS
+                            else LearningMilestoneType.STREAK_3_DAYS
+                        )
+                    }
                 )
+            }
+
+            // Daily Learning Goal Progress Card
+            val todayKey = remember { java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date()) }
+            val todayStat = remember(dailyStats, todayKey) { dailyStats.find { it.dateString == todayKey } }
+            val todayMinutes = todayStat?.minutesPracticed ?: 0
+            val goalMinutes = userPreferences.dailyGoalMinutes
+            val progressFraction = (todayMinutes.toFloat() / goalMinutes.coerceAtLeast(1).toFloat()).coerceIn(0f, 1f)
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
+            ) {
+                Card(
+                    shape = RoundedCornerShape(22.dp),
+                    colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(18.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Text("🎯", fontSize = 20.sp)
+                                Column {
+                                    Text(
+                                        text = stringResource(R.string.home_daily_goal, todayMinutes, goalMinutes),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = SleekTextDark
+                                    )
+                                    Text(
+                                        text = if (progressFraction >= 1f) stringResource(R.string.home_daily_target_achieved) else stringResource(R.string.home_mins_remaining, ((1f - progressFraction) * goalMinutes).toInt().coerceAtLeast(1)),
+                                        fontSize = 12.sp,
+                                        color = if (progressFraction >= 1f) SleekEmeraldDark else SleekTextMuted,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
+                            }
+
+                            Surface(
+                                shape = CircleShape,
+                                color = SleekCoral.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    text = "${(progressFraction * 100).toInt()}%",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.Black,
+                                    color = SleekCoral,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        // Custom Progress Bar
+                        androidx.compose.material3.LinearProgressIndicator(
+                            progress = { progressFraction },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(10.dp)
+                                .testTag("daily_goal_progress_bar"),
+                            color = SleekCoral,
+                            trackColor = SleekSurfaceBorder,
+                            strokeCap = androidx.compose.ui.graphics.StrokeCap.Round
+                        )
+                    }
+                }
+            }
+
+            // Review Mistakes Quick Banner (Extracts Room DB weak points)
+            if (missedWords.isNotEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = if (isMobile) 14.dp else 24.dp, vertical = 6.dp)
+                ) {
+                    FocusableCard(
+                        onClick = { onNavigateGame("review_mistakes") },
+                        shape = RoundedCornerShape(22.dp),
+                        backgroundColor = Color(0xFFFFF3E0),
+                        unfocusedBorderColor = SleekCoral,
+                        focusedBorderColor = SleekOcean,
+                        testTag = "review_mistakes_quick_banner"
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 14.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Text("💡", fontSize = 24.sp)
+                                Column {
+                                    Text(
+                                        text = "Practice Weak Points (${missedWords.size} Words)",
+                                        fontWeight = FontWeight.Black,
+                                        fontSize = 15.sp,
+                                        color = SleekTextDark
+                                    )
+                                    Text(
+                                        text = "Review incorrectly answered Room DB words to level up!",
+                                        fontSize = 12.sp,
+                                        color = SleekCoralDark,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+                            }
+
+                            Surface(
+                                shape = RoundedCornerShape(12.dp),
+                                color = SleekCoral
+                            ) {
+                                Text(
+                                    text = "Practice ➔",
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 12.sp,
+                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                                )
+                            }
+                        }
+                    }
+                }
             }
 
             // Section 1: Explore Worlds & Islands
@@ -347,13 +543,13 @@ fun HomeScreen(
                         }
                         Column {
                             Text(
-                                text = "World Explorer Islands",
+                                text = stringResource(R.string.home_world_explorer_islands),
                                 style = if (isMobile) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = SleekTextDark
                             )
                             Text(
-                                text = "CHOOSE AN ISLAND TO START EXPLORING",
+                                text = stringResource(R.string.home_choose_island_subtitle),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = SleekTextSubtle,
@@ -395,7 +591,7 @@ fun HomeScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "The Lumi Game Shows",
+                            text = stringResource(R.string.home_lumi_game_shows),
                             style = if (isMobile) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = SleekTextDark,
@@ -403,7 +599,7 @@ fun HomeScreen(
                             overflow = TextOverflow.Ellipsis
                         )
                         Text(
-                            text = "PLAY INTERACTIVE GAMES & WIN SHINING STARS",
+                            text = stringResource(R.string.home_play_games_subtitle),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             color = SleekTextSubtle,
@@ -495,6 +691,15 @@ fun HomeScreen(
             )
         }
 
+        // Lottie Mascot Learning Milestone Celebration Dialog
+        if (activeMilestone != null) {
+            LumiMilestoneCelebrationDialog(
+                milestone = activeMilestone!!,
+                onDismiss = { viewModel.dismissMilestone() },
+                onSpeak = { speechText -> viewModel.speakLumi(speechText, MascotMood.SUPERSTAR) }
+            )
+        }
+
         // Parental Gate Modal
         if (showParentGate) {
             ParentalGate(
@@ -507,6 +712,7 @@ fun HomeScreen(
         }
     }
 }
+}
 
 @Composable
 fun CategoryIslandCard(
@@ -516,7 +722,7 @@ fun CategoryIslandCard(
 ) {
     val categoryColor = Color(category.colorHex)
 
-    FocusableCard(
+    TvFocusableCard(
         onClick = onClick,
         shape = RoundedCornerShape(26.dp),
         backgroundColor = SleekSurface,
@@ -580,7 +786,7 @@ fun GameShowCard(
     isMobile: Boolean = false,
     onClick: () -> Unit
 ) {
-    FocusableCard(
+    TvFocusableCard(
         onClick = onClick,
         shape = RoundedCornerShape(26.dp),
         backgroundColor = SleekSurface,

@@ -10,9 +10,11 @@ import androidx.room.RoomDatabase
         VocabularyItemEntity::class,
         WordProgressEntity::class,
         BadgeEntity::class,
-        LearningSessionEntity::class
+        LearningSessionEntity::class,
+        DailyLearningStatsEntity::class,
+        UserPreferencesEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class LumiDatabase : RoomDatabase() {

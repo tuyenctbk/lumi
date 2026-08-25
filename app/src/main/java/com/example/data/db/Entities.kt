@@ -52,3 +52,26 @@ data class LearningSessionEntity(
     val accuracy: Float,
     val durationSeconds: Int
 )
+
+@Entity(tableName = "daily_learning_stats")
+data class DailyLearningStatsEntity(
+    @PrimaryKey val dateString: String, // Format: yyyy-MM-dd
+    val dayLabel: String,               // Mon, Tue, etc.
+    val wordsPracticed: Int = 0,
+    val correctCount: Int = 0,
+    val minutesPracticed: Int = 0,
+    val sessionsCompleted: Int = 0,
+    val accuracy: Float = 1.0f,
+    val isGoalMet: Boolean = false,
+    val timestamp: Long = System.currentTimeMillis()
+)
+
+@Entity(tableName = "user_preferences")
+data class UserPreferencesEntity(
+    @PrimaryKey val id: Int = 1,
+    val activeLanguageCode: String = "es",
+    val dailyGoalMinutes: Int = 10,
+    val isSoundEnabled: Boolean = true,
+    val isNotificationsEnabled: Boolean = true
+)
+

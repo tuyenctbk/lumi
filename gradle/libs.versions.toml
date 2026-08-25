@@ -44,9 +44,10 @@ googleid = "1.1.1"
 lottieCompose = "6.6.2"
 tvFoundation = "1.0.0-alpha12"
 tvMaterial = "1.0.0"
-
+workRuntime = "2.10.0"
 
 [libraries]
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntime" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

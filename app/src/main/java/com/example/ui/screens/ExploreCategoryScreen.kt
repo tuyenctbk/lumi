@@ -382,7 +382,6 @@ fun ExploreCategoryScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Quick Prompt Bar
             Surface(
                 shape = RoundedCornerShape(20.dp),
                 color = SleekSurface,
@@ -393,7 +392,12 @@ fun ExploreCategoryScreen(
                     .padding(horizontal = 2.dp)
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    modifier = Modifier.padding(
+                        start = 14.dp,
+                        end = if (isMobilePortrait) 105.dp else 14.dp,
+                        top = 10.dp,
+                        bottom = 10.dp
+                    ),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -401,7 +405,8 @@ fun ExploreCategoryScreen(
                         text = if (isMobilePortrait) "💡 Tap cards to hear & learn!" else "💡 Tip: Select any card to hear Lumi pronounce it out loud!",
                         color = SleekTextMuted,
                         fontWeight = FontWeight.Medium,
-                        fontSize = if (isMobilePortrait) 12.sp else 14.sp
+                        fontSize = if (isMobilePortrait) 12.sp else 14.sp,
+                        modifier = Modifier.weight(1f, fill = false)
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -436,34 +441,36 @@ fun ExploreCategoryScreen(
                             }
                         }
 
-                        // Listen Again Pronunciation
-                        FocusableCard(
-                            onClick = {
-                                selectedWord?.let { viewModel.speakWord(it) }
-                            },
-                            shape = RoundedCornerShape(14.dp),
-                            backgroundColor = SleekGold,
-                            unfocusedBorderColor = SleekGoldDark,
-                            focusedBorderColor = SleekEmerald,
-                            testTag = "repeat_audio_button"
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        if (!isMobilePortrait) {
+                            // Listen Again Pronunciation
+                            FocusableCard(
+                                onClick = {
+                                    selectedWord?.let { viewModel.speakWord(it) }
+                                },
+                                shape = RoundedCornerShape(14.dp),
+                                backgroundColor = SleekGold,
+                                unfocusedBorderColor = SleekGoldDark,
+                                focusedBorderColor = SleekEmerald,
+                                testTag = "repeat_audio_button"
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.VolumeUp,
-                                    contentDescription = "Listen",
-                                    tint = SleekTextDark,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Text(
-                                    text = "Pronounce",
-                                    color = SleekTextDark,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 12.sp
-                                )
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.VolumeUp,
+                                        contentDescription = "Listen",
+                                        tint = SleekTextDark,
+                                        modifier = Modifier.size(16.dp)
+                                    )
+                                    Text(
+                                        text = "Pronounce",
+                                        color = SleekTextDark,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp
+                                    )
+                                }
                             }
                         }
                     }

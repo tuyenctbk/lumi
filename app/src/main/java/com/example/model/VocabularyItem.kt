@@ -28,7 +28,11 @@ enum class TargetLanguage(
     JAPANESE("ja", "Japanese (日本語)", "🇯🇵", "ja-JP"),
     KOREAN("ko", "Korean (한국어)", "🇰🇷", "ko-KR"),
     MANDARIN("zh", "Chinese (中文)", "🇨🇳", "zh-CN"),
-    ENGLISH("en", "English", "🇬🇧", "en-US")
+    ENGLISH("en", "English", "🇬🇧", "en-US");
+
+    companion object {
+        fun fromCode(code: String): TargetLanguage = entries.find { it.code == code } ?: SPANISH
+    }
 }
 
 data class VocabularyItem(
@@ -51,5 +55,6 @@ enum class MascotMood {
     ENCOURAGING,
     SUPERSTAR,
     THINKING,
-    TALKING
+    TALKING,
+    CELEBRATING
 }

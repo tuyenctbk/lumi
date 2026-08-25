@@ -238,11 +238,108 @@ private val LOTTIE_THINKING_JSON = """
 }
 """.trimIndent()
 
+private val LOTTIE_CELEBRATING_JSON = """
+{
+  "v": "5.5.7",
+  "fr": 60,
+  "ip": 0,
+  "op": 60,
+  "w": 100,
+  "h": 100,
+  "nm": "lumi_celebrating",
+  "ddd": 0,
+  "assets": [],
+  "layers": [
+    {
+      "ddd": 0,
+      "ind": 1,
+      "ty": 4,
+      "nm": "celebrating_burst",
+      "sr": 1,
+      "ks": {
+        "o": {"a": 1, "k": [{"t": 0, "s": [85]}, {"t": 30, "s": [100]}, {"t": 60, "s": [85]}]},
+        "r": {"a": 1, "k": [{"t": 0, "s": [-25]}, {"t": 30, "s": [25]}, {"t": 60, "s": [-25]}]},
+        "p": {"a": 1, "k": [{"t": 0, "s": [50, 50, 0]}, {"t": 30, "s": [35, 35, 0]}, {"t": 60, "s": [50, 50, 0]}]},
+        "a": {"a": 0, "k": [0, 0, 0]},
+        "s": {"a": 1, "k": [{"t": 0, "s": [100, 100, 100]}, {"t": 30, "s": [130, 130, 100]}, {"t": 60, "s": [100, 100, 100]}]}
+      },
+      "ao": 0,
+      "shapes": [
+        {
+          "ty": "sr",
+          "sy": 1,
+          "pt": {"a": 0, "k": 5},
+          "p": {"a": 0, "k": [0, 0]},
+          "r": {"a": 0, "k": 0},
+          "or": {"a": 0, "k": 44},
+          "os": {"a": 0, "k": 0},
+          "ir": {"a": 0, "k": 22},
+          "is": {"a": 0, "k": 0}
+        },
+        {
+          "ty": "fl",
+          "c": {"a": 0, "k": [1, 0.84, 0.0, 0.6]},
+          "o": {"a": 0, "k": 100}
+        }
+      ]
+    }
+  ]
+}
+""".trimIndent()
+
+private val LOTTIE_ENCOURAGING_JSON = """
+{
+  "v": "5.5.7",
+  "fr": 60,
+  "ip": 0,
+  "op": 90,
+  "w": 100,
+  "h": 100,
+  "nm": "lumi_encouraging",
+  "ddd": 0,
+  "assets": [],
+  "layers": [
+    {
+      "ddd": 0,
+      "ind": 1,
+      "ty": 4,
+      "nm": "encouraging_pulse",
+      "sr": 1,
+      "ks": {
+        "o": {"a": 1, "k": [{"t": 0, "s": [60]}, {"t": 45, "s": [90]}, {"t": 90, "s": [60]}]},
+        "r": {"a": 1, "k": [{"t": 0, "s": [-5]}, {"t": 45, "s": [5]}, {"t": 90, "s": [-5]}]},
+        "p": {"a": 0, "k": [50, 50, 0]},
+        "a": {"a": 0, "k": [0, 0, 0]},
+        "s": {"a": 1, "k": [{"t": 0, "s": [98, 98, 100]}, {"t": 45, "s": [108, 108, 100]}, {"t": 90, "s": [98, 98, 100]}]}
+      },
+      "ao": 0,
+      "shapes": [
+        {
+          "ty": "gr",
+          "it": [
+            {
+              "ty": "el",
+              "p": {"a": 0, "k": [0, 0]},
+              "s": {"a": 0, "k": [82, 82]}
+            },
+            {
+              "ty": "fl",
+              "c": {"a": 0, "k": [0.38, 0.65, 0.98, 0.35]},
+              "o": {"a": 0, "k": 100}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+""".trimIndent()
+
 /**
  * LumiMascot
  *
  * An animated Mascot component that renders Lottie animations with state-based
- * triggers to seamlessly switch between idle, happy, thinking, and superstar states.
+ * triggers to seamlessly switch between idle, happy, thinking, superstar, celebrating, and encouraging states.
  */
 @Composable
 fun LumiMascot(
@@ -257,7 +354,9 @@ fun LumiMascot(
     val effectiveThoughtBubble = speechBubble ?: thoughtBubbleEmoji
     // Select appropriate Lottie composition based on mascot mood
     val selectedLottieJson = when (mood) {
-        MascotMood.HAPPY, MascotMood.SUPERSTAR -> LOTTIE_HAPPY_JSON
+        MascotMood.CELEBRATING, MascotMood.SUPERSTAR -> LOTTIE_CELEBRATING_JSON
+        MascotMood.HAPPY -> LOTTIE_HAPPY_JSON
+        MascotMood.ENCOURAGING -> LOTTIE_ENCOURAGING_JSON
         MascotMood.THINKING -> LOTTIE_THINKING_JSON
         else -> LOTTIE_IDLE_JSON
     }

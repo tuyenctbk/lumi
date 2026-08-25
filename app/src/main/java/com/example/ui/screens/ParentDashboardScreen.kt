@@ -39,6 +39,11 @@ import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material.icons.filled.RecordVoiceOver
 import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.NotificationsActive
+import androidx.compose.material.icons.filled.NotificationsOff
+import androidx.compose.material.icons.filled.Vibration
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -105,6 +110,9 @@ fun ParentDashboardScreen(
     val missedWords by viewModel.missedWords.collectAsState()
     val physicalBreaksCompleted by viewModel.physicalBreaksCompleted.collectAsState()
     val ttsOfflineMode by viewModel.ttsOfflineMode.collectAsState()
+    val dailyStats by viewModel.dailyStats.collectAsState()
+    val isDarkMode by viewModel.isDarkMode.collectAsState()
+    val isDailyReminderEnabled by viewModel.isDailyReminderEnabled.collectAsState()
 
     val masteredCount = wordProgressList.count { it.isMastered }
     val totalPracticed = wordProgressList.size
@@ -246,6 +254,15 @@ fun ParentDashboardScreen(
                         modifier = Modifier.weight(1f)
                     )
                 }
+            }
+
+            // Recharts Interactive Analytics Dashboard
+            item {
+                com.example.ui.components.RechartsDashboardView(
+                    dailyStats = dailyStats,
+                    totalMastered = masteredCount,
+                    totalPracticed = totalPracticed
+                )
             }
 
             // QR Code Parent Mirror Card
@@ -619,6 +636,200 @@ fun ParentDashboardScreen(
                             text = "When Offline Mode is active, Lumi uses pre-loaded local phonetic synthesizers so your child can continue learning and hearing accurate pronunciation guides without requiring an active internet connection.",
                             fontSize = 13.sp,
                             color = SleekTextMuted,
+                            lineHeight = 18.sp
+                        )
+                    }
+                }
+            }
+
+            // Material 3 Dark / Light Mode Appearance Card
+            item {
+                Card(
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(22.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = if (isDarkMode) SleekPurple.copy(alpha = 0.15f) else SleekGold.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = if (isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
+                                            contentDescription = null,
+                                            tint = if (isDarkMode) SleekPurple else SleekGoldDark,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
+                                }
+
+                                Column {
+                                    Text(
+                                        text = "Theme & Appearance",
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = if (isDarkMode) "🌙 Night Explorer Dark Mode Active" else "☀️ Daytime Cozy Warm Light Mode",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+
+                            FocusableCard(
+                                onClick = { viewModel.toggleDarkMode() },
+                                shape = RoundedCornerShape(16.dp),
+                                backgroundColor = if (isDarkMode) SleekPurple else MaterialTheme.colorScheme.surface,
+                                unfocusedBorderColor = if (isDarkMode) SleekPurple else MaterialTheme.colorScheme.outline,
+                                focusedBorderColor = SleekGold,
+                                testTag = "toggle_dark_mode_button"
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Text(
+                                        text = if (isDarkMode) "Dark Mode: ON" else "Dark Mode: OFF",
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isDarkMode) Color.White else MaterialTheme.colorScheme.onSurface,
+                                        fontSize = 13.sp
+                                    )
+                                    Switch(
+                                        checked = isDarkMode,
+                                        onCheckedChange = { viewModel.toggleDarkMode() },
+                                        colors = SwitchDefaults.colors(
+                                            checkedThumbColor = Color.White,
+                                            checkedTrackColor = SleekPurple,
+                                            uncheckedThumbColor = SleekTextMuted,
+                                            uncheckedTrackColor = SleekSurfaceBorder
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Text(
+                            text = "Switch between a bright daytime theme or a soft, eye-comfort dark theme designed for evening bedtime learning sessions.",
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            lineHeight = 18.sp
+                        )
+                    }
+                }
+            }
+
+            // Daily Lesson Streak Notification Scheduler Card
+            item {
+                Card(
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(22.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = if (isDailyReminderEnabled) SleekCoral.copy(alpha = 0.15f) else SleekTextMuted.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = if (isDailyReminderEnabled) Icons.Default.NotificationsActive else Icons.Default.NotificationsOff,
+                                            contentDescription = null,
+                                            tint = if (isDailyReminderEnabled) SleekCoral else SleekTextMuted,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
+                                }
+
+                                Column {
+                                    Text(
+                                        text = "Daily Streak Reminders",
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = if (isDailyReminderEnabled)
+                                            "⏰ Scheduled daily at 6:00 PM (If goal not yet completed)"
+                                        else
+                                            "🔕 Daily notifications paused",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        color = if (isDailyReminderEnabled) SleekCoral else MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                FocusableCard(
+                                    onClick = { viewModel.testDailyReminder(context) },
+                                    shape = RoundedCornerShape(14.dp),
+                                    backgroundColor = SleekCoral.copy(alpha = 0.15f),
+                                    unfocusedBorderColor = SleekCoral.copy(alpha = 0.4f),
+                                    focusedBorderColor = SleekCoral,
+                                    testTag = "test_daily_reminder_button"
+                                ) {
+                                    Text(
+                                        text = "🔔 Test Now",
+                                        fontWeight = FontWeight.Bold,
+                                        color = SleekCoral,
+                                        fontSize = 12.sp,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp)
+                                    )
+                                }
+
+                                Switch(
+                                    checked = isDailyReminderEnabled,
+                                    onCheckedChange = { viewModel.toggleDailyReminder(context) },
+                                    colors = SwitchDefaults.colors(
+                                        checkedThumbColor = Color.White,
+                                        checkedTrackColor = SleekCoral,
+                                        uncheckedThumbColor = SleekTextMuted,
+                                        uncheckedTrackColor = SleekSurfaceBorder
+                                    )
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Text(
+                            text = "Lumi checks your child's daily progress and automatically sends a friendly notification before bedtime if today's 3-minute lesson hasn't been finished yet, protecting their learning streak.",
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                             lineHeight = 18.sp
                         )
                     }

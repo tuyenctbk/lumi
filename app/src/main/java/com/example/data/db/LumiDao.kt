@@ -39,6 +39,12 @@ interface LumiDao {
     @Query("SELECT * FROM badges ORDER BY unlockedAt DESC")
     fun getAllBadges(): Flow<List<BadgeEntity>>
 
+    @Query("SELECT * FROM badges")
+    suspend fun getAllBadgesSnapshot(): List<BadgeEntity>
+
+    @Query("SELECT * FROM badges WHERE id = :id LIMIT 1")
+    suspend fun getBadgeById(id: String): BadgeEntity?
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun unlockBadge(badge: BadgeEntity)
 
@@ -56,4 +62,33 @@ interface LumiDao {
 
     @Query("SELECT COUNT(*) FROM word_progress WHERE languageCode = :langCode")
     fun getTotalTrackedWordsCount(langCode: String): Flow<Int>
+
+    // Daily Learning Stats
+    @Query("SELECT * FROM daily_learning_stats ORDER BY dateString DESC LIMIT 7")
+    fun getRecent7DaysStats(): Flow<List<DailyLearningStatsEntity>>
+
+    @Query("SELECT * FROM daily_learning_stats ORDER BY dateString DESC")
+    fun getAllDailyStats(): Flow<List<DailyLearningStatsEntity>>
+
+    @Query("SELECT * FROM daily_learning_stats ORDER BY dateString DESC")
+    suspend fun getAllDailyStatsSnapshot(): List<DailyLearningStatsEntity>
+
+    @Query("SELECT * FROM daily_learning_stats WHERE dateString = :dateString LIMIT 1")
+    suspend fun getDailyStatForDate(dateString: String): DailyLearningStatsEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveDailyStat(stat: DailyLearningStatsEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDailyStatsList(list: List<DailyLearningStatsEntity>)
+
+    // User Preferences Queries
+    @Query("SELECT * FROM user_preferences WHERE id = 1 LIMIT 1")
+    fun getUserPreferencesFlow(): Flow<UserPreferencesEntity?>
+
+    @Query("SELECT * FROM user_preferences WHERE id = 1 LIMIT 1")
+    suspend fun getUserPreferencesSnapshot(): UserPreferencesEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveUserPreferences(preferences: UserPreferencesEntity)
 }

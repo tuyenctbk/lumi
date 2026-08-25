@@ -28,6 +28,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.model.LearningCategory
+import com.example.ui.components.AchievementUnlockedDialog
+import com.example.ui.components.LumiQuizFeedbackOverlay
 import com.example.ui.components.LumiQuestModal
 import com.example.ui.screens.ColorMixerScreen
 import com.example.ui.screens.ExploreCategoryScreen
@@ -69,7 +71,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            val isDark by viewModel.isDarkMode.collectAsState()
+            MyApplicationTheme(darkTheme = isDark) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -86,17 +89,23 @@ class MainActivity : ComponentActivity() {
 fun LumiApp(viewModel: LumiViewModel) {
     val context = LocalContext.current
     val engagementManager = remember { SmartEngagementManager(context) }
+    val networkObserver = remember { com.example.util.NetworkObserver.getInstance(context) }
+    val isOnline by networkObserver.isOnline.collectAsState(initial = networkObserver.checkCurrentConnectivity())
+
     val navController = rememberNavController()
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     var showLanguagePicker by remember { mutableStateOf(false) }
 
     val activeBreakQuest by viewModel.activePhysicalBreak.collectAsState()
     val isBreakVisible by viewModel.isPhysicalBreakVisible.collectAsState()
+    val unlockedBadge by viewModel.unlockedBadgeEvent.collectAsState()
+    val quizFeedback by viewModel.quizFeedbackEvent.collectAsState()
 
     var activeEngagementSuggestion by remember { mutableStateOf<SmartSuggestionType?>(null) }
 
     LaunchedEffect(Unit) {
         engagementManager.recordAppLaunch()
+        com.example.service.DailyReminderWorker.scheduleDailyReminder(context)
     }
 
     LaunchedEffect(navController.currentBackStackEntryFlow) {
@@ -121,118 +130,126 @@ fun LumiApp(viewModel: LumiViewModel) {
     }
 
     SharedTransitionLayout {
-        NavHost(
-            navController = navController,
-            startDestination = "splash",
-            enterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
-            exitTransition = { fadeOut(tween(200)) },
-            popEnterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
-            popExitTransition = { fadeOut(tween(200)) }
-        ) {
-            composable("splash") {
-                com.example.ui.screens.SplashScreen(
-                    onSplashFinished = {
-                        if (engagementManager.isOnboardingCompleted) {
+        androidx.compose.foundation.layout.Box(modifier = Modifier.fillMaxSize()) {
+            NavHost(
+                navController = navController,
+                startDestination = "splash",
+                enterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
+                exitTransition = { fadeOut(tween(200)) },
+                popEnterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
+                popExitTransition = { fadeOut(tween(200)) }
+            ) {
+                composable("splash") {
+                    com.example.ui.screens.SplashScreen(
+                        onSplashFinished = {
+                            if (engagementManager.isOnboardingCompleted) {
+                                navController.navigate("home") {
+                                    popUpTo("splash") { inclusive = true }
+                                }
+                            } else {
+                                navController.navigate("onboarding") {
+                                    popUpTo("splash") { inclusive = true }
+                                }
+                            }
+                        }
+                    )
+                }
+
+                composable("onboarding") {
+                    OnboardingScreen(
+                        onOnboardingFinished = {
                             navController.navigate("home") {
-                                popUpTo("splash") { inclusive = true }
-                            }
-                        } else {
-                            navController.navigate("onboarding") {
-                                popUpTo("splash") { inclusive = true }
+                                popUpTo("onboarding") { inclusive = true }
                             }
                         }
-                    }
-                )
-            }
+                    )
+                }
 
-            composable("onboarding") {
-                OnboardingScreen(
-                    onOnboardingFinished = {
-                        navController.navigate("home") {
-                            popUpTo("onboarding") { inclusive = true }
+                composable("home") {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onNavigateCategory = { category ->
+                            navController.navigate("category/${category.id}")
+                        },
+                        onNavigateGame = { gameId ->
+                            navController.navigate("game/$gameId")
+                        },
+                        onNavigateParentHub = {
+                            navController.navigate("parent_hub")
+                        },
+                        onOpenLanguagePicker = {
+                            showLanguagePicker = true
+                        },
+                        onNavigateWorldMap = {
+                            navController.navigate("world_map")
+                        },
+                        onNavigateParentQrSync = {
+                            navController.navigate("parent_qr_sync")
                         }
-                    }
-                )
-            }
+                    )
+                }
 
-            composable("home") {
-                HomeScreen(
-                    viewModel = viewModel,
-                    onNavigateCategory = { category ->
-                        navController.navigate("category/${category.id}")
-                    },
-                    onNavigateGame = { gameId ->
-                        navController.navigate("game/$gameId")
-                    },
-                    onNavigateParentHub = {
-                        navController.navigate("parent_hub")
-                    },
-                    onOpenLanguagePicker = {
-                        showLanguagePicker = true
-                    },
-                    onNavigateWorldMap = {
-                        navController.navigate("world_map")
-                    },
-                    onNavigateParentQrSync = {
-                        navController.navigate("parent_qr_sync")
-                    }
-                )
-            }
+                composable("world_map") {
+                    WorldMapScreen(
+                        viewModel = viewModel,
+                        onSelectCategory = { category ->
+                            navController.navigate("category/${category.id}")
+                        },
+                        onBack = { navController.popBackStack() },
+                        animatedVisibilityScope = this,
+                        sharedTransitionScope = this@SharedTransitionLayout
+                    )
+                }
 
-            composable("world_map") {
-                WorldMapScreen(
-                    viewModel = viewModel,
-                    onSelectCategory = { category ->
-                        navController.navigate("category/${category.id}")
-                    },
-                    onBack = { navController.popBackStack() },
-                    animatedVisibilityScope = this,
-                    sharedTransitionScope = this@SharedTransitionLayout
-                )
-            }
+                composable(
+                    route = "category/{categoryId}",
+                    arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+                ) { backStackEntry ->
+                    val catId = backStackEntry.arguments?.getString("categoryId")
+                    val category = LearningCategory.entries.find { it.id == catId } ?: LearningCategory.ANIMALS
+                    ExploreCategoryScreen(
+                        category = category,
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() },
+                        animatedVisibilityScope = this,
+                        sharedTransitionScope = this@SharedTransitionLayout
+                    )
+                }
 
-            composable(
-                route = "category/{categoryId}",
-                arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
-            ) { backStackEntry ->
-                val catId = backStackEntry.arguments?.getString("categoryId")
-                val category = LearningCategory.entries.find { it.id == catId } ?: LearningCategory.ANIMALS
-                ExploreCategoryScreen(
-                    category = category,
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() },
-                    animatedVisibilityScope = this,
-                    sharedTransitionScope = this@SharedTransitionLayout
-                )
-            }
+                composable("game/mystery_spotlight") {
+                    MysterySpotlightScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
 
-            composable("game/mystery_spotlight") {
-                MysterySpotlightScreen(
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+                composable("game/sound_match") {
+                    SoundMatchScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
 
-            composable("game/sound_match") {
-                SoundMatchScreen(
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+                composable("game/shadow_guess") {
+                    ShadowGuessScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
 
-            composable("game/shadow_guess") {
-                ShadowGuessScreen(
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+                composable("game/color_mixer") {
+                    ColorMixerScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
 
-            composable("game/color_mixer") {
-                ColorMixerScreen(
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+                composable("game/review_mistakes") {
+                    com.example.ui.screens.ReviewMistakesScreen(
+                        viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() }
+                    )
+                }
 
             composable("game/movement_quest") {
                 MovementQuestScreen(
@@ -264,6 +281,106 @@ fun LumiApp(viewModel: LumiViewModel) {
 
             composable("achievement_gallery") {
                 com.example.ui.screens.AchievementGalleryScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/quiz") {
+                com.example.ui.screens.QuizScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() },
+                    onFinishQuiz = { score, total ->
+                        navController.navigate("lesson_celebration/$score/$total")
+                    }
+                )
+            }
+
+            composable("quiz") {
+                com.example.ui.screens.QuizScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() },
+                    onFinishQuiz = { score, total ->
+                        navController.navigate("lesson_celebration/$score/$total")
+                    }
+                )
+            }
+
+            composable("game/pronunciation") {
+                com.example.ui.screens.PronunciationPracticeScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() },
+                    onFinishLesson = { score, total ->
+                        navController.navigate("lesson_celebration/$score/$total")
+                    }
+                )
+            }
+
+            composable("pronunciation") {
+                com.example.ui.screens.PronunciationPracticeScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() },
+                    onFinishLesson = { score, total ->
+                        navController.navigate("lesson_celebration/$score/$total")
+                    }
+                )
+            }
+
+            composable(
+                route = "lesson_celebration/{score}/{total}",
+                arguments = listOf(
+                    navArgument("score") { type = NavType.IntType },
+                    navArgument("total") { type = NavType.IntType }
+                )
+            ) { backStackEntry ->
+                val score = backStackEntry.arguments?.getInt("score") ?: 100
+                val total = backStackEntry.arguments?.getInt("total") ?: 5
+                com.example.ui.screens.LessonCelebrationScreen(
+                    viewModel = viewModel,
+                    score = score,
+                    wordsMasteredCount = total,
+                    accuracyPercent = 100,
+                    onContinueNext = {
+                        navController.navigate("game/quiz") {
+                            popUpTo("home")
+                        }
+                    },
+                    onBackHome = {
+                        navController.navigate("home") {
+                            popUpTo("home") { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable("lesson_celebration") {
+                com.example.ui.screens.LessonCelebrationScreen(
+                    viewModel = viewModel,
+                    score = 100,
+                    wordsMasteredCount = 5,
+                    accuracyPercent = 100,
+                    onContinueNext = {
+                        navController.navigate("game/quiz") {
+                            popUpTo("home")
+                        }
+                    },
+                    onBackHome = {
+                        navController.navigate("home") {
+                            popUpTo("home") { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable("game/dashboard") {
+                com.example.ui.screens.ProgressDashboardScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("dashboard") {
+                com.example.ui.screens.ProgressDashboardScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }
                 )
@@ -330,7 +447,13 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
         }
+
+        com.example.ui.components.OfflineModeBanner(
+            isOffline = !isOnline,
+            modifier = Modifier.align(androidx.compose.ui.Alignment.TopCenter)
+        )
     }
+}
 
     // Global Language Picker Dialog
     if (showLanguagePicker) {
@@ -350,6 +473,26 @@ fun LumiApp(viewModel: LumiViewModel) {
             onCompleted = { viewModel.completePhysicalActivity(activeBreakQuest!!) },
             onDismiss = { viewModel.dismissPhysicalActivity() },
             onReplayAudio = { viewModel.speakLumi(activeBreakQuest!!.spokenPrompt) }
+        )
+    }
+
+    // Global Achievement Milestone Unlocked Popup Dialog
+    if (unlockedBadge != null) {
+        AchievementUnlockedDialog(
+            badge = unlockedBadge!!,
+            onDismiss = { viewModel.dismissUnlockedBadgeEvent() },
+            onViewGallery = {
+                navController.navigate("achievement_gallery")
+            }
+        )
+    }
+
+    // Global Quiz Feedback Lottie Mascot Overlay
+    if (quizFeedback != null) {
+        LumiQuizFeedbackOverlay(
+            feedbackType = quizFeedback!!,
+            visible = true,
+            onFinished = { viewModel.dismissQuizFeedback() }
         )
     }
 

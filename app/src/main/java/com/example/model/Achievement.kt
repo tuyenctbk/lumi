@@ -70,6 +70,33 @@ object AchievementCatalog {
             progressExtractor = { _, streak, _, _ -> streak }
         ),
         Achievement(
+            id = "streak_10",
+            title = "10-Day Streak Legend",
+            description = "Maintain a 10-day consecutive learning streak!",
+            iconEmoji = "🏆",
+            category = "Streaks",
+            targetGoal = 10,
+            progressExtractor = { _, streak, _, _ -> streak }
+        ),
+        Achievement(
+            id = "words_50",
+            title = "50 Words Polyglot",
+            description = "Master 50 vocabulary words!",
+            iconEmoji = "👑",
+            category = "Words",
+            targetGoal = 50,
+            progressExtractor = { mastered, _, _, _ -> mastered }
+        ),
+        Achievement(
+            id = "words_100",
+            title = "100 Words Lexicon Legend",
+            description = "Master 100 vocabulary words across all categories!",
+            iconEmoji = "💎",
+            category = "Words",
+            targetGoal = 100,
+            progressExtractor = { mastered, _, _, _ -> mastered }
+        ),
+        Achievement(
             id = "break_3",
             title = "Active Movement Champ",
             description = "Complete 3 off-screen physical movement breaks!",

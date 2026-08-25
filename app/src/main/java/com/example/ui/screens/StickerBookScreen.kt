@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.PaddingValues
@@ -85,16 +86,23 @@ fun StickerBookScreen(
         )
     }
 
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(SleekBackground)
     ) {
+        val isMobile = maxWidth < 600.dp
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
-                .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp)
+                .padding(
+                    start = if (isMobile) 14.dp else 24.dp,
+                    end = if (isMobile) 14.dp else 24.dp,
+                    top = 8.dp,
+                    bottom = if (isMobile) 90.dp else 110.dp
+                )
         ) {
             // Header
             Row(
@@ -253,13 +261,16 @@ fun StickerBookScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 24.dp, bottom = 12.dp)
+                .padding(
+                    end = if (isMobile) 10.dp else 24.dp,
+                    bottom = if (isMobile) 8.dp else 12.dp
+                )
         ) {
             LumiMascot(
                 mood = mascotMood,
                 isSpeaking = isSpeaking,
                 thoughtBubbleEmoji = mascotBubble,
-                size = 110.dp,
+                size = if (isMobile) 75.dp else 110.dp,
                 onClick = { viewModel.speakLumi("Look at all your awesome trophies and shiny stickers!") }
             )
         }

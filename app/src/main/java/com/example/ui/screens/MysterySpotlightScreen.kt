@@ -120,7 +120,7 @@ fun MysterySpotlightScreen(
                     start = if (isMobile) 14.dp else 24.dp,
                     end = if (isMobile) 14.dp else 24.dp,
                     top = if (isMobile) 4.dp else 8.dp,
-                    bottom = if (isMobile) 14.dp else 24.dp
+                    bottom = if (isMobile) 90.dp else 110.dp
                 )
         ) {
             // Top Bar
@@ -269,7 +269,8 @@ fun MysterySpotlightScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f),
+                        .weight(1f)
+                        .padding(end = if (isMobile) 85.dp else 0.dp),
                     horizontalArrangement = Arrangement.spacedBy(if (isMobile) 8.dp else 18.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {

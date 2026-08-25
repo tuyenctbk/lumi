@@ -121,7 +121,7 @@ fun SoundMatchScreen(
                     start = if (isMobile) 14.dp else 24.dp,
                     end = if (isMobile) 14.dp else 24.dp,
                     top = if (isMobile) 4.dp else 8.dp,
-                    bottom = if (isMobile) 14.dp else 24.dp
+                    bottom = if (isMobile) 90.dp else 110.dp
                 )
         ) {
             // Header
@@ -302,7 +302,8 @@ fun SoundMatchScreen(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f),
+                            .weight(1f)
+                            .padding(end = if (isMobile) 85.dp else 0.dp),
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {

@@ -96,6 +96,7 @@ fun SettingsScreen(
 
     val masteredCount = remember(wordProgressList) { wordProgressList.count { it.isMastered } }
     val totalPracticed = wordProgressList.size
+    val userPreferences by viewModel.userPreferences.collectAsState()
 
     var isParentUnlocked by remember { mutableStateOf(false) }
     var showParentGateModal by remember { mutableStateOf(false) }
@@ -385,6 +386,234 @@ fun SettingsScreen(
                             color = SleekTextMuted,
                             lineHeight = 18.sp
                         )
+                    }
+                }
+            }
+            
+            // Section 1B: Theme Toggle
+            item {
+                Card(
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    val isDarkMode by viewModel.isDarkMode.collectAsState()
+                    Column(modifier = Modifier.padding(22.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = if (isDarkMode) SleekOcean.copy(alpha = 0.15f) else SleekGold.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.Star,
+                                            contentDescription = null,
+                                            tint = if (isDarkMode) SleekOceanDark else SleekGoldDark,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
+                                }
+
+                                Column {
+                                    Text(
+                                        text = "Dark Theme",
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = SleekTextDark
+                                    )
+                                    Text(
+                                        text = if (isDarkMode) "🌙 Night Mode Active" else "☀️ Day Mode Active",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        color = if (isDarkMode) SleekOceanDark else SleekGoldDark
+                                    )
+                                }
+                            }
+
+                            FocusableCard(
+                                onClick = { viewModel.setDarkMode(!isDarkMode) },
+                                shape = RoundedCornerShape(16.dp),
+                                backgroundColor = if (isDarkMode) SleekOcean else SleekSurface,
+                                unfocusedBorderColor = if (isDarkMode) SleekOceanDark else SleekSurfaceBorder,
+                                focusedBorderColor = SleekGold,
+                                testTag = "settings_toggle_theme"
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Text(
+                                        text = if (isDarkMode) "ON" else "OFF",
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isDarkMode) Color.White else SleekTextDark,
+                                        fontSize = 13.sp
+                                    )
+                                    Switch(
+                                        checked = isDarkMode,
+                                        onCheckedChange = { viewModel.setDarkMode(!isDarkMode) },
+                                        colors = SwitchDefaults.colors(
+                                            checkedThumbColor = Color.White,
+                                            checkedTrackColor = SleekOceanDark,
+                                            uncheckedThumbColor = SleekTextMuted,
+                                            uncheckedTrackColor = SleekSurfaceBorder
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Section 1C: Interactive Sound & Audio Effects Toggle
+            item {
+                Card(
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(22.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = if (userPreferences.isSoundEnabled) SleekGold.copy(alpha = 0.15f) else Color.Gray.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(44.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Text(if (userPreferences.isSoundEnabled) "🔔" else "🔕", fontSize = 22.sp)
+                                    }
+                                }
+
+                                Column {
+                                    Text(
+                                        text = "Sound Effects & Mascot Chimes",
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = SleekTextDark
+                                    )
+                                    Text(
+                                        text = if (userPreferences.isSoundEnabled)
+                                            "🔊 Audio cues, pop sounds, & victory chimes active"
+                                        else
+                                            "🔇 Audio cues & mascot chimes muted",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        color = if (userPreferences.isSoundEnabled) SleekGoldDark else SleekTextMuted
+                                    )
+                                }
+                            }
+
+                            Switch(
+                                checked = userPreferences.isSoundEnabled,
+                                onCheckedChange = { enabled -> viewModel.setSoundEffectsEnabled(enabled) },
+                                colors = SwitchDefaults.colors(
+                                    checkedThumbColor = Color.White,
+                                    checkedTrackColor = SleekGoldDark,
+                                    uncheckedThumbColor = SleekTextMuted,
+                                    uncheckedTrackColor = SleekSurfaceBorder
+                                ),
+                                modifier = Modifier.testTag("settings_sound_toggle_switch")
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Section 1C: Daily Learning Goal Target (Room DB Persisted)
+            item {
+                Card(
+                    shape = RoundedCornerShape(26.dp),
+                    colors = CardDefaults.cardColors(containerColor = SleekSurface),
+                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(22.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = SleekCoral.copy(alpha = 0.15f),
+                                modifier = Modifier.size(44.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text("🎯", fontSize = 22.sp)
+                                }
+                            }
+
+                            Column {
+                                Text(
+                                    text = "Daily Practice Goal",
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = SleekTextDark
+                                )
+                                Text(
+                                    text = "Target: ${userPreferences.dailyGoalMinutes} Minutes / Day (Saved to Room DB)",
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = SleekCoral
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(14.dp))
+
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            listOf(5, 10, 15, 20).forEach { mins ->
+                                val isSelected = userPreferences.dailyGoalMinutes == mins
+                                FocusableCard(
+                                    onClick = { viewModel.setDailyGoalMinutes(mins) },
+                                    shape = RoundedCornerShape(16.dp),
+                                    backgroundColor = if (isSelected) SleekCoral else SleekSurface,
+                                    unfocusedBorderColor = if (isSelected) SleekCoral else SleekSurfaceBorder,
+                                    focusedBorderColor = SleekGold,
+                                    modifier = Modifier.weight(1f),
+                                    testTag = "goal_option_$mins"
+                                ) {
+                                    Box(
+                                        contentAlignment = Alignment.Center,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 12.dp)
+                                    ) {
+                                        Text(
+                                            text = "${mins}m",
+                                            fontWeight = FontWeight.Black,
+                                            color = if (isSelected) Color.White else SleekTextDark,
+                                            fontSize = 15.sp
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
