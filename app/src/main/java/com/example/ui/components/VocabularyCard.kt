@@ -166,7 +166,6 @@ fun VocabularyCard(
                 indication = null,
                 onClick = onCardClick
             )
-            .focusable(interactionSource = interactionSource)
     ) {
         Column(
             modifier = Modifier

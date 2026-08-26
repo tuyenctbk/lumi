@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -63,6 +64,7 @@ import com.example.ui.theme.SleekEmerald
 import com.example.ui.theme.SleekGold
 import com.example.ui.theme.SleekGoldDark
 import com.example.ui.theme.SleekOcean
+import com.example.ui.theme.SleekOceanDark
 import com.example.ui.theme.SleekPurple
 import com.example.ui.theme.SleekSurface
 import com.example.ui.theme.SleekSurfaceBorder
@@ -253,46 +255,62 @@ fun AchievementUnlockedDialog(
                         modifier = Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Button(
+                        FocusableCard(
                             onClick = {
                                 SoundFxHelper.playStarBurst()
                                 onDismiss()
                             },
                             shape = RoundedCornerShape(20.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = SleekOcean),
+                            backgroundColor = SleekOcean,
+                            unfocusedBorderColor = SleekOceanDark,
+                            focusedBorderColor = SleekGold,
+                            focusedScale = 1.05f,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(50.dp)
-                                .testTag("achievement_claim_button")
+                                .height(50.dp),
+                            testTag = "achievement_claim_button"
                         ) {
-                            Text(
-                                text = "Claim Reward! 🚀",
-                                fontSize = 15.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Claim Reward! 🚀",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                            }
                         }
 
                         if (onViewGallery != null) {
-                            OutlinedButton(
+                            FocusableCard(
                                 onClick = {
                                     SoundFxHelper.playPop()
                                     onDismiss()
                                     onViewGallery()
                                 },
                                 shape = RoundedCornerShape(20.dp),
-                                border = BorderStroke(1.5.dp, SleekGoldDark),
+                                backgroundColor = SleekSurface,
+                                unfocusedBorderColor = SleekSurfaceBorder,
+                                focusedBorderColor = SleekEmerald,
+                                focusedScale = 1.05f,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(46.dp)
-                                    .testTag("achievement_view_gallery_button")
+                                    .height(46.dp),
+                                testTag = "achievement_view_gallery_button"
                             ) {
-                                Text(
-                                    text = "View Badge Gallery 🏆",
-                                    fontSize = 13.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = SleekGoldDark
-                                )
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "View Badge Gallery 🏆",
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = SleekGoldDark
+                                    )
+                                }
                             }
                         }
                     }

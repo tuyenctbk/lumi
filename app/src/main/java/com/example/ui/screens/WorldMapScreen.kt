@@ -558,7 +558,6 @@ fun FocusableIslandNode(
                 indication = null,
                 onClick = onClick
             )
-            .focusable(interactionSource = interactionSource)
             .testTag("island_node_${island.category.id}")
     ) {
         // Island Island Disc with Emoji

@@ -73,7 +73,6 @@ fun FocusableCard(
         modifier = modifier
             .testTag(testTag)
             .scale(scale)
-            .focusable(interactionSource = interactionSource)
             .clickable(
                 interactionSource = interactionSource,
                 indication = androidx.compose.material3.ripple(),

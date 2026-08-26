@@ -37,11 +37,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.model.PhysicalBreakQuest
+import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
 import com.example.ui.theme.SleekEmeraldDark
 import com.example.ui.theme.SleekGold
@@ -269,17 +272,25 @@ fun PhysicalBreakDialog(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                OutlinedButton(
+                FocusableCard(
                     onClick = onDismiss,
                     shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.dp, SleekSurfaceBorder),
-                    modifier = Modifier.testTag("physical_break_later_button")
+                    backgroundColor = SleekSurface,
+                    unfocusedBorderColor = SleekSurfaceBorder,
+                    focusedBorderColor = SleekCoral,
+                    focusedScale = 1.04f,
+                    testTag = "physical_break_later_button",
+                    modifier = Modifier.widthIn(min = 120.dp)
                 ) {
                     Text(
-                        text = "Play Later",
+                        text = stringResource(R.string.button_later),
                         fontSize = 13.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = SleekTextMuted
+                        fontWeight = FontWeight.Bold,
+                        color = SleekTextMuted,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 10.dp)
                     )
                 }
             }

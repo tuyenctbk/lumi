@@ -9,8 +9,11 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -466,13 +469,29 @@ fun LumiMascot(
         else -> null
     }
 
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+
+    LaunchedEffect(isFocused) {
+        if (isFocused) {
+            com.example.audio.SoundFxHelper.playHoverBoop()
+        }
+    }
+
+    val focusScale by animateFloatAsState(
+        targetValue = if (isFocused) 1.12f else 1.0f,
+        animationSpec = tween(150),
+        label = "lumi_mascot_focus_scale"
+    )
+
     val isFullTextSpeech = !speechBubble.isNullOrBlank()
 
     androidx.compose.foundation.layout.Column(
         modifier = modifier
             .testTag("lumi_mascot")
+            .scale(focusScale)
             .clickable(
-                interactionSource = remember { MutableInteractionSource() },
+                interactionSource = interactionSource,
                 indication = null,
                 onClick = onClick
             ),

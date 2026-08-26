@@ -227,19 +227,25 @@ fun ParentalGate(
                     )
                 }
 
-                OutlinedButton(
+                FocusableCard(
                     onClick = onDismiss,
                     shape = RoundedCornerShape(16.dp),
-                    border = BorderStroke(1.5.dp, SleekSurfaceBorder),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .testTag("parental_gate_cancel_button")
+                    backgroundColor = SleekSurface,
+                    unfocusedBorderColor = SleekSurfaceBorder,
+                    focusedBorderColor = SleekCoral,
+                    focusedScale = 1.04f,
+                    testTag = "parental_gate_cancel_button",
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = "Back to Learning",
                         color = SleekTextDark,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 12.dp)
                     )
                 }
             }

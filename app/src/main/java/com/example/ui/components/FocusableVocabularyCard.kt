@@ -140,7 +140,6 @@ fun FocusableVocabularyCard(
                 spotColor = if (isFocused) focusedBorderColor.copy(alpha = 0.85f) else categoryColor.copy(alpha = 0.35f),
                 ambientColor = if (isFocused) focusedBorderColor.copy(alpha = 0.45f) else Color.Black.copy(alpha = 0.1f)
             )
-            .focusable(interactionSource = interactionSource)
             .clickable(
                 interactionSource = interactionSource,
                 indication = androidx.compose.material3.ripple(),

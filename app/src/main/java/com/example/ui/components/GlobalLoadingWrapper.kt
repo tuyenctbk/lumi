@@ -44,6 +44,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import com.example.model.MascotMood
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
@@ -220,7 +222,7 @@ private fun ErrorView(
                                 modifier = Modifier.size(18.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Try Again", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.lumi_reaction_try_again), fontWeight = FontWeight.Bold)
                         }
                     }
                 }

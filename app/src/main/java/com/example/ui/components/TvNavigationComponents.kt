@@ -104,7 +104,6 @@ fun TvFocusableCard(
         modifier = modifier
             .testTag(testTag)
             .scale(scale)
-            .focusable(interactionSource = interactionSource)
             .onKeyEvent { keyEvent ->
                 if (keyEvent.nativeKeyEvent.action == KeyEvent.ACTION_DOWN &&
                     (keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||

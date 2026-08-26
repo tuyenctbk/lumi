@@ -47,6 +47,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import com.example.audio.SoundFxHelper
 import com.example.model.MascotMood
 import com.example.ui.components.ConfettiCanvas
@@ -202,7 +204,7 @@ fun ReviewMistakesScreen(
                                 shape = RoundedCornerShape(16.dp),
                                 modifier = Modifier.testTag("review_empty_back_button")
                             ) {
-                                Text("Return to Home Lessons", fontWeight = FontWeight.Bold)
+                                Text(stringResource(R.string.quiz_go_back), fontWeight = FontWeight.Bold)
                             }
                         }
                     }

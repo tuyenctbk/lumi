@@ -24,6 +24,13 @@
         </aapt:attr>
     </path>
 
+    <!-- Elegant Frame Border (Cinematic Inset Border for premium TV dashboard presentation) -->
+    <path
+        android:strokeWidth="1.5"
+        android:strokeColor="#20FFFFFF"
+        android:fillColor="#00000000"
+        android:pathData="M8,8 L312,8 A8,8 0 0,1 320,16 L320,164 A8,8 0 0,1 312,172 L8,172 A8,8 0 0,1 0,164 L0,16 A8,8 0 0,1 8,8 Z" />
+
     <!-- 2. Colorful Ambient Abstract Waves & Bubbles -->
     <!-- Soft Coral Diagonal Stripe -->
     <path
@@ -44,6 +51,38 @@
     <path
         android:fillColor="#28FDE047"
         android:pathData="M90,90 m-65,0 a65,65 0 1,0 130,0 a65,65 0 1,0 -130,0" />
+
+    <!-- Official App Icon Background (Framed Squircle representing the launcher icon) -->
+    <path
+        android:pathData="M 42 68 A 26 26 0 0 1 68 42 L 112 42 A 26 26 0 0 1 138 68 L 138 112 A 26 26 0 0 1 112 138 L 68 138 A 26 26 0 0 1 42 112 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="42"
+                android:startY="42"
+                android:endX="138"
+                android:endY="138"
+                android:type="linear">
+                <item android:color="#FF3E2D8F" android:offset="0.0" />
+                <item android:color="#FF241468" android:offset="0.5" />
+                <item android:color="#FF0084FF" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- App Icon Sparkles -->
+    <path
+        android:fillColor="#40FFFFFF"
+        android:pathData="M58,54 Q58,58 54,58 Q58,58 58,62 Q58,58 62,58 Q58,58 58,54 Z" />
+    <path
+        android:fillColor="#30FFFFFF"
+        android:pathData="M122,112 Q122,116 118,116 Q122,116 122,120 Q122,116 126,116 Q122,116 122,112 Z" />
+
+    <!-- App Icon Border/Frame (Elegant Polished Glass) -->
+    <path
+        android:strokeColor="#40FFFFFF"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M 42 68 A 26 26 0 0 1 68 42 L 112 42 A 26 26 0 0 1 138 68 L 138 112 A 26 26 0 0 1 112 138 L 68 138 A 26 26 0 0 1 42 112 Z" />
 
     <!-- 4. Highly Polished Star Mascot "Lumi" -->
     <!-- Mascot Drop Shadow -->
@@ -197,6 +236,16 @@
     <!-- Subtitle: "YOUR PLAYMATE" with simplified horizontal bars -->
     <path
         android:fillColor="#80FFFFFF"
-        android:pathData="M175,106 h100 v2 h-100 z" />
+        android:pathData="M175,106 h86 v2 h-86 z" />
+
+    <!-- Interactive TV Play Action Triangle Indicator -->
+    <path
+        android:fillColor="#FFFACC15"
+        android:pathData="M272,104 L278,107 L272,110 Z" />
+
+    <!-- Cute Small Star at the Play Indicator -->
+    <path
+        android:fillColor="#60FFFFFF"
+        android:pathData="M284,105 Q284,107 282,107 Q284,107 284,109 Q284,107 286,107 Q284,107 284,105 Z" />
 
 </vector>

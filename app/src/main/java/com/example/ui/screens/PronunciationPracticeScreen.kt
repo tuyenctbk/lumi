@@ -61,6 +61,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import com.example.model.MascotMood
 import com.example.model.VocabularyItem
 import com.example.ui.components.FocusableCard
@@ -333,7 +335,7 @@ fun PronunciationPracticeScreen(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Icon(imageVector = Icons.Default.VolumeUp, contentDescription = null, tint = SleekOceanDark)
-                                Text("Listen Native Audio", fontWeight = FontWeight.Bold, color = SleekOceanDark, fontSize = 13.sp)
+                                Text(stringResource(R.string.quiz_listen_audio), fontWeight = FontWeight.Bold, color = SleekOceanDark, fontSize = 13.sp)
                             }
                         }
                     }
@@ -383,7 +385,7 @@ fun PronunciationPracticeScreen(
                             modifier = Modifier.padding(vertical = 4.dp)
                         ) {
                             Icon(imageVector = Icons.Default.MicOff, contentDescription = null)
-                            Text("Grant Mic Permission to Speak", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.permission_mic), fontWeight = FontWeight.Bold)
                         }
                     }
                 } else {
