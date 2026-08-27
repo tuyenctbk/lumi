@@ -122,31 +122,38 @@ fun SmartEngagementDialog(
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    TextButton(
+                    FocusableCard(
                         onClick = onDismiss,
-                        modifier = Modifier.testTag("engagement_dismiss_button")
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = Color(0xFFF1F5F9),
+                        unfocusedBorderColor = Color.Transparent,
+                        focusedBorderColor = SleekOcean,
+                        testTag = "engagement_dismiss_button"
                     ) {
                         Text(
                             text = stringResource(R.string.button_later),
                             color = SleekTextMuted,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 15.sp
+                            fontSize = 15.sp,
+                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
                         )
                     }
 
                     Spacer(modifier = Modifier.width(12.dp))
 
-                    Button(
+                    val confirmColor = when (suggestionType) {
+                        SmartSuggestionType.RATE_APP -> SleekEmerald
+                        SmartSuggestionType.SHARE_APP -> SleekOcean
+                        SmartSuggestionType.UPDATE_APP -> SleekCoral
+                    }
+
+                    FocusableCard(
                         onClick = onConfirm,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = when (suggestionType) {
-                                SmartSuggestionType.RATE_APP -> SleekEmerald
-                                SmartSuggestionType.SHARE_APP -> SleekOcean
-                                SmartSuggestionType.UPDATE_APP -> SleekCoral
-                            }
-                        ),
                         shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.testTag("engagement_confirm_button")
+                        backgroundColor = confirmColor,
+                        unfocusedBorderColor = confirmColor,
+                        focusedBorderColor = Color(0xFFFFD54F),
+                        testTag = "engagement_confirm_button"
                     ) {
                         Text(
                             text = when (suggestionType) {
@@ -156,7 +163,8 @@ fun SmartEngagementDialog(
                             },
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
-                            color = Color.White
+                            color = Color.White,
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp)
                         )
                     }
                 }

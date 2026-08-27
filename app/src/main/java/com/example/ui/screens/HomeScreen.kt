@@ -62,6 +62,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -227,13 +228,19 @@ fun HomeScreen(
                 .background(SleekBackground)
         ) {
         val isMobile = maxWidth < 600.dp
-        val isTv = maxWidth >= 840.dp
+        val context = LocalContext.current
+        val isTv = remember {
+            context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+            context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+            (context.resources.configuration.uiMode.and(android.content.res.Configuration.UI_MODE_TYPE_MASK)) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION ||
+            maxWidth >= 840.dp
+        }
 
         val initialFocusRequester = remember { FocusRequester() }
 
         LaunchedEffect(isTv) {
             if (isTv) {
-                kotlinx.coroutines.delay(200)
+                kotlinx.coroutines.delay(350)
                 try {
                     initialFocusRequester.requestFocus()
                 } catch (_: Exception) {}

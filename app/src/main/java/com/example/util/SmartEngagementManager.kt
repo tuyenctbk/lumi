@@ -91,6 +91,15 @@ class SmartEngagementManager(private val context: Context) {
 
         val updateAvailable = prefs.getBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, false)
 
+        // On Android TV leanback devices, suppress mobile sharing / rate prompts and only show updates if available
+        val isTv = context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+                   context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+                   (context.resources.configuration.uiMode.and(android.content.res.Configuration.UI_MODE_TYPE_MASK)) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
+
+        if (isTv) {
+            return if (updateAvailable) SmartSuggestionType.UPDATE_APP else null
+        }
+
         // 1. Check Update App Suggestion: Only when an actual update is flagged as available
         if (updateAvailable) {
             return SmartSuggestionType.UPDATE_APP

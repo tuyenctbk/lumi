@@ -100,19 +100,11 @@ fun ProgressSummary(
     Card(
         shape = RoundedCornerShape(26.dp),
         colors = CardDefaults.cardColors(containerColor = SleekSurface),
-        border = BorderStroke(
-            if (isFocused) 3.dp else 1.5.dp,
-            if (isFocused) SleekEmerald else SleekSurfaceBorder
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = if (isFocused) 8.dp else 3.dp),
+        border = BorderStroke(1.5.dp, SleekSurfaceBorder),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
         modifier = modifier
             .fillMaxWidth()
             .testTag("progress_summary_card")
-            .clickable(
-                interactionSource = interactionSource,
-                indication = androidx.compose.material3.ripple(),
-                onClick = onViewAnalyticsClick
-            )
     ) {
         Column(
             modifier = Modifier.padding(20.dp),
