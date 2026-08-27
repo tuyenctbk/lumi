@@ -45,6 +45,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
@@ -180,7 +181,11 @@ fun DailyLearningStreakCanvas(
                             Text(
                                 text = "🔥",
                                 fontSize = 26.sp,
-                                modifier = Modifier.scale(if (currentStreakDays > 0) pulseScale else 1f)
+                                modifier = Modifier.graphicsLayer {
+                                    val s = if (currentStreakDays > 0) pulseScale else 1f
+                                    scaleX = s
+                                    scaleY = s
+                                }
                             )
                         }
                     }

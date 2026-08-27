@@ -112,7 +112,9 @@ fun LumiApp(viewModel: LumiViewModel) {
         navController.currentBackStackEntryFlow.collect { backStackEntry ->
             if (backStackEntry.destination.route == "home" && engagementManager.isOnboardingCompleted) {
                 delay(2000)
-                activeEngagementSuggestion = engagementManager.calculateBestTimeSuggestion()
+                if (activeEngagementSuggestion == null && !isBreakVisible && unlockedBadge == null) {
+                    activeEngagementSuggestion = engagementManager.calculateBestTimeSuggestion()
+                }
             }
         }
     }
@@ -131,30 +133,18 @@ fun LumiApp(viewModel: LumiViewModel) {
 
     SharedTransitionLayout {
         androidx.compose.foundation.layout.Box(modifier = Modifier.fillMaxSize()) {
+            val startRoute = remember {
+                if (engagementManager.isOnboardingCompleted) "home" else "onboarding"
+            }
+
             NavHost(
                 navController = navController,
-                startDestination = "splash",
+                startDestination = startRoute,
                 enterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
                 exitTransition = { fadeOut(tween(200)) },
                 popEnterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
                 popExitTransition = { fadeOut(tween(200)) }
             ) {
-                composable("splash") {
-                    com.example.ui.screens.SplashScreen(
-                        onSplashFinished = {
-                            if (engagementManager.isOnboardingCompleted) {
-                                navController.navigate("home") {
-                                    popUpTo("splash") { inclusive = true }
-                                }
-                            } else {
-                                navController.navigate("onboarding") {
-                                    popUpTo("splash") { inclusive = true }
-                                }
-                            }
-                        }
-                    )
-                }
-
                 composable("onboarding") {
                     OnboardingScreen(
                         onOnboardingFinished = {

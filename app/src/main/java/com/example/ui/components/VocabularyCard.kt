@@ -41,8 +41,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -84,22 +84,31 @@ fun VocabularyCard(
     onCardClick: () -> Unit = {},
     onAudioClick: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    val inputModeManager = androidx.compose.ui.platform.LocalInputModeManager.current
+    val isTvDevice = remember {
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+        (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
+    }
+
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val isPressed by interactionSource.collectIsPressedAsState()
+    val showFocus = isFocused && (isTvDevice || inputModeManager.inputMode == androidx.compose.ui.input.InputMode.Keyboard)
 
     // Subtle audio chime on TV D-pad focus
-    androidx.compose.runtime.LaunchedEffect(isFocused) {
-        if (isFocused) {
+    androidx.compose.runtime.LaunchedEffect(showFocus) {
+        if (showFocus) {
             com.example.audio.SoundFxHelper.playHoverBoop()
         }
     }
 
-    // 1.1x Scaling Animation on D-pad Focus
+    // 1.1x Scaling Animation on D-pad Focus (TV only; on touch press uses 1.03x)
     val animatedScale by animateFloatAsState(
         targetValue = when {
-            isPressed -> 1.05f
-            isFocused -> 1.12f
+            isPressed -> 0.98f
+            showFocus -> 1.10f
             else -> 1.0f
         },
         animationSpec = tween(durationMillis = 220, easing = FastOutSlowInEasing),
@@ -108,7 +117,7 @@ fun VocabularyCard(
 
     // Dynamic Glowing Soft-Shadow Elevation on Focus
     val animatedElevation by animateDpAsState(
-        targetValue = if (isFocused) 24.dp else 4.dp,
+        targetValue = if (showFocus) 24.dp else 4.dp,
         animationSpec = tween(durationMillis = 220),
         label = "tv_dpad_elevation_anim"
     )
@@ -117,7 +126,7 @@ fun VocabularyCard(
     val primaryColor = Color(item.category.colorHex)
     val animatedBorderColor by animateColorAsState(
         targetValue = when {
-            isFocused -> primaryColor
+            showFocus -> primaryColor
             isMastered -> SleekEmerald
             else -> SleekSurfaceBorder
         },
@@ -130,18 +139,21 @@ fun VocabularyCard(
 
     Box(
         modifier = modifier
-            .scale(animatedScale)
-            .zIndex(if (isFocused) 10f else 1f)
+            .graphicsLayer {
+                scaleX = animatedScale
+                scaleY = animatedScale
+            }
+            .zIndex(if (showFocus) 10f else 1f)
             .testTag("vocabulary_card_${item.id}")
             .shadow(
                 elevation = animatedElevation,
                 shape = RoundedCornerShape(22.dp),
-                spotColor = if (isFocused) primaryColor.copy(alpha = 0.85f) else primaryColor.copy(alpha = 0.35f),
-                ambientColor = if (isFocused) primaryColor.copy(alpha = 0.50f) else Color.Black.copy(alpha = 0.1f)
+                spotColor = if (showFocus) primaryColor.copy(alpha = 0.85f) else primaryColor.copy(alpha = 0.35f),
+                ambientColor = if (showFocus) primaryColor.copy(alpha = 0.50f) else Color.Black.copy(alpha = 0.1f)
             )
             .clip(RoundedCornerShape(22.dp))
             .background(
-                if (isFocused) {
+                if (showFocus) {
                     Brush.verticalGradient(
                         colors = listOf(
                             primaryColor.copy(alpha = 0.08f),
@@ -155,10 +167,8 @@ fun VocabularyCard(
                 }
             )
             .border(
-                border = BorderStroke(
-                    width = if (isFocused) 4.dp else 1.5.dp,
-                    color = animatedBorderColor
-                ),
+                width = if (showFocus) 3.5.dp else if (isMastered) 2.dp else 1.5.dp,
+                color = animatedBorderColor,
                 shape = RoundedCornerShape(22.dp)
             )
             .clickable(

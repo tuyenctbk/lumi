@@ -31,8 +31,8 @@ class SmartEngagementManager(private val context: Context) {
         private const val KEY_LAST_DISMISSED_TIME = "last_dismissed_time"
         private const val KEY_SIMULATED_UPDATE_AVAILABLE = "simulated_update_available"
 
-        // Min time between auto popup triggers (e.g. 1 hour = 3,600,000 ms)
-        private const val MIN_PROMPT_INTERVAL_MS = 60 * 60 * 1000L
+        // Min time between auto popup triggers (e.g. 24 hours = 86,400,000 ms to avoid user disruption)
+        private const val MIN_PROMPT_INTERVAL_MS = 24 * 60 * 60 * 1000L
     }
 
     var isOnboardingCompleted: Boolean
@@ -84,25 +84,25 @@ class SmartEngagementManager(private val context: Context) {
         val lastPrompt = prefs.getLong(KEY_LAST_PROMPT_TIME, 0L)
         val lastDismissed = prefs.getLong(KEY_LAST_DISMISSED_TIME, 0L)
 
-        // Ensure we don't spam the user (must pass min interval since last prompt/dismiss)
+        // Ensure we don't spam the user (must pass min 24h interval since last prompt/dismiss)
         if (now - lastPrompt < MIN_PROMPT_INTERVAL_MS || now - lastDismissed < MIN_PROMPT_INTERVAL_MS) {
             return null
         }
 
-        val updateAvailable = prefs.getBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, true)
+        val updateAvailable = prefs.getBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, false)
 
-        // 1. Check Update App Suggestion: After 4+ launches if update is available
-        if (updateAvailable && launchCount >= 4 && launchCount % 3 == 0) {
+        // 1. Check Update App Suggestion: Only when an actual update is flagged as available
+        if (updateAvailable) {
             return SmartSuggestionType.UPDATE_APP
         }
 
         // 2. Check Rate App Suggestion: Best time is after completing games / high engagement
-        if (!hasRated && completedGamesCount >= 2) {
+        if (!hasRated && completedGamesCount >= 3) {
             return SmartSuggestionType.RATE_APP
         }
 
         // 3. Check Share App Suggestion: After high engagement if not shared yet
-        if (!hasShared && (completedGamesCount >= 4 || launchCount >= 3)) {
+        if (!hasShared && (completedGamesCount >= 5 || launchCount >= 4)) {
             return SmartSuggestionType.SHARE_APP
         }
 
@@ -157,6 +157,7 @@ class SmartEngagementManager(private val context: Context) {
     }
 
     fun executeUpdateApp() {
+        setUpdateAvailable(false)
         recordPromptActionTaken()
 
         val appPackageName = context.packageName

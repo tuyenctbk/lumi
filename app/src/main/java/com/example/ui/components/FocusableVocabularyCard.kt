@@ -41,14 +41,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.input.InputMode
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInputModeManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
 import com.example.audio.SoundFxHelper
 import com.example.model.VocabularyItem
@@ -96,30 +101,39 @@ fun FocusableVocabularyCard(
     elevation: Dp = 4.dp,
     testTag: String = "vocab_card_${item.id}"
 ) {
+    val context = LocalContext.current
+    val inputModeManager = LocalInputModeManager.current
+    val isTvDevice = remember {
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+        (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
+    }
+
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
+    val showFocus = isFocused && (isTvDevice || inputModeManager.inputMode == InputMode.Keyboard)
 
     // Subtle audio chime/boop on TV D-pad focus
-    LaunchedEffect(isFocused) {
-        if (isFocused) {
+    LaunchedEffect(showFocus) {
+        if (showFocus) {
             SoundFxHelper.playHoverBoop()
         }
     }
 
     val scale by animateFloatAsState(
-        targetValue = if (isFocused) focusedScale else 1.0f,
+        targetValue = if (showFocus) focusedScale else 1.0f,
         animationSpec = tween(durationMillis = 180),
         label = "focusable_vocab_card_scale"
     )
 
-    val currentBorder = if (isFocused) {
+    val currentBorder = if (showFocus) {
         BorderStroke(4.dp, focusedBorderColor)
     } else {
         BorderStroke(1.5.dp, unfocusedBorderColor)
     }
 
     val animatedElevation by animateDpAsState(
-        targetValue = if (isFocused) 22.dp else elevation,
+        targetValue = if (showFocus) 22.dp else elevation,
         animationSpec = tween(durationMillis = 200),
         label = "focusable_card_elevation"
     )
@@ -133,12 +147,16 @@ fun FocusableVocabularyCard(
         ),
         modifier = modifier
             .testTag(testTag)
-            .scale(scale)
+            .zIndex(if (showFocus) 20f else 1f)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
             .shadow(
                 elevation = animatedElevation,
                 shape = shape,
-                spotColor = if (isFocused) focusedBorderColor.copy(alpha = 0.85f) else categoryColor.copy(alpha = 0.35f),
-                ambientColor = if (isFocused) focusedBorderColor.copy(alpha = 0.45f) else Color.Black.copy(alpha = 0.1f)
+                spotColor = if (showFocus) focusedBorderColor.copy(alpha = 0.85f) else categoryColor.copy(alpha = 0.35f),
+                ambientColor = if (showFocus) focusedBorderColor.copy(alpha = 0.45f) else Color.Black.copy(alpha = 0.1f)
             )
             .clickable(
                 interactionSource = interactionSource,

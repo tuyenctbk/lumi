@@ -52,6 +52,7 @@ import com.example.R
 import com.example.audio.SoundFxHelper
 import com.example.model.MascotMood
 import com.example.ui.components.ConfettiCanvas
+import com.example.ui.components.FocusableCard
 import com.example.ui.components.LumiMascot
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
@@ -313,12 +314,12 @@ fun ReviewMistakesScreen(
                             val isSelected = selectedAnswerIndex == idx
                             val isCorrectOption = optionText == activeWord.englishWord
 
-                            val cardBorder = when {
-                                selectedAnswerIndex == null -> BorderStroke(1.5.dp, MaterialTheme.colorScheme.outline)
-                                isSelected && isAnswerCorrect == true -> BorderStroke(2.dp, SleekEmerald)
-                                isSelected && isAnswerCorrect == false -> BorderStroke(2.dp, SleekCoral)
-                                isCorrectOption && selectedAnswerIndex != null -> BorderStroke(2.dp, SleekEmerald)
-                                else -> BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
+                            val cardBorderColor = when {
+                                selectedAnswerIndex == null -> MaterialTheme.colorScheme.outline
+                                isSelected && isAnswerCorrect == true -> SleekEmerald
+                                isSelected && isAnswerCorrect == false -> SleekCoral
+                                isCorrectOption && selectedAnswerIndex != null -> SleekEmerald
+                                else -> MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
                             }
 
                             val cardBg = when {
@@ -328,13 +329,9 @@ fun ReviewMistakesScreen(
                                 else -> MaterialTheme.colorScheme.surface
                             }
 
-                            Card(
-                                shape = RoundedCornerShape(18.dp),
-                                colors = CardDefaults.cardColors(containerColor = cardBg),
-                                border = cardBorder,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable(enabled = selectedAnswerIndex == null) {
+                            FocusableCard(
+                                onClick = {
+                                    if (selectedAnswerIndex == null) {
                                         selectedAnswerIndex = idx
                                         if (optionText == activeWord.englishWord) {
                                             isAnswerCorrect = true
@@ -345,7 +342,14 @@ fun ReviewMistakesScreen(
                                             viewModel.onAnswerGiven(activeWord.id, false)
                                         }
                                     }
-                                    .testTag("review_option_$idx")
+                                },
+                                shape = RoundedCornerShape(18.dp),
+                                backgroundColor = cardBg,
+                                unfocusedBorderColor = cardBorderColor,
+                                focusedBorderColor = SleekEmerald,
+                                focusedScale = 1.05f,
+                                modifier = Modifier.fillMaxWidth(),
+                                testTag = "review_option_$idx"
                             ) {
                                 Row(
                                     modifier = Modifier.padding(16.dp),

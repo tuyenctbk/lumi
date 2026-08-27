@@ -35,6 +35,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -489,7 +490,10 @@ fun LumiMascot(
     androidx.compose.foundation.layout.Column(
         modifier = modifier
             .testTag("lumi_mascot")
-            .scale(focusScale)
+            .graphicsLayer {
+                scaleX = focusScale
+                scaleY = focusScale
+            }
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
@@ -552,13 +556,16 @@ fun LumiMascot(
                 }
             }
 
-            // Animated Character Art Canvas (Rendered at 60fps)
+            // Animated Character Art Canvas (Rendered efficiently on RenderNode)
             Canvas(
                 modifier = Modifier
                     .size(size)
-                    .offset(y = activeYOffset.dp)
-                    .rotate(activeRotation)
-                    .scale(currentScale)
+                    .graphicsLayer {
+                        translationY = activeYOffset * density
+                        rotationZ = activeRotation
+                        scaleX = currentScale
+                        scaleY = currentScale
+                    }
             ) {
             val center = Offset(this.size.width / 2f, this.size.height / 2f)
             val radius = this.size.width * 0.38f

@@ -27,18 +27,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.foundation.focusGroup
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,11 +53,16 @@ import com.example.ui.theme.SleekOceanDark
 import com.example.ui.theme.SleekSurface
 import com.example.ui.theme.SleekSurfaceBorder
 
+import androidx.compose.ui.input.InputMode
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInputModeManager
+
 /**
  * TvFocusableCard
  *
  * Dedicated Android TV D-Pad focusable card with high-contrast focus rings,
  * scale elevation, and sound feedback for lean-back TV experiences.
+ * On mobile/tablet touch screens, focus indication is disabled for clean touch UI.
  */
 @Composable
 fun TvFocusableCard(
@@ -73,18 +77,27 @@ fun TvFocusableCard(
     elevation: Dp = 4.dp,
     content: @Composable () -> Unit
 ) {
+    val context = LocalContext.current
+    val inputModeManager = LocalInputModeManager.current
+    val isTvDevice = remember {
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+        (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
+    }
+
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
+    val showFocus = isFocused && (isTvDevice || inputModeManager.inputMode == InputMode.Keyboard)
 
-    // Play subtle audio sound when D-pad lands on this item
-    LaunchedEffect(isFocused) {
-        if (isFocused) {
+    // Play subtle audio sound when D-pad lands on this item on TV
+    LaunchedEffect(showFocus) {
+        if (showFocus) {
             SoundFxHelper.playHoverBoop()
         }
     }
 
     val scale by animateFloatAsState(
-        targetValue = if (isFocused) focusedScale else 1.0f,
+        targetValue = if (showFocus) focusedScale else 1.0f,
         animationSpec = tween(150),
         label = "tv_card_scale"
     )
@@ -92,18 +105,25 @@ fun TvFocusableCard(
     Card(
         shape = shape,
         colors = CardDefaults.cardColors(
-            containerColor = if (isFocused) backgroundColor else backgroundColor
+            containerColor = if (showFocus) Color.White else backgroundColor
         ),
         border = BorderStroke(
-            width = if (isFocused) 3.5.dp else 1.5.dp,
-            color = if (isFocused) focusedBorderColor else unfocusedBorderColor
+            width = if (showFocus) 4.dp else 1.5.dp,
+            color = if (showFocus) focusedBorderColor else unfocusedBorderColor
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = if (isFocused) elevation + 8.dp else elevation
+            defaultElevation = if (showFocus) elevation + 12.dp else elevation
         ),
         modifier = modifier
             .testTag(testTag)
-            .scale(scale)
+            .zIndex(if (showFocus) 20f else 1f)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+                shadowElevation = if (showFocus) 28f else 4f
+                spotShadowColor = if (showFocus) focusedBorderColor else Color.Black.copy(alpha = 0.1f)
+                ambientShadowColor = if (showFocus) focusedBorderColor.copy(alpha = 0.45f) else Color.Black.copy(alpha = 0.05f)
+            }
             .onKeyEvent { keyEvent ->
                 if (keyEvent.nativeKeyEvent.action == KeyEvent.ACTION_DOWN &&
                     (keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
@@ -126,7 +146,25 @@ fun TvFocusableCard(
                 }
             )
     ) {
-        content()
+        Box {
+            content()
+            if (showFocus) {
+                // High-visibility focus indicator dot/glow in top corner on TV
+                Surface(
+                    shape = RoundedCornerShape(topStart = 0.dp, topEnd = 24.dp, bottomStart = 12.dp, bottomEnd = 0.dp),
+                    color = focusedBorderColor,
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    Text(
+                        text = "●",
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Black,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -147,7 +185,9 @@ fun <T> TvShelfRow(
     val listState = rememberLazyListState()
     LazyRow(
         state = listState,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .focusGroup(),
         contentPadding = contentPadding,
         horizontalArrangement = horizontalArrangement
     ) {

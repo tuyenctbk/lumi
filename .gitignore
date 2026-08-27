@@ -1,18 +1,69 @@
-*.iml
-.gradle
-.kotlin
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# ==========================================
+# Android & Gradle Build Artifacts
+# ==========================================
+.gradle/
+.kotlin/
+build/
+*/build/
+app/build/
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+native-binaries/
+
+# Package outputs
+*.apk
+*.ap_
+*.aab
+*.dex
+
+# Profiling & Diagnostics
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# ==========================================
+# Local Configuration & Sensitive Credentials
+# ==========================================
 local.properties
+local.defaults.properties
 .env
+.env.*
+secrets.properties
+signing.properties
+
+# Signing Keys & Certificates (Never commit production keys)
+*.jks
+*.keystore
+*.p12
+*.key
 debug.keystore
+common_release_key.jks
+
+# ==========================================
+# IDE & Editor Files
+# ==========================================
+# Android Studio / IntelliJ IDEA
+*.iml
+*.iws
+*.ipr
+.idea/
+!.idea/codeStyles/
+!.idea/copyright/
+
+# Visual Studio Code & Fleet
+.vscode/
+.fleet/
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+

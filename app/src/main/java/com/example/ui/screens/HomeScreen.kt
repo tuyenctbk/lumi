@@ -48,13 +48,17 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.foundation.focusGroup
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -225,12 +229,23 @@ fun HomeScreen(
         val isMobile = maxWidth < 600.dp
         val isTv = maxWidth >= 840.dp
 
+        val initialFocusRequester = remember { FocusRequester() }
+
+        LaunchedEffect(isTv) {
+            if (isTv) {
+                kotlinx.coroutines.delay(200)
+                try {
+                    initialFocusRequester.requestFocus()
+                } catch (_: Exception) {}
+            }
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
                 .verticalScroll(rememberScrollState())
-                .padding(bottom = if (isMobile) 80.dp else 100.dp)
+                .padding(bottom = if (isMobile) 80.dp else 140.dp)
         ) {
             // Lean-back TV & Mobile Top Bar
             TopBarHeader(
@@ -269,6 +284,7 @@ fun HomeScreen(
                 ) {
                     FocusableCard(
                         onClick = { onNavigateGame("review_mistakes") },
+                        modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(22.dp),
                         backgroundColor = Color(0xFFFFF3E0),
                         unfocusedBorderColor = SleekCoral,
@@ -369,12 +385,17 @@ fun HomeScreen(
                 LazyRow(
                     contentPadding = PaddingValues(end = if (isMobile) 14.dp else 24.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusGroup()
                 ) {
-                    items(LearningCategory.entries.toList()) { category ->
+                    val categoryList = LearningCategory.entries.toList()
+                    items(categoryList.size) { index ->
+                        val category = categoryList[index]
                         CategoryIslandCard(
                             category = category,
                             isMobile = isMobile,
+                            modifier = if (index == 0) Modifier.focusRequester(initialFocusRequester) else Modifier,
                             onClick = {
                                 viewModel.setActiveCategory(category)
                                 onNavigateCategory(category)
@@ -449,7 +470,9 @@ fun HomeScreen(
                 LazyRow(
                     contentPadding = PaddingValues(end = if (isMobile) 14.dp else 24.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusGroup()
                 ) {
                     items(gameShows) { show ->
                         GameShowCard(
@@ -511,6 +534,7 @@ fun HomeScreen(
 fun CategoryIslandCard(
     category: LearningCategory,
     isMobile: Boolean = false,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     val categoryColor = Color(category.colorHex)
@@ -523,7 +547,7 @@ fun CategoryIslandCard(
         focusedBorderColor = categoryColor,
         focusedScale = 1.08f,
         elevation = 3.dp,
-        modifier = Modifier
+        modifier = modifier
             .width(if (isMobile) 155.dp else 190.dp)
             .height(if (isMobile) 180.dp else 215.dp)
             .testTag("island_${category.id}")
@@ -577,6 +601,7 @@ fun CategoryIslandCard(
 fun GameShowCard(
     item: GameShowItem,
     isMobile: Boolean = false,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     TvFocusableCard(
@@ -587,7 +612,7 @@ fun GameShowCard(
         focusedBorderColor = item.color,
         focusedScale = 1.08f,
         elevation = 3.dp,
-        modifier = Modifier
+        modifier = modifier
             .width(if (isMobile) 170.dp else 210.dp)
             .height(if (isMobile) 170.dp else 195.dp)
             .testTag("game_card_${item.id}")

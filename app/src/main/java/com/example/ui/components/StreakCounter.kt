@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -106,7 +107,11 @@ fun StreakCounter(
                             Text(
                                 text = "🔥",
                                 fontSize = if (compact) 20.sp else 26.sp,
-                                modifier = Modifier.scale(if (currentStreakDays > 0) flameScale else 1.0f)
+                                modifier = Modifier.graphicsLayer {
+                                    val s = if (currentStreakDays > 0) flameScale else 1.0f
+                                    scaleX = s
+                                    scaleY = s
+                                }
                             )
                         }
                     }
