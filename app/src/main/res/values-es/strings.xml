@@ -82,4 +82,33 @@
     <string name="game_round_counter">Ronda %1$d / %2$d</string>
     <string name="game_finish">Finalizar Juego 🎉</string>
     <string name="game_play_again">Jugar de Nuevo 🔄</string>
+    <string name="game_score_pts">⭐ %1$d pts</string>
+    <string name="game_listen">Escuchar</string>
+
+    <!-- New Games & AI Creator -->
+    <string name="spelling_bee_title">Deletreo Divertido 🐝</string>
+    <string name="spelling_bee_word_counter">Palabra %1$d de %2$d</string>
+    <string name="memory_match_title">Memorama de Cartas 🎴</string>
+    <string name="memory_match_pairs">Parejas emparejadas: %1$d / %2$d</string>
+    <string name="ai_quest_title">Creador de Misiones AI ✨</string>
+    <string name="ai_quest_input_label">¿Qué tema quieres aprender?</string>
+    <string name="ai_quest_input_placeholder">ej. Dinosaurios, Océano, Música</string>
+    <string name="ai_quest_building">Creando lección de IA...</string>
+    <string name="ai_quest_generate_btn">Generar Lección con IA ✨</string>
+    <string name="ai_quest_items_count">Palabras de la Lección (%1$d palabras)</string>
+    <string name="button_delete">Borrar</string>
+    <string name="button_clear">Limpiar</string>
+    <string name="button_next_word">Siguiente palabra ➔</string>
+
+    <!-- Parent Dashboard & Settings -->
+    <string name="parent_dashboard_title">Panel de Control para Padres 📊</string>
+    <string name="parent_dashboard_sub">Estadísticas, Informes y Controles Inteligentes</string>
+    <string name="parent_qr_report">Informe Web para Padres por Código QR 📱</string>
+    <string name="parent_qr_scan_desc">¡Escanea con la cámara de tu teléfono para ver el informe web en vivo!</string>
+    <string name="parent_open_browser">Abrir Informe Web en Navegador 🌐</string>
+    <string name="parent_learning_language">Idioma de Aprendizaje</string>
+    <string name="parent_words_mastered">Palabras Dominadas</string>
+    <string name="parent_retention_accuracy">Precisión de Retención</string>
+    <string name="parent_study_streak">Racha de Estudio</string>
+    <string name="parent_active_breaks">Descansos Activos Tomados</string>
 </resources>

@@ -113,6 +113,7 @@ class SpeechHelper(context: Context) {
             TargetLanguage.KOREAN -> Locale("ko", "KR")
             TargetLanguage.MANDARIN -> Locale("zh", "CN")
             TargetLanguage.ENGLISH -> Locale("en", "US")
+            TargetLanguage.VIETNAMESE -> Locale("vi", "VN")
         }
 
         // Set clear native pronunciation

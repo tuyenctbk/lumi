@@ -12,7 +12,13 @@ enum class LearningCategory(
     ACTIONS("actions", "Action Verbs", "🏃", 0xFFE91E63, 0xFFF06292),
     COLORS("colors", "Colors & Shapes", "🎨", 0xFF9C27B0, 0xFFBA68C8),
     SPACE("space", "Space & Stars", "🚀", 0xFF3F51B5, 0xFF7986CB),
-    HOME("home", "Everyday Objects", "🏠", 0xFF00BCD4, 0xFF4DD0E1)
+    HOME("home", "Everyday Objects", "🏠", 0xFF00BCD4, 0xFF4DD0E1),
+    NUMBERS("numbers", "Numbers & Counting", "🔢", 0xFFFF5722, 0xFFFF8A65),
+    FAMILY("family", "Family & Friends", "👨‍👩‍👧‍👦", 0xFF009688, 0xFF4DB6AC),
+    VEHICLES("vehicles", "Vehicles & Travel", "🚗", 0xFF673AB7, 0xFF9575CD),
+    NATURE("nature", "Forest & Weather", "🌲", 0xFF2E7D32, 0xFF66BB6A),
+    CLOTHES("clothes", "Clothes & Dressing", "👕", 0xFFEC407A, 0xFFF48FB1),
+    BODY("body", "My Body & Health", "👁️", 0xFF1565C0, 0xFF42A5F5)
 }
 
 enum class TargetLanguage(
@@ -28,7 +34,8 @@ enum class TargetLanguage(
     JAPANESE("ja", "Japanese (日本語)", "🇯🇵", "ja-JP"),
     KOREAN("ko", "Korean (한국어)", "🇰🇷", "ko-KR"),
     MANDARIN("zh", "Chinese (中文)", "🇨🇳", "zh-CN"),
-    ENGLISH("en", "English", "🇬🇧", "en-US");
+    ENGLISH("en", "English", "🇬🇧", "en-US"),
+    VIETNAMESE("vi", "Vietnamese (Tiếng Việt)", "🇻🇳", "vi-VN");
 
     companion object {
         fun fromCode(code: String): TargetLanguage = entries.find { it.code == code } ?: SPANISH

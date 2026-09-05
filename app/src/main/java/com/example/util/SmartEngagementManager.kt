@@ -29,10 +29,17 @@ class SmartEngagementManager(private val context: Context) {
         private const val KEY_HAS_SHARED = "has_shared_app"
         private const val KEY_LAST_PROMPT_TIME = "last_prompt_time"
         private const val KEY_LAST_DISMISSED_TIME = "last_dismissed_time"
+        private const val KEY_LAST_PROMPT_GAMES_COUNT = "last_prompt_games_count"
+        private const val KEY_LAST_PROMPT_LAUNCH_COUNT = "last_prompt_launch_count"
+        private const val KEY_RATE_DISMISS_COUNT = "rate_dismiss_count"
+        private const val KEY_SHARE_DISMISS_COUNT = "share_dismiss_count"
         private const val KEY_SIMULATED_UPDATE_AVAILABLE = "simulated_update_available"
 
-        // Min time between auto popup triggers (e.g. 24 hours = 86,400,000 ms to avoid user disruption)
-        private const val MIN_PROMPT_INTERVAL_MS = 24 * 60 * 60 * 1000L
+        // Minimum time interval between any auto popups (7 days = 604,800,000 ms to avoid user disruption)
+        private const val MIN_PROMPT_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000L
+        private const val MIN_GAMES_DELTA_BETWEEN_PROMPTS = 5
+        private const val MIN_LAUNCHES_DELTA_BETWEEN_PROMPTS = 3
+        private const val MAX_DISMISS_COUNT = 2
     }
 
     var isOnboardingCompleted: Boolean
@@ -55,6 +62,14 @@ class SmartEngagementManager(private val context: Context) {
         get() = prefs.getBoolean(KEY_HAS_SHARED, false)
         set(value) = prefs.edit().putBoolean(KEY_HAS_SHARED, value).apply()
 
+    var rateDismissCount: Int
+        get() = prefs.getInt(KEY_RATE_DISMISS_COUNT, 0)
+        private set(value) = prefs.edit().putInt(KEY_RATE_DISMISS_COUNT, value).apply()
+
+    var shareDismissCount: Int
+        get() = prefs.getInt(KEY_SHARE_DISMISS_COUNT, 0)
+        private set(value) = prefs.edit().putInt(KEY_SHARE_DISMISS_COUNT, value).apply()
+
     fun recordAppLaunch() {
         launchCount += 1
     }
@@ -67,12 +82,37 @@ class SmartEngagementManager(private val context: Context) {
         prefs.edit().putBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, isAvailable).apply()
     }
 
-    fun recordPromptDismissed() {
-        prefs.edit().putLong(KEY_LAST_DISMISSED_TIME, System.currentTimeMillis()).apply()
+    fun recordPromptShown(suggestionType: SmartSuggestionType) {
+        prefs.edit()
+            .putLong(KEY_LAST_PROMPT_TIME, System.currentTimeMillis())
+            .putInt(KEY_LAST_PROMPT_GAMES_COUNT, completedGamesCount)
+            .putInt(KEY_LAST_PROMPT_LAUNCH_COUNT, launchCount)
+            .apply()
+    }
+
+    fun recordPromptDismissed(suggestionType: SmartSuggestionType) {
+        val now = System.currentTimeMillis()
+        val editor = prefs.edit()
+            .putLong(KEY_LAST_DISMISSED_TIME, now)
+            .putLong(KEY_LAST_PROMPT_TIME, now)
+            .putInt(KEY_LAST_PROMPT_GAMES_COUNT, completedGamesCount)
+            .putInt(KEY_LAST_PROMPT_LAUNCH_COUNT, launchCount)
+
+        if (suggestionType == SmartSuggestionType.RATE_APP) {
+            editor.putInt(KEY_RATE_DISMISS_COUNT, rateDismissCount + 1)
+        } else if (suggestionType == SmartSuggestionType.SHARE_APP) {
+            editor.putInt(KEY_SHARE_DISMISS_COUNT, shareDismissCount + 1)
+        }
+        editor.apply()
     }
 
     fun recordPromptActionTaken() {
-        prefs.edit().putLong(KEY_LAST_PROMPT_TIME, System.currentTimeMillis()).apply()
+        val now = System.currentTimeMillis()
+        prefs.edit()
+            .putLong(KEY_LAST_PROMPT_TIME, now)
+            .putInt(KEY_LAST_PROMPT_GAMES_COUNT, completedGamesCount)
+            .putInt(KEY_LAST_PROMPT_LAUNCH_COUNT, launchCount)
+            .apply()
     }
 
     /**
@@ -84,9 +124,21 @@ class SmartEngagementManager(private val context: Context) {
         val lastPrompt = prefs.getLong(KEY_LAST_PROMPT_TIME, 0L)
         val lastDismissed = prefs.getLong(KEY_LAST_DISMISSED_TIME, 0L)
 
-        // Ensure we don't spam the user (must pass min 24h interval since last prompt/dismiss)
+        // 1. Ensure we don't spam the user (must pass min 7 days interval since last prompt/dismiss)
         if (now - lastPrompt < MIN_PROMPT_INTERVAL_MS || now - lastDismissed < MIN_PROMPT_INTERVAL_MS) {
             return null
+        }
+
+        // 2. Require meaningful new activity since last prompt
+        if (lastPrompt > 0L) {
+            val lastPromptGames = prefs.getInt(KEY_LAST_PROMPT_GAMES_COUNT, 0)
+            val lastPromptLaunches = prefs.getInt(KEY_LAST_PROMPT_LAUNCH_COUNT, 0)
+            val gamesDelta = completedGamesCount - lastPromptGames
+            val launchesDelta = launchCount - lastPromptLaunches
+
+            if (gamesDelta < MIN_GAMES_DELTA_BETWEEN_PROMPTS || launchesDelta < MIN_LAUNCHES_DELTA_BETWEEN_PROMPTS) {
+                return null
+            }
         }
 
         val updateAvailable = prefs.getBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, false)
@@ -100,18 +152,18 @@ class SmartEngagementManager(private val context: Context) {
             return if (updateAvailable) SmartSuggestionType.UPDATE_APP else null
         }
 
-        // 1. Check Update App Suggestion: Only when an actual update is flagged as available
+        // 3. Check Update App Suggestion: Only when an actual update is flagged as available
         if (updateAvailable) {
             return SmartSuggestionType.UPDATE_APP
         }
 
-        // 2. Check Rate App Suggestion: Best time is after completing games / high engagement
-        if (!hasRated && completedGamesCount >= 3) {
+        // 4. Check Rate App Suggestion: Requires high engagement, not previously rated, and < max dismissals (max 2)
+        if (!hasRated && rateDismissCount < MAX_DISMISS_COUNT && completedGamesCount >= 5 && launchCount >= 4) {
             return SmartSuggestionType.RATE_APP
         }
 
-        // 3. Check Share App Suggestion: After high engagement if not shared yet
-        if (!hasShared && (completedGamesCount >= 5 || launchCount >= 4)) {
+        // 5. Check Share App Suggestion: Requires even higher engagement, not previously shared, and < max dismissals (max 2)
+        if (!hasShared && shareDismissCount < MAX_DISMISS_COUNT && completedGamesCount >= 8 && launchCount >= 6) {
             return SmartSuggestionType.SHARE_APP
         }
 

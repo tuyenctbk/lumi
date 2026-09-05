@@ -37,7 +37,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Gato", "fr" to "Chat", "de" to "Katze",
                 "it" to "Gatto", "ja" to "ねこ (Neko)", "ko" to "고양이 (Goyangi)",
-                "zh" to "猫 (Māo)", "en" to "Cat"
+                "zh" to "猫 (Māo)", "en" to "Cat", "vi" to "Con mèo"
             ),
             colorHex = 0xFFFFAB91
         ),
@@ -51,7 +51,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Perro", "fr" to "Chien", "de" to "Hund",
                 "it" to "Cane", "ja" to "いぬ (Inu)", "ko" to "개 (Gae)",
-                "zh" to "狗 (Gǒu)", "en" to "Dog"
+                "zh" to "狗 (Gǒu)", "en" to "Dog", "vi" to "Con chó"
             ),
             colorHex = 0xFFFFCC80
         ),
@@ -65,7 +65,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "León", "fr" to "Lion", "de" to "Löwe",
                 "it" to "Leone", "ja" to "ライオン (Raion)", "ko" to "사자 (Saja)",
-                "zh" to "狮子 (Shīzi)", "en" to "Lion"
+                "zh" to "狮子 (Shīzi)", "en" to "Lion", "vi" to "Sư tử"
             ),
             colorHex = 0xFFFFE082
         ),
@@ -79,7 +79,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Elefante", "fr" to "Éléphant", "de" to "Elefant",
                 "it" to "Elefante", "ja" to "ぞう (Zou)", "ko" to "코끼리 (Kokkiri)",
-                "zh" to "大象 (Dàxiàng)", "en" to "Elephant"
+                "zh" to "大象 (Dàxiàng)", "en" to "Elephant", "vi" to "Con voi"
             ),
             colorHex = 0xFFB0BEC5
         ),
@@ -93,7 +93,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Pájaro", "fr" to "Oiseau", "de" to "Vogel",
                 "it" to "Uccello", "ja" to "とり (Tori)", "ko" to "새 (Sae)",
-                "zh" to "鸟 (Niǎo)", "en" to "Bird"
+                "zh" to "鸟 (Niǎo)", "en" to "Bird", "vi" to "Con chim"
             ),
             colorHex = 0xFF81D4FA
         ),
@@ -107,7 +107,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Rana", "fr" to "Grenouille", "de" to "Frosch",
                 "it" to "Rana", "ja" to "かえる (Kaeru)", "ko" to "개구리 (Gaeguri)",
-                "zh" to "青蛙 (Qīngwā)", "en" to "Frog"
+                "zh" to "青蛙 (Qīngwā)", "en" to "Frog", "vi" to "Con ếch"
             ),
             colorHex = 0xFFA5D6A7
         ),
@@ -121,7 +121,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Conejo", "fr" to "Lapin", "de" to "Hase",
                 "it" to "Coniglio", "ja" to "うさぎ (Usagi)", "ko" to "토끼 (Tokki)",
-                "zh" to "兔子 (Tùzǐ)", "en" to "Rabbit"
+                "zh" to "兔子 (Tùzǐ)", "en" to "Rabbit", "vi" to "Con thỏ"
             ),
             colorHex = 0xFFF48FB1
         ),
@@ -135,7 +135,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Pez", "fr" to "Poisson", "de" to "Fisch",
                 "it" to "Pesce", "ja" to "さかな (Sakana)", "ko" to "물고기 (Mulgogi)",
-                "zh" to "鱼 (Yú)", "en" to "Fish"
+                "zh" to "鱼 (Yú)", "en" to "Fish", "vi" to "Con cá"
             ),
             colorHex = 0xFF80DEEA
         ),
@@ -151,7 +151,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Manzana", "fr" to "Pomme", "de" to "Apfel",
                 "it" to "Mela", "ja" to "りんご (Ringo)", "ko" to "사과 (Sagwa)",
-                "zh" to "苹果 (Píngguǒ)", "en" to "Apple"
+                "zh" to "苹果 (Píngguǒ)", "en" to "Apple", "vi" to "Quả táo"
             ),
             colorHex = 0xFFEF9A9A
         ),
@@ -165,7 +165,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Plátano", "fr" to "Banane", "de" to "Banane",
                 "it" to "Banana", "ja" to "バナナ (Banana)", "ko" to "바나나 (Banana)",
-                "zh" to "香蕉 (Xiāngjiāo)", "en" to "Banana"
+                "zh" to "香蕉 (Xiāngjiāo)", "en" to "Banana", "vi" to "Quả chuối"
             ),
             colorHex = 0xFFFFF59D
         ),
@@ -179,7 +179,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Leche", "fr" to "Lait", "de" to "Milch",
                 "it" to "Latte", "ja" to "ぎゅうにゅう (Gyuunyuu)", "ko" to "우유 (Uyu)",
-                "zh" to "牛奶 (Niúnǎi)", "en" to "Milk"
+                "zh" to "牛奶 (Niúnǎi)", "en" to "Milk", "vi" to "Sữa"
             ),
             colorHex = 0xFFE0E0E0
         ),
@@ -193,7 +193,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Pan", "fr" to "Pain", "de" to "Brot",
                 "it" to "Pane", "ja" to "パン (Pan)", "ko" to "빵 (Ppang)",
-                "zh" to "面包 (Miànbāo)", "en" to "Bread"
+                "zh" to "面包 (Miànbāo)", "en" to "Bread", "vi" to "Bánh mì"
             ),
             colorHex = 0xFFFFCC80
         ),
@@ -207,7 +207,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Helado", "fr" to "Glace", "de" to "Eis",
                 "it" to "Gelato", "ja" to "アイス (Aisu)", "ko" to "아이스크림 (Aiseukeurim)",
-                "zh" to "冰淇淋 (Bīngqílín)", "en" to "Ice Cream"
+                "zh" to "冰淇淋 (Bīngqílín)", "en" to "Ice Cream", "vi" to "Kem"
             ),
             colorHex = 0xFFF8BBD0
         ),
@@ -221,7 +221,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Fresa", "fr" to "Fraise", "de" to "Erdbeere",
                 "it" to "Fragola", "ja" to "いちご (Ichigo)", "ko" to "딸기 (Ttalgi)",
-                "zh" to "草莓 (Cǎoméi)", "en" to "Strawberry"
+                "zh" to "草莓 (Cǎoméi)", "en" to "Strawberry", "vi" to "Quả dâu tây"
             ),
             colorHex = 0xFFFF8A80
         ),
@@ -237,7 +237,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Correr", "fr" to "Courir", "de" to "Rennen",
                 "it" to "Correre", "ja" to "はしる (Hashiru)", "ko" to "달리다 (Dallida)",
-                "zh" to "跑 (Pǎo)", "en" to "Run"
+                "zh" to "跑 (Pǎo)", "en" to "Run", "vi" to "Chạy"
             ),
             colorHex = 0xFFFF8A80
         ),
@@ -251,7 +251,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Saltar", "fr" to "Sauter", "de" to "Springen",
                 "it" to "Saltare", "ja" to "とぶ (Tobu)", "ko" to "뛰다 (Ttwida)",
-                "zh" to "跳 (Tiào)", "en" to "Jump"
+                "zh" to "跳 (Tiào)", "en" to "Jump", "vi" to "Nhảy"
             ),
             colorHex = 0xFFFFD54F
         ),
@@ -265,7 +265,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Dormir", "fr" to "Dormir", "de" to "Schlafen",
                 "it" to "Dormire", "ja" to "ねる (Neru)", "ko" to "자다 (Jada)",
-                "zh" to "睡觉 (Shuìjiào)", "en" to "Sleep"
+                "zh" to "睡觉 (Shuìjiào)", "en" to "Sleep", "vi" to "Ngủ"
             ),
             colorHex = 0xFFB39DDB
         ),
@@ -279,7 +279,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Comer", "fr" to "Manger", "de" to "Essen",
                 "it" to "Mangiare", "ja" to "たべる (Taberu)", "ko" to "먹다 (Meokda)",
-                "zh" to "吃 (Chī)", "en" to "Eat"
+                "zh" to "吃 (Chī)", "en" to "Eat", "vi" to "Ăn"
             ),
             colorHex = 0xFFFFAB91
         ),
@@ -293,7 +293,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Bailar", "fr" to "Danser", "de" to "Tanzen",
                 "it" to "Ballare", "ja" to "おどる (Odoru)", "ko" to "춤추다 (Chumchuda)",
-                "zh" to "跳舞 (Tiàowǔ)", "en" to "Dance"
+                "zh" to "跳舞 (Tiàowǔ)", "en" to "Dance", "vi" to "Nhảy múa"
             ),
             colorHex = 0xFFCE93D8
         ),
@@ -309,7 +309,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Rojo", "fr" to "Rouge", "de" to "Rot",
                 "it" to "Rosso", "ja" to "あか (Aka)", "ko" to "빨간색 (Ppalgansaek)",
-                "zh" to "红色 (Hóngsè)", "en" to "Red"
+                "zh" to "红色 (Hóngsè)", "en" to "Red", "vi" to "Màu đỏ"
             ),
             colorHex = 0xFFFF5252
         ),
@@ -323,7 +323,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Azul", "fr" to "Bleu", "de" to "Blau",
                 "it" to "Blu", "ja" to "あお (Ao)", "ko" to "파란색 (Paransaek)",
-                "zh" to "蓝色 (Lánsè)", "en" to "Blue"
+                "zh" to "蓝色 (Lánsè)", "en" to "Blue", "vi" to "Màu xanh dương"
             ),
             colorHex = 0xFF448AFF
         ),
@@ -337,7 +337,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Amarillo", "fr" to "Jaune", "de" to "Gelb",
                 "it" to "Giallo", "ja" to "きいろ (Kiiro)", "ko" to "노란색 (Noransaek)",
-                "zh" to "黄色 (Huángsè)", "en" to "Yellow"
+                "zh" to "黄色 (Huángsè)", "en" to "Yellow", "vi" to "Màu vàng"
             ),
             colorHex = 0xFFFFD700
         ),
@@ -351,7 +351,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Verde", "fr" to "Vert", "de" to "Grün",
                 "it" to "Verde", "ja" to "みどり (Midori)", "ko" to "초록색 (Choroksaek)",
-                "zh" to "绿色 (Lǜsè)", "en" to "Green"
+                "zh" to "绿色 (Lǜsè)", "en" to "Green", "vi" to "Màu xanh lá"
             ),
             colorHex = 0xFF69F0AE
         ),
@@ -365,7 +365,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Estrella", "fr" to "Étoile", "de" to "Stern",
                 "it" to "Stella", "ja" to "ほし (Hoshi)", "ko" to "별 (Byeol)",
-                "zh" to "星星 (Xīngxing)", "en" to "Star"
+                "zh" to "星星 (Xīngxing)", "en" to "Star", "vi" to "Ngôi sao"
             ),
             colorHex = 0xFFFFE57F
         ),
@@ -379,7 +379,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Corazón", "fr" to "Cœur", "de" to "Herz",
                 "it" to "Cuore", "ja" to "ハート (Hāto)", "ko" to "하트 (Hateu)",
-                "zh" to "爱心 (Àixīn)", "en" to "Heart"
+                "zh" to "爱心 (Àixīn)", "en" to "Heart", "vi" to "Trái tim"
             ),
             colorHex = 0xFFFF4081
         ),
@@ -395,7 +395,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Sol", "fr" to "Soleil", "de" to "Sonne",
                 "it" to "Sole", "ja" to "たいよう (Taiyou)", "ko" to "태양 (Taeyang)",
-                "zh" to "太阳 (Tàiyáng)", "en" to "Sun"
+                "zh" to "太阳 (Tàiyáng)", "en" to "Sun", "vi" to "Mặt trời"
             ),
             colorHex = 0xFFFFCA28
         ),
@@ -409,7 +409,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Luna", "fr" to "Lune", "de" to "Mond",
                 "it" to "Luna", "ja" to "つき (Tsuki)", "ko" to "달 (Dal)",
-                "zh" to "月亮 (Yuèliang)", "en" to "Moon"
+                "zh" to "月亮 (Yuèliang)", "en" to "Moon", "vi" to "Mặt trăng"
             ),
             colorHex = 0xFFFFF9C4
         ),
@@ -423,7 +423,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Cohete", "fr" to "Fusée", "de" to "Rakete",
                 "it" to "Razzo", "ja" to "ロケット (Roketto)", "ko" to "로켓 (Roket)",
-                "zh" to "火箭 (Huǒjiàn)", "en" to "Rocket"
+                "zh" to "火箭 (Huǒjiàn)", "en" to "Rocket", "vi" to "Tên lửa"
             ),
             colorHex = 0xFFFF5252
         ),
@@ -437,7 +437,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Planeta", "fr" to "Planète", "de" to "Planet",
                 "it" to "Pianeta", "ja" to "わくせい (Wakusei)", "ko" to "행성 (Haengseong)",
-                "zh" to "行星 (Xíngxīng)", "en" to "Planet"
+                "zh" to "行星 (Xíngxīng)", "en" to "Planet", "vi" to "Hành tinh"
             ),
             colorHex = 0xFF90CAF9
         ),
@@ -453,7 +453,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Casa", "fr" to "Maison", "de" to "Haus",
                 "it" to "Casa", "ja" to "いえ (Ie)", "ko" to "집 (Jip)",
-                "zh" to "房子 (Fángzi)", "en" to "House"
+                "zh" to "房子 (Fángzi)", "en" to "House", "vi" to "Ngôi nhà"
             ),
             colorHex = 0xFF80CBC4
         ),
@@ -467,7 +467,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Coche", "fr" to "Voiture", "de" to "Auto",
                 "it" to "Macchina", "ja" to "くるま (Kuruma)", "ko" to "자동차 (Jadongcha)",
-                "zh" to "汽车 (Qìchē)", "en" to "Car"
+                "zh" to "汽车 (Qìchē)", "en" to "Car", "vi" to "Xe ô tô"
             ),
             colorHex = 0xFFEF5350
         ),
@@ -481,7 +481,7 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Libro", "fr" to "Livre", "de" to "Buch",
                 "it" to "Libro", "ja" to "ほん (Hon)", "ko" to "책 (Chaek)",
-                "zh" to "书 (Shū)", "en" to "Book"
+                "zh" to "书 (Shū)", "en" to "Book", "vi" to "Quyển sách"
             ),
             colorHex = 0xFFFFB74D
         ),
@@ -495,9 +495,371 @@ class VocabularyRepository(
             translations = mapOf(
                 "es" to "Pelota", "fr" to "Ballon", "de" to "Ball",
                 "it" to "Palla", "ja" to "ボール (Bōru)", "ko" to "공 (Gong)",
-                "zh" to "球 (Qiú)", "en" to "Ball"
+                "zh" to "球 (Qiú)", "en" to "Ball", "vi" to "Quả bóng"
             ),
             colorHex = 0xFF81C784
+        ),
+
+        // NUMBERS & COUNTING
+        VocabularyItem(
+            id = "one",
+            englishWord = "One",
+            category = LearningCategory.NUMBERS,
+            emoji = "1️⃣",
+            phonetic = "wʌn",
+            soundPrompt = "Number 1!",
+            translations = mapOf(
+                "es" to "Uno", "fr" to "Un", "de" to "Eins",
+                "it" to "Uno", "ja" to "いち (Ichi)", "ko" to "하나 (Hana)",
+                "zh" to "一 (Yī)", "en" to "One", "vi" to "Số một"
+            ),
+            colorHex = 0xFFFF7043
+        ),
+        VocabularyItem(
+            id = "two",
+            englishWord = "Two",
+            category = LearningCategory.NUMBERS,
+            emoji = "2️⃣",
+            phonetic = "tuː",
+            soundPrompt = "Number 2!",
+            translations = mapOf(
+                "es" to "Dos", "fr" to "Deux", "de" to "Zwei",
+                "it" to "Due", "ja" to "に (Ni)", "ko" to "둘 (Dul)",
+                "zh" to "二 (Èr)", "en" to "Two", "vi" to "Số hai"
+            ),
+            colorHex = 0xFFFF8A65
+        ),
+        VocabularyItem(
+            id = "three",
+            englishWord = "Three",
+            category = LearningCategory.NUMBERS,
+            emoji = "3️⃣",
+            phonetic = "θriː",
+            soundPrompt = "Number 3!",
+            translations = mapOf(
+                "es" to "Tres", "fr" to "Trois", "de" to "Drei",
+                "it" to "Tre", "ja" to "さん (San)", "ko" to "셋 (Set)",
+                "zh" to "三 (Sān)", "en" to "Three", "vi" to "Số ba"
+            ),
+            colorHex = 0xFFFFA726
+        ),
+        VocabularyItem(
+            id = "four",
+            englishWord = "Four",
+            category = LearningCategory.NUMBERS,
+            emoji = "4️⃣",
+            phonetic = "fɔːr",
+            soundPrompt = "Number 4!",
+            translations = mapOf(
+                "es" to "Cuatro", "fr" to "Quatre", "de" to "Vier",
+                "it" to "Quattro", "ja" to "よん (Yon)", "ko" to "넷 (Net)",
+                "zh" to "四 (Sì)", "en" to "Four", "vi" to "Số bốn"
+            ),
+            colorHex = 0xFFFFB74D
+        ),
+        VocabularyItem(
+            id = "five",
+            englishWord = "Five",
+            category = LearningCategory.NUMBERS,
+            emoji = "5️⃣",
+            phonetic = "faɪv",
+            soundPrompt = "High five!",
+            translations = mapOf(
+                "es" to "Cinco", "fr" to "Cinq", "de" to "Fünf",
+                "it" to "Cinque", "ja" to "ご (Go)", "ko" to "다섯 (Daseot)",
+                "zh" to "五 (Wǔ)", "en" to "Five", "vi" to "Số năm"
+            ),
+            colorHex = 0xFFFFCC80
+        ),
+
+        // FAMILY & FRIENDS
+        VocabularyItem(
+            id = "mother",
+            englishWord = "Mother",
+            category = LearningCategory.FAMILY,
+            emoji = "👩",
+            phonetic = "ˈmʌð.ər",
+            soundPrompt = "Mommy love!",
+            translations = mapOf(
+                "es" to "Madre", "fr" to "Mère", "de" to "Mutter",
+                "it" to "Madre", "ja" to "おかあさん (Okaasan)", "ko" to "엄마 (Eomma)",
+                "zh" to "妈妈 (Māma)", "en" to "Mother", "vi" to "Mẹ"
+            ),
+            colorHex = 0xFF26A69A
+        ),
+        VocabularyItem(
+            id = "father",
+            englishWord = "Father",
+            category = LearningCategory.FAMILY,
+            emoji = "👨",
+            phonetic = "ˈfɑː.ðər",
+            soundPrompt = "Daddy hug!",
+            translations = mapOf(
+                "es" to "Padre", "fr" to "Père", "de" to "Vater",
+                "it" to "Padre", "ja" to "おとうさん (Otousan)", "ko" to "아빠 (Appa)",
+                "zh" to "爸爸 (Bàba)", "en" to "Father", "vi" to "Bố"
+            ),
+            colorHex = 0xFF4DB6AC
+        ),
+        VocabularyItem(
+            id = "baby",
+            englishWord = "Baby",
+            category = LearningCategory.FAMILY,
+            emoji = "👶",
+            phonetic = "ˈbeɪ.bi",
+            soundPrompt = "Goo goo gaa gaa!",
+            translations = mapOf(
+                "es" to "Bebé", "fr" to "Bébé", "de" to "Baby",
+                "it" to "Bambino", "ja" to "赤ん坊 (Akanbou)", "ko" to "아기 (Agi)",
+                "zh" to "婴儿 (Yīng'ér)", "en" to "Baby", "vi" to "Em bé"
+            ),
+            colorHex = 0xFF80CBC4
+        ),
+        VocabularyItem(
+            id = "sister",
+            englishWord = "Sister",
+            category = LearningCategory.FAMILY,
+            emoji = "👧",
+            phonetic = "ˈsɪs.tər",
+            soundPrompt = "Sister power!",
+            translations = mapOf(
+                "es" to "Hermana", "fr" to "Sœur", "de" to "Schwester",
+                "it" to "Sorella", "ja" to "おねえさん (Oneesan)", "ko" to "언니 (Eonni)",
+                "zh" to "姐妹 (Jiěmèi)", "en" to "Sister", "vi" to "Chị/Em gái"
+            ),
+            colorHex = 0xFFB2DFDB
+        ),
+        VocabularyItem(
+            id = "brother",
+            englishWord = "Brother",
+            category = LearningCategory.FAMILY,
+            emoji = "👦",
+            phonetic = "ˈbrʌð.ər",
+            soundPrompt = "High-five brother!",
+            translations = mapOf(
+                "es" to "Hermano", "fr" to "Frère", "de" to "Bruder",
+                "it" to "Fratello", "ja" to "おにいさん (Oniisan)", "ko" to "오빠 (Oppa)",
+                "zh" to "兄弟 (Xiōngdì)", "en" to "Brother", "vi" to "Anh/Em trai"
+            ),
+            colorHex = 0xFF00897B
+        ),
+
+        // VEHICLES & TRAVEL
+        VocabularyItem(
+            id = "airplane",
+            englishWord = "Airplane",
+            category = LearningCategory.VEHICLES,
+            emoji = "✈️",
+            phonetic = "ˈeə.pleɪn",
+            soundPrompt = "Whoosh in the sky!",
+            translations = mapOf(
+                "es" to "Avión", "fr" to "Avion", "de" to "Flugzeug",
+                "it" to "Aereo", "ja" to "ひこうき (Hikouki)", "ko" to "비행기 (Bihaenggi)",
+                "zh" to "飞机 (Fēijī)", "en" to "Airplane", "vi" to "Máy bay"
+            ),
+            colorHex = 0xFF7E57C2
+        ),
+        VocabularyItem(
+            id = "train",
+            englishWord = "Train",
+            category = LearningCategory.VEHICLES,
+            emoji = "🚆",
+            phonetic = "treɪn",
+            soundPrompt = "Choo choo!",
+            translations = mapOf(
+                "es" to "Tren", "fr" to "Train", "de" to "Zug",
+                "it" to "Treno", "ja" to "でんしゃ (Densha)", "ko" to "기차 (Gicha)",
+                "zh" to "火车 (Huǒchē)", "en" to "Train", "vi" to "Tàu hỏa"
+            ),
+            colorHex = 0xFF9575CD
+        ),
+        VocabularyItem(
+            id = "bicycle",
+            englishWord = "Bicycle",
+            category = LearningCategory.VEHICLES,
+            emoji = "🚲",
+            phonetic = "ˈbaɪ.sɪ.kəl",
+            soundPrompt = "Ring ring!",
+            translations = mapOf(
+                "es" to "Bicicleta", "fr" to "Vélo", "de" to "Fahrrad",
+                "it" to "Bicicletta", "ja" to "じてんしゃ (Jitensha)", "ko" to "자전거 (Jajeongeor)",
+                "zh" to "自行车 (Zìxíngchē)", "en" to "Bicycle", "vi" to "Xe đạp"
+            ),
+            colorHex = 0xFFB39DDB
+        ),
+        VocabularyItem(
+            id = "bus",
+            englishWord = "Bus",
+            category = LearningCategory.VEHICLES,
+            emoji = "🚌",
+            phonetic = "bʌs",
+            soundPrompt = "Wheels on the bus!",
+            translations = mapOf(
+                "es" to "Autobús", "fr" to "Bus", "de" to "Bus",
+                "it" to "Autobus", "ja" to "バス (Basu)", "ko" to "버스 (Beoseu)",
+                "zh" to "公交车 (Gōngjiāochē)", "en" to "Bus", "vi" to "Xe buýt"
+            ),
+            colorHex = 0xFF5E35B1
+        ),
+        VocabularyItem(
+            id = "boat",
+            englishWord = "Boat",
+            category = LearningCategory.VEHICLES,
+            emoji = "⛵",
+            phonetic = "bəʊt",
+            soundPrompt = "Sailing on water!",
+            translations = mapOf(
+                "es" to "Barco", "fr" to "Bateau", "de" to "Boot",
+                "it" to "Barca", "ja" to "ふね (Fune)", "ko" to "배 (Bae)",
+                "zh" to "船 (Chuán)", "en" to "Boat", "vi" to "Thuyền"
+            ),
+            colorHex = 0xFF512DA8
+        ),
+
+        // NATURE & WEATHER
+        VocabularyItem(
+            id = "tree",
+            englishWord = "Tree",
+            category = LearningCategory.NATURE,
+            emoji = "🌳",
+            phonetic = "triː",
+            soundPrompt = "Tall green tree!",
+            translations = mapOf(
+                "es" to "Árbol", "fr" to "Arbre", "de" to "Baum",
+                "it" to "Albero", "ja" to "き (Ki)", "ko" to "나무 (Namu)",
+                "zh" to "树 (Shù)", "en" to "Tree", "vi" to "Cây"
+            ),
+            colorHex = 0xFF43A047
+        ),
+        VocabularyItem(
+            id = "flower",
+            englishWord = "Flower",
+            category = LearningCategory.NATURE,
+            emoji = "🌸",
+            phonetic = "ˈflaʊ.ər",
+            soundPrompt = "Pretty bloom!",
+            translations = mapOf(
+                "es" to "Flor", "fr" to "Fleur", "de" to "Blume",
+                "it" to "Fiore", "ja" to "はな (Hana)", "ko" to "꽃 (Kkot)",
+                "zh" to "花 (Huā)", "en" to "Flower", "vi" to "Bông hoa"
+            ),
+            colorHex = 0xFF66BB6A
+        ),
+        VocabularyItem(
+            id = "mountain",
+            englishWord = "Mountain",
+            category = LearningCategory.NATURE,
+            emoji = "⛰️",
+            phonetic = "ˈmaʊn.tɪn",
+            soundPrompt = "High peak!",
+            translations = mapOf(
+                "es" to "Montaña", "fr" to "Montagne", "de" to "Berg",
+                "it" to "Montagna", "ja" to "やま (Yama)", "ko" to "산 (San)",
+                "zh" to "山 (Shān)", "en" to "Mountain", "vi" to "Ngọn núi"
+            ),
+            colorHex = 0xFF81C784
+        ),
+        VocabularyItem(
+            id = "rain",
+            englishWord = "Rain",
+            category = LearningCategory.NATURE,
+            emoji = "🌧️",
+            phonetic = "reɪn",
+            soundPrompt = "Pitter patter rain!",
+            translations = mapOf(
+                "es" to "Lluvia", "fr" to "Pluie", "de" to "Regen",
+                "it" to "Pioggia", "ja" to "あめ (Ame)", "ko" to "비 (Bi)",
+                "zh" to "雨 (Yǔ)", "en" to "Rain", "vi" to "Mưa"
+            ),
+            colorHex = 0xFFA5D6A7
+        ),
+        VocabularyItem(
+            id = "rainbow",
+            englishWord = "Rainbow",
+            category = LearningCategory.NATURE,
+            emoji = "🌈",
+            phonetic = "ˈreɪn.bəʊ",
+            soundPrompt = "Colorful sky arc!",
+            translations = mapOf(
+                "es" to "Arcoíris", "fr" to "Arc-en-ciel", "de" to "Regenbogen",
+                "it" to "Arcobaleno", "ja" to "にじ (Niji)", "ko" to "무지개 (Mujigae)",
+                "zh" to "彩虹 (Cǎihóng)", "en" to "Rainbow", "vi" to "Cầu vồng"
+            ),
+            colorHex = 0xFF2E7D32
+        ),
+
+        // CLOTHES & DRESSING
+        VocabularyItem(
+            id = "shirt",
+            englishWord = "Shirt",
+            category = LearningCategory.CLOTHES,
+            emoji = "👕",
+            phonetic = "ʃɜːt",
+            soundPrompt = "Comfy shirt!",
+            translations = mapOf(
+                "es" to "Camisa", "fr" to "Chemise", "de" to "Hemd",
+                "it" to "Camicia", "ja" to "シャツ (Shirt)", "ko" to "셔츠 (Syeocheu)",
+                "zh" to "衬衫 (Chènshān)", "en" to "Shirt", "vi" to "Áo sơ mi"
+            ),
+            colorHex = 0xFFF06292
+        ),
+        VocabularyItem(
+            id = "shoes",
+            englishWord = "Shoes",
+            category = LearningCategory.CLOTHES,
+            emoji = "👟",
+            phonetic = "ʃuːz",
+            soundPrompt = "Walk and run!",
+            translations = mapOf(
+                "es" to "Zapatos", "fr" to "Chaussures", "de" to "Schuhe",
+                "it" to "Scarpe", "ja" to "くつ (Kutsu)", "ko" to "신발 (Sinbal)",
+                "zh" to "鞋子 (Xiézi)", "en" to "Shoes", "vi" to "Đôi giày"
+            ),
+            colorHex = 0xFFF48FB1
+        ),
+        VocabularyItem(
+            id = "hat",
+            englishWord = "Hat",
+            category = LearningCategory.CLOTHES,
+            emoji = "🧢",
+            phonetic = "hæt",
+            soundPrompt = "Put on your hat!",
+            translations = mapOf(
+                "es" to "Sombrero", "fr" to "Chapeau", "de" to "Hut",
+                "it" to "Cappello", "ja" to "ぼうし (Boushi)", "ko" to "모자 (Moja)",
+                "zh" to "帽子 (Màozi)", "en" to "Hat", "vi" to "Cái mũ"
+            ),
+            colorHex = 0xFFE91E63
+        ),
+
+        // BODY & HEALTH
+        VocabularyItem(
+            id = "eyes",
+            englishWord = "Eyes",
+            category = LearningCategory.BODY,
+            emoji = "👁️",
+            phonetic = "aɪz",
+            soundPrompt = "Blink blink!",
+            translations = mapOf(
+                "es" to "Ojos", "fr" to "Yeux", "de" to "Augen",
+                "it" to "Occhi", "ja" to "め (Me)", "ko" to "눈 (Nun)",
+                "zh" to "眼睛 (Yǎnjing)", "en" to "Eyes", "vi" to "Đôi mắt"
+            ),
+            colorHex = 0xFF1E88E5
+        ),
+        VocabularyItem(
+            id = "hands",
+            englishWord = "Hands",
+            category = LearningCategory.BODY,
+            emoji = "✋",
+            phonetic = "hændz",
+            soundPrompt = "Clap your hands!",
+            translations = mapOf(
+                "es" to "Manos", "fr" to "Mains", "de" to "Hände",
+                "it" to "Mani", "ja" to "て (Te)", "ko" to "손 (Son)",
+                "zh" to "手 (Shǒu)", "en" to "Hands", "vi" to "Bàn tay"
+            ),
+            colorHex = 0xFF42A5F5
         )
     )
 

@@ -96,10 +96,10 @@ fun QuizScreen(
 
     var selectedDifficulty by remember { mutableStateOf<QuizDifficulty>(QuizDifficulty.EASY) }
 
-    // Generate 5 multiple-choice questions based on difficulty
+    // Generate 10 multiple-choice questions for longer, deeper lesson sessions
     val questions: List<QuizQuestion> = remember(wordProgressList, targetLanguage, selectedDifficulty) {
         val allItems: List<VocabularyItem> = viewModel.currentCategoryWords
-        val pool = allItems.shuffled().take(5)
+        val pool = allItems.shuffled().take(10)
 
         pool.map { targetItem ->
             val targetTrans = targetItem.translations[targetLanguage.code] ?: targetItem.englishWord

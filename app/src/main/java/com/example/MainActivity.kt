@@ -113,7 +113,11 @@ fun LumiApp(viewModel: LumiViewModel) {
             if (backStackEntry.destination.route == "home" && engagementManager.isOnboardingCompleted) {
                 delay(2000)
                 if (activeEngagementSuggestion == null && !isBreakVisible && unlockedBadge == null) {
-                    activeEngagementSuggestion = engagementManager.calculateBestTimeSuggestion()
+                    val suggestion = engagementManager.calculateBestTimeSuggestion()
+                    if (suggestion != null) {
+                        activeEngagementSuggestion = suggestion
+                        engagementManager.recordPromptShown(suggestion)
+                    }
                 }
             }
         }
@@ -316,6 +320,27 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
 
+            composable("game/spelling_bee") {
+                com.example.ui.screens.SpellingBeeScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/memory_match") {
+                com.example.ui.screens.MemoryMatchScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/ai_quest") {
+                com.example.ui.screens.AiQuestGeneratorScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
             composable(
                 route = "lesson_celebration/{score}/{total}",
                 arguments = listOf(
@@ -499,7 +524,10 @@ fun LumiApp(viewModel: LumiViewModel) {
                 activeEngagementSuggestion = null
             },
             onDismiss = {
-                engagementManager.recordPromptDismissed()
+                val suggestion = activeEngagementSuggestion
+                if (suggestion != null) {
+                    engagementManager.recordPromptDismissed(suggestion)
+                }
                 activeEngagementSuggestion = null
             }
         )

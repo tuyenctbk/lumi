@@ -75,12 +75,16 @@ class ExampleRobolectricTest {
     @Test
     fun `target languages are correctly configured with codes and flag emojis`() {
         val languages = TargetLanguage.entries
-        assertTrue(languages.size >= 6)
+        assertTrue(languages.size >= 7)
         languages.forEach { lang ->
             assertTrue(lang.code.isNotEmpty())
             assertTrue(lang.displayName.isNotEmpty())
             assertTrue(lang.flagEmoji.isNotEmpty())
         }
+        val vietnamese = TargetLanguage.fromCode("vi")
+        assertEquals(TargetLanguage.VIETNAMESE, vietnamese)
+        assertEquals("vi", vietnamese.code)
+        assertEquals("🇻🇳", vietnamese.flagEmoji)
     }
 
     @Test

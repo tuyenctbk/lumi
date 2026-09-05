@@ -206,6 +206,33 @@ fun HomeScreen(
                 badge = "HOT!"
             ),
             GameShowItem(
+                id = "spelling_bee",
+                title = "Spelling Bee Builder",
+                subtitle = "Unscramble Letters",
+                icon = Icons.Default.AutoAwesome,
+                color = SleekGold,
+                colorDark = SleekGoldDark,
+                badge = "NEW!"
+            ),
+            GameShowItem(
+                id = "memory_match",
+                title = "Memory Card Flip",
+                subtitle = "Match Picture Pairs",
+                icon = Icons.Default.Visibility,
+                color = SleekPurple,
+                colorDark = Color(0xFF5B1AA8),
+                badge = "NEW!"
+            ),
+            GameShowItem(
+                id = "ai_quest",
+                title = "Open AI Quest Creator",
+                subtitle = "Generate Dynamic Lessons",
+                icon = Icons.Default.AutoAwesome,
+                color = SleekCoral,
+                colorDark = SleekCoralDark,
+                badge = "AI ✨"
+            ),
+            GameShowItem(
                 id = "pronunciation",
                 title = "Pronunciation Lab",
                 subtitle = "Practice Speaking",
