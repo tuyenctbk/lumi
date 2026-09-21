@@ -51,7 +51,10 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.util.SmartEngagementManager
 import com.example.util.SmartSuggestionType
 import com.example.ui.components.SmartEngagementDialog
+import com.example.ui.screens.BalloonPopGameScreen
 import com.example.ui.screens.OnboardingScreen
+import com.example.ui.screens.SplashScreen
+import com.example.ui.screens.WordSorterGameScreen
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -137,9 +140,7 @@ fun LumiApp(viewModel: LumiViewModel) {
 
     SharedTransitionLayout {
         androidx.compose.foundation.layout.Box(modifier = Modifier.fillMaxSize()) {
-            val startRoute = remember {
-                if (engagementManager.isOnboardingCompleted) "home" else "onboarding"
-            }
+            val startRoute = "splash"
 
             NavHost(
                 navController = navController,
@@ -149,6 +150,17 @@ fun LumiApp(viewModel: LumiViewModel) {
                 popEnterTransition = { fadeIn(tween(260)) + scaleIn(initialScale = 0.96f, animationSpec = tween(260)) },
                 popExitTransition = { fadeOut(tween(200)) }
             ) {
+                composable("splash") {
+                    SplashScreen(
+                        onSplashFinished = {
+                            val nextRoute = if (engagementManager.isOnboardingCompleted) "home" else "onboarding"
+                            navController.navigate(nextRoute) {
+                                popUpTo("splash") { inclusive = true }
+                            }
+                        }
+                    )
+                }
+
                 composable("onboarding") {
                     OnboardingScreen(
                         onOnboardingFinished = {
@@ -336,6 +348,34 @@ fun LumiApp(viewModel: LumiViewModel) {
 
             composable("game/ai_quest") {
                 com.example.ui.screens.AiQuestGeneratorScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/balloon_pop") {
+                BalloonPopGameScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("balloon_pop") {
+                BalloonPopGameScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/word_sorter") {
+                WordSorterGameScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("word_sorter") {
+                WordSorterGameScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }
                 )

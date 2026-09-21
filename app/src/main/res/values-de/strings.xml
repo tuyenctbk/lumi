@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Lumi</string>
     <string name="button_next">Weiter</string>
@@ -24,8 +25,6 @@
     <string name="dialog_share_desc">Teile Lumi mit anderen Eltern und Kindern, um gemeinsam zu lernen und zu spielen!</string>
     <string name="dialog_update_title">Neues Update verfügbar! 🚀</string>
     <string name="dialog_update_desc">Lumi hat neue lustige Wörter, Sticker, Spiele und Fehlerbehebungen. Hol dir jetzt die neueste Version!</string>
-
-    <!-- Quiz Screen -->
     <string name="quiz_select_difficulty">Schwierigkeit wählen</string>
     <string name="quiz_go_back">Zurück</string>
     <string name="quiz_vocabulary_quiz">Wortschatz-Quiz</string>
@@ -34,8 +33,6 @@
     <string name="quiz_listen_audio">Aussprache anhören</string>
     <string name="quiz_next_question">Nächste Frage ➔</string>
     <string name="quiz_see_results">Ergebnisse ansehen 🎉</string>
-
-    <!-- Home Screen -->
     <string name="home_daily_goal">Tagesziel: %1$d / %2$d Minuten</string>
     <string name="home_daily_target_achieved">🎉 Tagesziel erreicht! Fantastische Leistung!</string>
     <string name="home_mins_remaining">Noch %1$d Minuten heute</string>
@@ -43,8 +40,6 @@
     <string name="home_choose_island_subtitle">WÄHLE EINE INSEL ZUM STARTEN</string>
     <string name="home_lumi_game_shows">Lumi Spiele-Shows</string>
     <string name="home_play_games_subtitle">SPIELE INTERAKTIVE SPIELE &amp; GEWINNE STERNE</string>
-
-    <!-- Celebration & Summary Screen -->
     <string name="celebration_lesson_completed">LEKTION ABGESCHLOSSEN!</string>
     <string name="celebration_fantastic_job">Fantastische Arbeit!</string>
     <string name="celebration_subtitle">Du hast neue Sterne verdient und deinen Wortschatz erweitert!</string>
@@ -64,8 +59,6 @@
     <string name="celebration_badge_earned">🚀 +%1$d Wörter in dieser Sitzung gemeistert</string>
     <string name="celebration_superstar_speech">Du bist ein Sprach-Superstar!</string>
     <string name="celebration_momentum_speech">Hurra! Mach weiter so!</string>
-
-    <!-- Lumi Mascot Reactions -->
     <string name="lumi_reaction_correct">Super gemacht! 🌟</string>
     <string name="lumi_reaction_correct_sub">+10 Sterne verdient!</string>
     <string name="lumi_reaction_streak">Unglaubliche Serie! 🔥</string>
@@ -76,10 +69,66 @@
     <string name="lumi_speech_keep_practicing">Übe fleißig weiter!</string>
     <string name="lumi_speech_high_five">Richtig! Gib mir fünf!</string>
     <string name="lumi_speech_tap_answer">Tippe auf die richtige Antwort!</string>
-
-    <!-- General Game Labels -->
     <string name="game_sound_match_prompt">Welches Bild passt zum gehörten Geräusch?</string>
-    <string name="game_round_counter">Runde %1$d / %2$d</string>
+    <string name="game_round_counter">Round %1$d of %2$d</string>
     <string name="game_finish">Spiel beenden 🎉</string>
     <string name="game_play_again">Nochmal spielen 🔄</string>
+    <string name="game_score_pts">⭐ %1$d pts</string>
+    <string name="game_listen">Listen</string>
+    <string name="spelling_bee_title">Spelling Bee 🐝</string>
+    <string name="spelling_bee_word_counter">Word %1$d of %2$d</string>
+    <string name="memory_match_title">Memory Match 🎴</string>
+    <string name="memory_match_pairs">Pairs Matched: %1$d / %2$d</string>
+    <string name="ai_quest_title">AI Open Quest Creator ✨</string>
+    <string name="ai_quest_input_label">What topic do you want to learn?</string>
+    <string name="ai_quest_input_placeholder">e.g. Dinosaurs, Deep Ocean, Music</string>
+    <string name="ai_quest_building">Building AI Lesson...</string>
+    <string name="ai_quest_generate_btn">Generate AI Lesson Quest ✨</string>
+    <string name="ai_quest_items_count">AI Lesson Items (%1$d Words)</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_clear">Clear</string>
+    <string name="button_next_word">Next Word ➔</string>
+    <string name="parent_dashboard_title">Parental Analytics Hub 📊</string>
+    <string name="parent_dashboard_sub">Insights, Reports &amp; Smart Learning Controls</string>
+    <string name="parent_qr_report">QR Parent Web Report 📱</string>
+    <string name="parent_qr_scan_desc">Scan with your phone camera to view the live web report!</string>
+    <string name="parent_open_browser">Open Web Report in Browser 🌐</string>
+    <string name="parent_learning_language">Target Language</string>
+    <string name="parent_words_mastered">Words Mastered</string>
+    <string name="parent_retention_accuracy">Retention Accuracy</string>
+    <string name="parent_study_streak">Study Streak</string>
+    <string name="parent_active_breaks">Active Breaks Taken</string>
+    <string name="game_show_complete">Runde abgeschlossen!</string>
+    <string name="game_score_summary">Score: %1$d / %2$d</string>
+    <string name="game_back_to_islands">Zurück zu den Inseln</string>
+    <string name="game_balloon_pop_title">Ballon-Platzer! 🎈</string>
+    <string name="game_balloon_pop_prompt">Lass den richtigen Ballon platzen! 🎈</string>
+    <string name="game_word_sorter_title">Wort-Zug-Sortierer 🚂</string>
+    <string name="game_word_sorter_prompt">Sortiere die Karte in den richtigen Waggon! 🚂</string>
+    <string name="game_color_mixer_title">Farbzauber-Mischer 🎨</string>
+    <string name="game_shadow_guess_title">Schatten-Rätsel 👤</string>
+    <string name="game_mystery_spotlight_title">Geheimnisvoller Scheinwerfer 🔦</string>
+    <string name="game_spot_the_word">Spot the: \"%1$s\"</string>
+    <string name="game_hear_word">Wort anhören</string>
+    <string name="game_sound_match_title">Klang-Match 🎵</string>
+    <string name="game_find_it_title">Finde-Es-Abenteuer 🔎</string>
+    <string name="game_listen_closely">Hör Lumi genau zu!</string>
+    <string name="game_find_target">Find: \"%1$s\"</string>
+    <string name="game_listen_again">Nochmals anhören 🔊</string>
+    <string name="game_awesome_pop">Super Treffer! ⭐</string>
+    <string name="game_try_another">Hoppla! Probier einen anderen Ballon! 🎈</string>
+    <string name="game_pts_upper">%1$d PTS</string>
+    <string name="parent_gate_title">Elternbereich 🔒</string>
+    <string name="parent_gate_prompt">Nur für Erwachsene: Lösen zum Fortfahren</string>
+    <string name="parent_gate_error">Falsche Antwort, bitte versuche es mit einer neuen Aufgabe!</string>
+    <string name="parent_gate_coppa">🔒 Kinderschutz • COPPA-konform</string>
+    <string name="parent_gate_back">Zurück zum Lernen</string>
+    <string name="offline_mode_banner">⚡ Offline-Modus — Fortschritt wird lokal gespeichert</string>
+    <string name="splash_tagline">Dein magischer Sprachlern-Freund ✨</string>
+    <string name="splash_loading">Lade Spielwelten &amp; Spaß...</string>
+    <string name="splash_tap_skip">Tippe zum Überspringen 🚀</string>
+    <string name="topbar_language">SPRACHE</string>
+    <string name="break_i_did_it">Geschafft! 🌟</string>
+    <string name="break_skip">Jetzt überspringen</string>
+    <string name="break_hear_lumi">Lumi anhören 🔊</string>
 </resources>

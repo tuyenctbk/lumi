@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.model.TargetLanguage
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
@@ -158,7 +160,7 @@ fun TopBarHeader(
                                 fontSize = 14.sp
                             )
                             Text(
-                                text = "LANGUAGE",
+                                text = stringResource(R.string.topbar_language),
                                 fontSize = 9.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = SleekTextSubtle,

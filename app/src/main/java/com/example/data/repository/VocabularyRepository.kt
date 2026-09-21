@@ -860,6 +860,354 @@ class VocabularyRepository(
                 "zh" to "手 (Shǒu)", "en" to "Hands", "vi" to "Bàn tay"
             ),
             colorHex = 0xFF42A5F5
+        ),
+
+        // NUMBERS 6-10
+        VocabularyItem(
+            id = "six",
+            englishWord = "Six",
+            category = LearningCategory.NUMBERS,
+            emoji = "6️⃣",
+            phonetic = "sɪks",
+            soundPrompt = "Number 6!",
+            translations = mapOf(
+                "es" to "Seis", "fr" to "Six", "de" to "Sechs",
+                "it" to "Sei", "ja" to "ろく (Roku)", "ko" to "여섯 (Yeoseot)",
+                "zh" to "六 (Liù)", "en" to "Six", "vi" to "Số sáu"
+            ),
+            colorHex = 0xFFFF7043
+        ),
+        VocabularyItem(
+            id = "seven",
+            englishWord = "Seven",
+            category = LearningCategory.NUMBERS,
+            emoji = "7️⃣",
+            phonetic = "ˈsɛv.ən",
+            soundPrompt = "Lucky number 7!",
+            translations = mapOf(
+                "es" to "Siete", "fr" to "Sept", "de" to "Sieben",
+                "it" to "Sette", "ja" to "なな (Nana)", "ko" to "일곱 (Ilgop)",
+                "zh" to "七 (Qī)", "en" to "Seven", "vi" to "Số bảy"
+            ),
+            colorHex = 0xFFFF8A65
+        ),
+        VocabularyItem(
+            id = "eight",
+            englishWord = "Eight",
+            category = LearningCategory.NUMBERS,
+            emoji = "8️⃣",
+            phonetic = "eɪt",
+            soundPrompt = "Great number 8!",
+            translations = mapOf(
+                "es" to "Ocho", "fr" to "Huit", "de" to "Acht",
+                "it" to "Otto", "ja" to "はち (Hachi)", "ko" to "여덟 (Yeodeol)",
+                "zh" to "八 (Bā)", "en" to "Eight", "vi" to "Số tám"
+            ),
+            colorHex = 0xFFFFA726
+        ),
+        VocabularyItem(
+            id = "nine",
+            englishWord = "Nine",
+            category = LearningCategory.NUMBERS,
+            emoji = "9️⃣",
+            phonetic = "naɪn",
+            soundPrompt = "Number 9!",
+            translations = mapOf(
+                "es" to "Nueve", "fr" to "Neuf", "de" to "Neun",
+                "it" to "Nove", "ja" to "きゅう (Kyū)", "ko" to "아홉 (Ahop)",
+                "zh" to "九 (Jiǔ)", "en" to "Nine", "vi" to "Số chín"
+            ),
+            colorHex = 0xFFFFB74D
+        ),
+        VocabularyItem(
+            id = "ten",
+            englishWord = "Ten",
+            category = LearningCategory.NUMBERS,
+            emoji = "🔟",
+            phonetic = "tɛn",
+            soundPrompt = "Perfect 10!",
+            translations = mapOf(
+                "es" to "Diez", "fr" to "Dix", "de" to "Zehn",
+                "it" to "Dieci", "ja" to "じゅう (Jū)", "ko" to "열 (Yeol)",
+                "zh" to "十 (Shí)", "en" to "Ten", "vi" to "Số mười"
+            ),
+            colorHex = 0xFFFFCC80
+        ),
+
+        // MUSIC & INSTRUMENTS
+        VocabularyItem(
+            id = "piano",
+            englishWord = "Piano",
+            category = LearningCategory.MUSIC,
+            emoji = "🎹",
+            phonetic = "piˈæn.oʊ",
+            soundPrompt = "Plink plank plonk!",
+            translations = mapOf(
+                "es" to "Piano", "fr" to "Piano", "de" to "Klavier",
+                "it" to "Pianoforte", "ja" to "ピアノ (Piano)", "ko" to "피아노 (Piano)",
+                "zh" to "钢琴 (Gāngqín)", "en" to "Piano", "vi" to "Đàn dương cầm"
+            ),
+            colorHex = 0xFF8E24AA
+        ),
+        VocabularyItem(
+            id = "guitar",
+            englishWord = "Guitar",
+            category = LearningCategory.MUSIC,
+            emoji = "🎸",
+            phonetic = "ɡɪˈtɑːr",
+            soundPrompt = "Strum strum strum!",
+            translations = mapOf(
+                "es" to "Guitarra", "fr" to "Guitare", "de" to "Gitarre",
+                "it" to "Chitarra", "ja" to "ギター (Gitā)", "ko" to "기타 (Gita)",
+                "zh" to "吉他 (Jítā)", "en" to "Guitar", "vi" to "Đàn ghi-ta"
+            ),
+            colorHex = 0xFFAB47BC
+        ),
+        VocabularyItem(
+            id = "drum",
+            englishWord = "Drum",
+            category = LearningCategory.MUSIC,
+            emoji = "🥁",
+            phonetic = "drʌm",
+            soundPrompt = "Boom boom tap!",
+            translations = mapOf(
+                "es" to "Tambor", "fr" to "Tambour", "de" to "Trommel",
+                "it" to "Tamburo", "ja" to "たいこ (Taiko)", "ko" to "드럼 (Deureom)",
+                "zh" to "鼓 (Gǔ)", "en" to "Drum", "vi" to "Cái trống"
+            ),
+            colorHex = 0xFFBA68C8
+        ),
+        VocabularyItem(
+            id = "violin",
+            englishWord = "Violin",
+            category = LearningCategory.MUSIC,
+            emoji = "🎻",
+            phonetic = "ˌvaɪəˈlɪn",
+            soundPrompt = "Sweet sweet strings!",
+            translations = mapOf(
+                "es" to "Violín", "fr" to "Violon", "de" to "Geige",
+                "it" to "Violino", "ja" to "バイオリン (Baiorin)", "ko" to "바이올린 (Baiollin)",
+                "zh" to "小提琴 (Xiǎotíqín)", "en" to "Violin", "vi" to "Đàn vĩ cầm"
+            ),
+            colorHex = 0xFFCE93D8
+        ),
+        VocabularyItem(
+            id = "trumpet",
+            englishWord = "Trumpet",
+            category = LearningCategory.MUSIC,
+            emoji = "🎺",
+            phonetic = "ˈtrʌm.pɪt",
+            soundPrompt = "Toot toot toot!",
+            translations = mapOf(
+                "es" to "Trompeta", "fr" to "Trompette", "de" to "Trompete",
+                "it" to "Tromba", "ja" to "トランペット (Toranpetto)", "ko" to "트럼펫 (Teureompet)",
+                "zh" to "小号 (Xiǎohào)", "en" to "Trumpet", "vi" to "Kèn trumpet"
+            ),
+            colorHex = 0xFF9C27B0
+        ),
+
+        // SPORTS & PLAY
+        VocabularyItem(
+            id = "soccer",
+            englishWord = "Soccer",
+            category = LearningCategory.SPORTS,
+            emoji = "⚽",
+            phonetic = "ˈsɒk.ər",
+            soundPrompt = "Goal! Kick the ball!",
+            translations = mapOf(
+                "es" to "Fútbol", "fr" to "Football", "de" to "Fußball",
+                "it" to "Calcio", "ja" to "サッカー (Sakkā)", "ko" to "축구 (Chukgu)",
+                "zh" to "足球 (Zúqiú)", "en" to "Soccer", "vi" to "Bóng đá"
+            ),
+            colorHex = 0xFFFF5722
+        ),
+        VocabularyItem(
+            id = "basketball",
+            englishWord = "Basketball",
+            category = LearningCategory.SPORTS,
+            emoji = "🏀",
+            phonetic = "ˈbɑː.skɪt.bɔːl",
+            soundPrompt = "Swoosh! Dribble and shoot!",
+            translations = mapOf(
+                "es" to "Baloncesto", "fr" to "Basket", "de" to "Basketball",
+                "it" to "Pallacanestro", "ja" to "バスケ (Basuke)", "ko" to "농구 (Nong-gu)",
+                "zh" to "篮球 (Lánqiú)", "en" to "Basketball", "vi" to "Bóng rổ"
+            ),
+            colorHex = 0xFFFF7043
+        ),
+        VocabularyItem(
+            id = "swimming",
+            englishWord = "Swimming",
+            category = LearningCategory.SPORTS,
+            emoji = "🏊",
+            phonetic = "ˈswɪm.ɪŋ",
+            soundPrompt = "Splash splash glide!",
+            translations = mapOf(
+                "es" to "Natación", "fr" to "Natation", "de" to "Schwimmen",
+                "it" to "Nuoto", "ja" to "すいえい (Suiei)", "ko" to "수영 (Suyeong)",
+                "zh" to "游泳 (Yóuyǒng)", "en" to "Swimming", "vi" to "Bơi lội"
+            ),
+            colorHex = 0xFF0288D1
+        ),
+        VocabularyItem(
+            id = "cycling",
+            englishWord = "Cycling",
+            category = LearningCategory.SPORTS,
+            emoji = "🚴",
+            phonetic = "ˈsaɪ.klɪŋ",
+            soundPrompt = "Pedal fast!",
+            translations = mapOf(
+                "es" to "Ciclismo", "fr" to "Cyclisme", "de" to "Radfahren",
+                "it" to "Ciclismo", "ja" to "サイクリング", "ko" to "자전거 (Jajeon-geo)",
+                "zh" to "骑自行车 (Qí zìxíngchē)", "en" to "Cycling", "vi" to "Đi xe đạp"
+            ),
+            colorHex = 0xFF26A69A
+        ),
+
+        // FEELINGS & MOODS
+        VocabularyItem(
+            id = "happy",
+            englishWord = "Happy",
+            category = LearningCategory.FEELINGS,
+            emoji = "😄",
+            phonetic = "ˈhæp.i",
+            soundPrompt = "Big bright smile!",
+            translations = mapOf(
+                "es" to "Feliz", "fr" to "Heureux", "de" to "Glücklich",
+                "it" to "Felice", "ja" to "うれしい (Ureshii)", "ko" to "행복한 (Haengbokhan)",
+                "zh" to "开心 (Kāixīn)", "en" to "Happy", "vi" to "Vui vẻ"
+            ),
+            colorHex = 0xFF00ACC1
+        ),
+        VocabularyItem(
+            id = "excited",
+            englishWord = "Excited",
+            category = LearningCategory.FEELINGS,
+            emoji = "🤩",
+            phonetic = "ɪkˈsaɪ.tɪd",
+            soundPrompt = "Yay! So fun!",
+            translations = mapOf(
+                "es" to "Emocionado", "fr" to "Enthousiaste", "de" to "Begeistert",
+                "it" to "Emozionato", "ja" to "わくわく (Wakuwaku)", "ko" to "신나는 (Sinnaneun)",
+                "zh" to "兴奋 (Xīngfèn)", "en" to "Excited", "vi" to "Hào hứng"
+            ),
+            colorHex = 0xFF26C6DA
+        ),
+        VocabularyItem(
+            id = "curious",
+            englishWord = "Curious",
+            category = LearningCategory.FEELINGS,
+            emoji = "🧐",
+            phonetic = "ˈkjʊə.ri.əs",
+            soundPrompt = "I wonder why!",
+            translations = mapOf(
+                "es" to "Curioso", "fr" to "Curieux", "de" to "Neugierig",
+                "it" to "Curioso", "ja" to "こうきしん (Kōkishin)", "ko" to "호기심 (Hogisim)",
+                "zh" to "好奇 (Hàoqí)", "en" to "Curious", "vi" to "Tò mò"
+            ),
+            colorHex = 0xFF00838F
+        ),
+        VocabularyItem(
+            id = "brave",
+            englishWord = "Brave",
+            category = LearningCategory.FEELINGS,
+            emoji = "🦁",
+            phonetic = "breɪv",
+            soundPrompt = "Strong and courageous!",
+            translations = mapOf(
+                "es" to "Valiente", "fr" to "Courageux", "de" to "Mutig",
+                "it" to "Coraggioso", "ja" to "ゆうき (Yūki)", "ko" to "용감한 (Yong-gamhan)",
+                "zh" to "勇敢 (Yǒnggǎn)", "en" to "Brave", "vi" to "Dũng cảm"
+            ),
+            colorHex = 0xFF0097A7
+        ),
+
+        // MORE ANIMALS
+        VocabularyItem(
+            id = "dolphin",
+            englishWord = "Dolphin",
+            category = LearningCategory.ANIMALS,
+            emoji = "🐬",
+            phonetic = "ˈdɒl.fɪn",
+            soundPrompt = "Click click splash!",
+            translations = mapOf(
+                "es" to "Delfín", "fr" to "Dauphin", "de" to "Delfin",
+                "it" to "Delfino", "ja" to "イルカ (Iruka)", "ko" to "돌고래 (Dolgorae)",
+                "zh" to "海豚 (Hǎitún)", "en" to "Dolphin", "vi" to "Cá heo"
+            ),
+            colorHex = 0xFF039BE5
+        ),
+        VocabularyItem(
+            id = "penguin",
+            englishWord = "Penguin",
+            category = LearningCategory.ANIMALS,
+            emoji = "🐧",
+            phonetic = "ˈpɛŋ.ɡwɪn",
+            soundPrompt = "Waddle on the ice!",
+            translations = mapOf(
+                "es" to "Pingüino", "fr" to "Manchot", "de" to "Pinguin",
+                "it" to "Pinguino", "ja" to "ペンギン (Pengin)", "ko" to "펭귄 (Peng-gwin)",
+                "zh" to "企鹅 (Qǐ'é)", "en" to "Penguin", "vi" to "Chim cánh cụt"
+            ),
+            colorHex = 0xFF546E7A
+        ),
+        VocabularyItem(
+            id = "butterfly",
+            englishWord = "Butterfly",
+            category = LearningCategory.ANIMALS,
+            emoji = "🦋",
+            phonetic = "ˈbʌt.ə.flaɪ",
+            soundPrompt = "Flutter flutter high!",
+            translations = mapOf(
+                "es" to "Mariposa", "fr" to "Papillon", "de" to "Schmetterling",
+                "it" to "Farfalla", "ja" to "ちょう (Chō)", "ko" to "나비 (Nabi)",
+                "zh" to "蝴蝶 (Húdié)", "en" to "Butterfly", "vi" to "Con bướm"
+            ),
+            colorHex = 0xFF7E57C2
+        ),
+
+        // MORE FOOD
+        VocabularyItem(
+            id = "pizza",
+            englishWord = "Pizza",
+            category = LearningCategory.FOOD,
+            emoji = "🍕",
+            phonetic = "ˈpiːt.sə",
+            soundPrompt = "Cheesy slice!",
+            translations = mapOf(
+                "es" to "Pizza", "fr" to "Pizza", "de" to "Pizza",
+                "it" to "Pizza", "ja" to "ピザ (Piza)", "ko" to "피자 (Pija)",
+                "zh" to "披萨 (Pīsà)", "en" to "Pizza", "vi" to "Bánh pizza"
+            ),
+            colorHex = 0xFFFF7043
+        ),
+        VocabularyItem(
+            id = "cookie",
+            englishWord = "Cookie",
+            category = LearningCategory.FOOD,
+            emoji = "🍪",
+            phonetic = "ˈkʊk.i",
+            soundPrompt = "Crunch crunch yummy!",
+            translations = mapOf(
+                "es" to "Galleta", "fr" to "Biscuit", "de" to "Keks",
+                "it" to "Biscotto", "ja" to "クッキー (Kukkī)", "ko" to "쿠키 (Kuki)",
+                "zh" to "饼干 (Bǐnggān)", "en" to "Cookie", "vi" to "Bánh quy"
+            ),
+            colorHex = 0xFF8D6E63
+        ),
+        VocabularyItem(
+            id = "watermelon",
+            englishWord = "Watermelon",
+            category = LearningCategory.FOOD,
+            emoji = "🍉",
+            phonetic = "ˈwɔː.təˌmɛl.ən",
+            soundPrompt = "Sweet juicy bite!",
+            translations = mapOf(
+                "es" to "Sandía", "fr" to "Pastèque", "de" to "Wassermelone",
+                "it" to "Anguria", "ja" to "スイカ (Suika)", "ko" to "수박 (Subak)",
+                "zh" to "西瓜 (Xīguā)", "en" to "Watermelon", "vi" to "Dưa hấu"
+            ),
+            colorHex = 0xFFE91E63
         )
     )
 

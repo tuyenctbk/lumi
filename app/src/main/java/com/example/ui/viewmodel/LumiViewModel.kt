@@ -166,11 +166,18 @@ class LumiViewModel(
     private val _isPhysicalBreakVisible = MutableStateFlow(false)
     val isPhysicalBreakVisible: StateFlow<Boolean> = _isPhysicalBreakVisible.asStateFlow()
 
+    private val _isGameOrQuizActive = MutableStateFlow(false)
+    val isGameOrQuizActive: StateFlow<Boolean> = _isGameOrQuizActive.asStateFlow()
+
     private val _physicalBreaksCompleted = MutableStateFlow(1)
     val physicalBreaksCompleted: StateFlow<Int> = _physicalBreaksCompleted.asStateFlow()
 
     private var periodicBreakJob: Job? = null
     private var questionsAnsweredCounter = 0
+
+    fun setGameActive(active: Boolean) {
+        _isGameOrQuizActive.value = active
+    }
 
     init {
         // Welcome voice greeting on launch
@@ -206,8 +213,8 @@ class LumiViewModel(
         periodicBreakJob?.cancel()
         periodicBreakJob = viewModelScope.launch {
             while (true) {
-                delay(150_000L) // 2.5 minutes interval
-                if (!_isPhysicalBreakVisible.value) {
+                delay(900_000L) // 15 minutes healthy interval
+                if (!_isPhysicalBreakVisible.value && !_isGameOrQuizActive.value) {
                     triggerPhysicalActivitySuggestion()
                 }
             }
@@ -215,6 +222,7 @@ class LumiViewModel(
     }
 
     fun triggerPhysicalActivitySuggestion(quest: PhysicalBreakQuest? = null) {
+        if (_isGameOrQuizActive.value && quest == null) return
         val nextQuest = quest ?: PhysicalBreakCatalog.getRandomQuest(_activePhysicalBreak.value?.id)
         _activePhysicalBreak.value = nextQuest
         _isPhysicalBreakVisible.value = true
@@ -378,12 +386,7 @@ class LumiViewModel(
                 setMascotMood(MascotMood.ENCOURAGING, 2200)
             }
 
-            // Every 5 answers, suggest a physical active break to reduce TV sedentary time
             questionsAnsweredCounter++
-            if (questionsAnsweredCounter % 5 == 0 && !_isPhysicalBreakVisible.value) {
-                delay(2000)
-                triggerPhysicalActivitySuggestion()
-            }
         }
     }
 

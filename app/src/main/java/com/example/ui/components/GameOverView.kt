@@ -25,6 +25,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.R
 import com.example.ui.theme.SleekEmerald
 import com.example.ui.theme.SleekGold
 import com.example.ui.theme.SleekGoldDark
@@ -66,14 +68,14 @@ fun GameOverView(
         Spacer(modifier = Modifier.height(18.dp))
 
         Text(
-            text = "Show Complete!",
+            text = stringResource(R.string.game_show_complete),
             fontSize = 36.sp,
             fontWeight = FontWeight.Black,
             color = SleekTextDark
         )
 
         Text(
-            text = "You scored $correctCount out of $totalRounds stars!",
+            text = stringResource(R.string.game_score_summary, correctCount, totalRounds),
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             color = SleekEmerald,
@@ -102,7 +104,7 @@ fun GameOverView(
                         tint = SleekTextDark
                     )
                     Text(
-                        text = "Play Again",
+                        text = stringResource(R.string.game_play_again),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = SleekTextDark
@@ -119,7 +121,7 @@ fun GameOverView(
                 testTag = "finish_game_button"
             ) {
                 Text(
-                    text = "Back to Islands",
+                    text = stringResource(R.string.game_back_to_islands),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = SleekTextDark,

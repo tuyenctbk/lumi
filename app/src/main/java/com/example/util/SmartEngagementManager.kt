@@ -35,11 +35,13 @@ class SmartEngagementManager(private val context: Context) {
         private const val KEY_SHARE_DISMISS_COUNT = "share_dismiss_count"
         private const val KEY_SIMULATED_UPDATE_AVAILABLE = "simulated_update_available"
 
-        // Minimum time interval between any auto popups (7 days = 604,800,000 ms to avoid user disruption)
-        private const val MIN_PROMPT_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000L
-        private const val MIN_GAMES_DELTA_BETWEEN_PROMPTS = 5
-        private const val MIN_LAUNCHES_DELTA_BETWEEN_PROMPTS = 3
+        // Minimum time interval between any auto popups (14 days = 1,209,600,000 ms to avoid user disruption)
+        private const val MIN_PROMPT_INTERVAL_MS = 14 * 24 * 60 * 60 * 1000L
+        private const val MIN_GAMES_DELTA_BETWEEN_PROMPTS = 8
+        private const val MIN_LAUNCHES_DELTA_BETWEEN_PROMPTS = 5
         private const val MAX_DISMISS_COUNT = 2
+        private const val KEY_TOTAL_PROMPTS_SHOWN = "total_prompts_shown"
+        private const val MAX_LIFETIME_PROMPTS = 3
     }
 
     var isOnboardingCompleted: Boolean
@@ -82,7 +84,12 @@ class SmartEngagementManager(private val context: Context) {
         prefs.edit().putBoolean(KEY_SIMULATED_UPDATE_AVAILABLE, isAvailable).apply()
     }
 
+    var totalPromptsShown: Int
+        get() = prefs.getInt(KEY_TOTAL_PROMPTS_SHOWN, 0)
+        private set(value) = prefs.edit().putInt(KEY_TOTAL_PROMPTS_SHOWN, value).apply()
+
     fun recordPromptShown(suggestionType: SmartSuggestionType) {
+        totalPromptsShown += 1
         prefs.edit()
             .putLong(KEY_LAST_PROMPT_TIME, System.currentTimeMillis())
             .putInt(KEY_LAST_PROMPT_GAMES_COUNT, completedGamesCount)
@@ -124,7 +131,10 @@ class SmartEngagementManager(private val context: Context) {
         val lastPrompt = prefs.getLong(KEY_LAST_PROMPT_TIME, 0L)
         val lastDismissed = prefs.getLong(KEY_LAST_DISMISSED_TIME, 0L)
 
-        // 1. Ensure we don't spam the user (must pass min 7 days interval since last prompt/dismiss)
+        // 1. Ensure we don't spam the user (must pass min 14 days interval since last prompt/dismiss and max lifetime prompts)
+        if (totalPromptsShown >= MAX_LIFETIME_PROMPTS) {
+            return null
+        }
         if (now - lastPrompt < MIN_PROMPT_INTERVAL_MS || now - lastDismissed < MIN_PROMPT_INTERVAL_MS) {
             return null
         }

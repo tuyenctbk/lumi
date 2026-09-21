@@ -18,7 +18,10 @@ enum class LearningCategory(
     VEHICLES("vehicles", "Vehicles & Travel", "🚗", 0xFF673AB7, 0xFF9575CD),
     NATURE("nature", "Forest & Weather", "🌲", 0xFF2E7D32, 0xFF66BB6A),
     CLOTHES("clothes", "Clothes & Dressing", "👕", 0xFFEC407A, 0xFFF48FB1),
-    BODY("body", "My Body & Health", "👁️", 0xFF1565C0, 0xFF42A5F5)
+    BODY("body", "My Body & Health", "👁️", 0xFF1565C0, 0xFF42A5F5),
+    MUSIC("music", "Music & Instruments", "🎵", 0xFF8E24AA, 0xFFCE93D8),
+    SPORTS("sports", "Sports & Fun Play", "⚽", 0xFFFF5722, 0xFFFFAB91),
+    FEELINGS("feelings", "Feelings & Moods", "😊", 0xFF00ACC1, 0xFF80DEEA)
 }
 
 enum class TargetLanguage(

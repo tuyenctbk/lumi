@@ -33,11 +33,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.R
 import com.example.audio.SoundFxHelper
 import com.example.ui.theme.SleekCoral
 import com.example.ui.theme.SleekEmerald
@@ -61,8 +63,8 @@ import kotlin.random.Random
 fun ParentalGate(
     onDismiss: () -> Unit,
     onSuccess: () -> Unit,
-    title: String = "Grown-Ups Only",
-    subtitle: String = "Please solve this quick math challenge to access settings and progress reports:"
+    title: String = stringResource(R.string.parent_gate_title),
+    subtitle: String = stringResource(R.string.parent_gate_prompt)
 ) {
     // Generate fresh random numbers for the math challenge
     var challengeSeed by remember { mutableIntStateOf(0) }
@@ -159,7 +161,7 @@ fun ParentalGate(
 
                 if (hasError) {
                     Text(
-                        text = "Incorrect answer, please try again with a new question!",
+                        text = stringResource(R.string.parent_gate_error),
                         color = SleekCoral,
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold,
@@ -177,23 +179,23 @@ fun ParentalGate(
                 ) {
                     options.forEach { opt ->
                         FocusableCard(
-                            onClick = {
-                                if (opt == correctAnswer) {
-                                    SoundFxHelper.playCorrectChime()
-                                    onSuccess()
-                                } else {
-                                    SoundFxHelper.playWrongOops()
-                                    hasError = true
-                                    challengeSeed++ // Regenerate challenge
-                                }
-                            },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(18.dp),
-                            testTag = "parental_gate_option_$opt",
-                            backgroundColor = SleekSurface,
-                            unfocusedBorderColor = SleekSurfaceBorder,
-                            focusedBorderColor = SleekEmerald,
-                            focusedScale = 1.06f
+                             onClick = {
+                                 if (opt == correctAnswer) {
+                                     SoundFxHelper.playCorrectChime()
+                                     onSuccess()
+                                 } else {
+                                     SoundFxHelper.playWrongOops()
+                                     hasError = true
+                                     challengeSeed++ // Regenerate challenge
+                                 }
+                             },
+                             modifier = Modifier.weight(1f),
+                             shape = RoundedCornerShape(18.dp),
+                             testTag = "parental_gate_option_$opt",
+                             backgroundColor = SleekSurface,
+                             unfocusedBorderColor = SleekSurfaceBorder,
+                             focusedBorderColor = SleekEmerald,
+                             focusedScale = 1.06f
                         ) {
                             Text(
                                 text = "$opt",
@@ -219,7 +221,7 @@ fun ParentalGate(
                     modifier = Modifier.padding(bottom = 12.dp)
                 ) {
                     Text(
-                        text = "🔒 Safe Kids Protection • COPPA Compliant",
+                        text = stringResource(R.string.parent_gate_coppa),
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = SleekEmeraldDark,
@@ -238,7 +240,7 @@ fun ParentalGate(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Back to Learning",
+                        text = stringResource(R.string.parent_gate_back),
                         color = SleekTextDark,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,

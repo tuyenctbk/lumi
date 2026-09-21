@@ -124,4 +124,49 @@
     <string name="parent_retention_accuracy">Retention Accuracy</string>
     <string name="parent_study_streak">Study Streak</string>
     <string name="parent_active_breaks">Active Breaks Taken</string>
+
+    <!-- Additional Game Shows & UI Strings -->
+    <string name="game_show_complete">Show Complete!</string>
+    <string name="game_score_summary">You scored %1$d out of %2$d stars!</string>
+    <string name="game_back_to_islands">Back to Islands</string>
+    <string name="game_balloon_pop_title">Balloon Pop! 🎈</string>
+    <string name="game_balloon_pop_prompt">Pop the matching balloon! 🎈</string>
+    <string name="game_word_sorter_title">Word Train Sorter 🚂</string>
+    <string name="game_word_sorter_prompt">Sort the card into the right train car! 🚂</string>
+    <string name="game_color_mixer_title">Color Magic Mixer 🎨</string>
+    <string name="game_shadow_guess_title">Shadow Silhouette Guess 👤</string>
+    <string name="game_mystery_spotlight_title">Mystery Spotlight 🔦</string>
+    <string name="game_spot_the_word">Spot the: \"%1$s\"</string>
+    <string name="game_hear_word">Hear Word</string>
+    <string name="game_sound_match_title">Sound Match 🎵</string>
+    <string name="game_find_it_title">Find It Adventure 🔎</string>
+    <string name="game_listen_closely">Listen closely to Lumi!</string>
+    <string name="game_find_target">Find: \"%1$s\"</string>
+    <string name="game_listen_again">Listen Again 🔊</string>
+    <string name="game_awesome_pop">Awesome pop! ⭐</string>
+    <string name="game_try_another">Oops! Try another balloon! 🎈</string>
+    <string name="game_pts_upper">%1$d PTS</string>
+
+    <!-- Parental Gate -->
+    <string name="parent_gate_title">Parental Gate 🔒</string>
+    <string name="parent_gate_prompt">Adults Only: Solve to continue</string>
+    <string name="parent_gate_error">Incorrect answer, please try again with a new question!</string>
+    <string name="parent_gate_coppa">🔒 Safe Kids Protection • COPPA Compliant</string>
+    <string name="parent_gate_back">Back to Learning</string>
+
+    <!-- Offline Banner -->
+    <string name="offline_mode_banner">⚡ Offline Mode — Progress is being saved safely to local database</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_tagline">Your Magical Animated Language Playmate ✨</string>
+    <string name="splash_loading">Loading fun worlds &amp; games...</string>
+    <string name="splash_tap_skip">Tap anywhere to jump in 🚀</string>
+
+    <!-- Top Bar -->
+    <string name="topbar_language">LANGUAGE</string>
+
+    <!-- Physical Breaks & Active Quests -->
+    <string name="break_i_did_it">I Did It! 🌟</string>
+    <string name="break_skip">Skip for Now</string>
+    <string name="break_hear_lumi">Hear Lumi 🔊</string>
 </resources>

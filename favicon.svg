@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B" />
+      <stop offset="50%" stop-color="#312E81" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF59E" />
+      <stop offset="40%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Circular Base Badge -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGrad)" stroke="#38BDF8" stroke-width="1.5" />
+
+  <!-- Outer Star Glow -->
+  <circle cx="32" cy="32" r="18" fill="#FDE047" opacity="0.2" />
+
+  <!-- Lumi Golden Star Body -->
+  <polygon points="32,14 36.8,24.5 48,25.8 39.5,33.8 42,45 32,38.8 22,45 24.5,33.8 16,25.8 27.2,24.5"
+           fill="url(#starGrad)" filter="url(#glow)" />
+
+  <!-- Bevel Facet Highlight -->
+  <polygon points="32,16 35.8,24.8 45,26 38,32.5 40,42 32,36.5 24,42 26,32.5 19,26 28.2,24.8"
+           fill="#FFFFFF" opacity="0.3" />
+
+  <!-- Tiny Crown -->
+  <polygon points="28,14 29.5,11.5 32,13 34.5,11.5 36,14" fill="#FBBF24" />
+  <circle cx="29.5" cy="11.5" r="0.7" fill="#FFFFFF" />
+  <circle cx="32" cy="13" r="0.6" fill="#FFFFFF" />
+  <circle cx="34.5" cy="11.5" r="0.7" fill="#FFFFFF" />
+
+  <!-- Rosy Cheeks -->
+  <ellipse cx="23.5" cy="34" rx="2" ry="1.2" fill="#F87171" />
+  <ellipse cx="40.5" cy="34" rx="2" ry="1.2" fill="#F87171" />
+
+  <!-- Left Eye -->
+  <ellipse cx="27" cy="29.5" rx="1.8" ry="2.6" fill="#1E1B4B" />
+  <circle cx="26.3" cy="28.5" r="0.9" fill="#FFFFFF" />
+  <circle cx="27.8" cy="30.5" r="0.4" fill="#FFFFFF" />
+
+  <!-- Right Eye -->
+  <ellipse cx="37" cy="29.5" rx="1.8" ry="2.6" fill="#1E1B4B" />
+  <circle cx="36.3" cy="28.5" r="0.9" fill="#FFFFFF" />
+  <circle cx="37.8" cy="30.5" r="0.4" fill="#FFFFFF" />
+
+  <!-- Cheerful Smile -->
+  <path d="M 29.5,33 Q 32,36.5 34.5,33" stroke="#1E1B4B" stroke-width="1.2" fill="none" stroke-linecap="round" />
+  <path d="M 30.5,34 Q 32,36.5 33.5,34" fill="#F43F5E" />
+
+  <!-- Magic Sparkle -->
+  <polygon points="44,19 45,21 47,22 45,23 44,25 43,23 41,22 43,21" fill="#FFFFFF" opacity="0.9" />
+</svg>

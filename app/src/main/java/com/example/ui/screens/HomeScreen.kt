@@ -30,8 +30,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DirectionsRun
 import androidx.compose.material.icons.filled.AutoAwesome
-import androidx.compose.material.icons.filled.DirectionsRun
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Hearing
 import androidx.compose.material.icons.filled.Map
@@ -173,7 +173,7 @@ fun HomeScreen(
                 id = "movement_quest",
                 title = "Movement Quest",
                 subtitle = "Physical Fun Break",
-                icon = Icons.Default.DirectionsRun,
+                icon = Icons.AutoMirrored.Filled.DirectionsRun,
                 color = SleekOcean,
                 colorDark = SleekOceanDark,
                 badge = "Active!"
@@ -240,6 +240,24 @@ fun HomeScreen(
                 color = SleekOcean,
                 colorDark = SleekOceanDark,
                 badge = "MIC"
+            ),
+            GameShowItem(
+                id = "balloon_pop",
+                title = "Balloon Pop!",
+                subtitle = "Float & Pop Target Words",
+                icon = Icons.Default.AutoAwesome,
+                color = SleekCoral,
+                colorDark = SleekCoralDark,
+                badge = "NEW! 🎈"
+            ),
+            GameShowItem(
+                id = "word_sorter",
+                title = "Category Train",
+                subtitle = "Sort Words into Cars",
+                icon = Icons.Default.AutoAwesome,
+                color = SleekOcean,
+                colorDark = SleekOceanDark,
+                badge = "NEW! 🚂"
             )
         )
     }
@@ -482,7 +500,7 @@ fun HomeScreen(
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Default.DirectionsRun,
+                                imageVector = Icons.AutoMirrored.Filled.DirectionsRun,
                                 contentDescription = null,
                                 tint = Color.White,
                                 modifier = Modifier.size(14.dp)

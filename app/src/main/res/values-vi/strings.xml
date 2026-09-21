@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Lumi</string>
     <string name="button_next">Tiếp tục</string>
@@ -24,8 +25,6 @@
     <string name="dialog_share_desc">Chia sẻ ứng dụng Lumi cho bạn bè và các phụ huynh khác để cùng bé chơi và học nhé!</string>
     <string name="dialog_update_title">Có bản cập nhật mới! 🚀</string>
     <string name="dialog_update_desc">Lumi có thêm từ vựng mới, nhãn dán đáng yêu và trò chơi mới. Hãy cập nhật ngay hôm nay!</string>
-
-    <!-- Quiz Screen -->
     <string name="quiz_select_difficulty">Chọn Độ Khó</string>
     <string name="quiz_go_back">Quay lại</string>
     <string name="quiz_vocabulary_quiz">Câu Đố Từ Vựng</string>
@@ -34,8 +33,6 @@
     <string name="quiz_listen_audio">Nghe phát âm</string>
     <string name="quiz_next_question">Câu tiếp theo ➔</string>
     <string name="quiz_see_results">Xem kết quả 🎉</string>
-
-    <!-- Home Screen -->
     <string name="home_daily_goal">Mục tiêu ngày: %1$d / %2$d phút</string>
     <string name="home_daily_target_achieved">🎉 Đã đạt mục tiêu hôm nay! Quá tuyệt vời!</string>
     <string name="home_mins_remaining">Còn %1$d phút hôm nay</string>
@@ -43,8 +40,6 @@
     <string name="home_choose_island_subtitle">CHỌN MỘT HÒN ĐẢO ĐỂ BẮT ĐẦU KHÁM PHÁ</string>
     <string name="home_lumi_game_shows">Gameshow Cùng Lumi</string>
     <string name="home_play_games_subtitle">CHƠI TRÒ CHƠI TƯƠNG TÁC VÀ GIÀNH SAO SÁNG</string>
-
-    <!-- Celebration & Summary Screen -->
     <string name="celebration_lesson_completed">HOÀN THÀNH BÀI HỌC!</string>
     <string name="celebration_fantastic_job">Làm Tốt Lắm Bé Ơi!</string>
     <string name="celebration_subtitle">Bé đã giành thêm sao sáng và mở rộng vốn từ vựng!</string>
@@ -64,8 +59,6 @@
     <string name="celebration_badge_earned">🚀 +%1$d từ vựng đã thành thạo trong phiên này</string>
     <string name="celebration_superstar_speech">Bé là Siêu Sao Ngôn Ngữ!</string>
     <string name="celebration_momentum_speech">Hoan hô! Tiếp tục phát huy nhé!</string>
-
-    <!-- Lumi Mascot Reactions -->
     <string name="lumi_reaction_correct">Tuyệt Vời! 🌟</string>
     <string name="lumi_reaction_correct_sub">+10 Ngôi Sao Thưởng!</string>
     <string name="lumi_reaction_streak">Chuỗi Bất Bại! 🔥</string>
@@ -76,16 +69,12 @@
     <string name="lumi_speech_keep_practicing">Tiếp tục luyện tập nhé!</string>
     <string name="lumi_speech_high_five">Chính xác! Đập tay nào!</string>
     <string name="lumi_speech_tap_answer">Chạm vào đáp án đúng nhé!</string>
-
-    <!-- General Game Labels -->
     <string name="game_sound_match_prompt">Hình ảnh nào khớp với âm thanh bé vừa nghe?</string>
     <string name="game_round_counter">Vòng %1$d / %2$d</string>
     <string name="game_finish">Hoàn Thành Trò Chơi 🎉</string>
     <string name="game_play_again">Chơi Lại 🔄</string>
     <string name="game_score_pts">⭐ %1$d điểm</string>
     <string name="game_listen">Nghe</string>
-
-    <!-- New Games & AI Creator -->
     <string name="spelling_bee_title">Đố Vui Đánh Vần 🐝</string>
     <string name="spelling_bee_word_counter">Từ %1$d / %2$d</string>
     <string name="memory_match_title">Lật Thẻ Trí Nhớ 🎴</string>
@@ -99,8 +88,6 @@
     <string name="button_delete">Xóa</string>
     <string name="button_clear">Xóa hết</string>
     <string name="button_next_word">Từ tiếp theo ➔</string>
-
-    <!-- Parent Dashboard & Settings -->
     <string name="parent_dashboard_title">Trung Tâm Phân Tích Cho Phụ Huynh 📊</string>
     <string name="parent_dashboard_sub">Báo cáo học tập &amp; Báo cáo thông minh</string>
     <string name="parent_qr_report">Báo Cáo Web Phụ Huynh Qua Mã QR 📱</string>
@@ -111,4 +98,37 @@
     <string name="parent_retention_accuracy">Độ chính xác ghi nhớ</string>
     <string name="parent_study_streak">Chuỗi ngày học tập</string>
     <string name="parent_active_breaks">Số lần nghỉ giải lao</string>
+    <string name="game_show_complete">Hoàn Thành Trò Chơi!</string>
+    <string name="game_score_summary">Bé đạt %1 trên %2 ngôi sao!</string>
+    <string name="game_back_to_islands">Quay Lại Quần Đảo</string>
+    <string name="game_balloon_pop_title">Bắn Bóng Bay! 🎈</string>
+    <string name="game_balloon_pop_prompt">Bắn trúng bóng bay chính xác! 🎈</string>
+    <string name="game_word_sorter_title">Đoàn Tàu Từ Vựng 🚂</string>
+    <string name="game_word_sorter_prompt">Kéo thẻ vào đúng toa tàu! 🚂</string>
+    <string name="game_color_mixer_title">Pha Màu Ma Thuật 🎨</string>
+    <string name="game_shadow_guess_title">Đoán Hình Bóng 👤</string>
+    <string name="game_mystery_spotlight_title">Đèn Chiếu Bí Ẩn 🔦</string>
+    <string name="game_spot_the_word">Tìm từ: "%1"</string>
+    <string name="game_hear_word">Nghe Từ</string>
+    <string name="game_sound_match_title">Nghe &amp; Ghép Âm 🎵</string>
+    <string name="game_find_it_title">Phiêu Lưu Tìm Đồ 🔎</string>
+    <string name="game_listen_closely">Lắng nghe bé Lumi nói nhé!</string>
+    <string name="game_find_target">Tìm: "%1"</string>
+    <string name="game_listen_again">Nghe Lại 🔊</string>
+    <string name="game_awesome_pop">Tuyệt vời lắm! ⭐</string>
+    <string name="game_try_another">Ôi! Thử lại bóng khác nhé! 🎈</string>
+    <string name="game_pts_upper">%1 ĐIỂM</string>
+    <string name="parent_gate_title">Cổng Phụ Huynh 🔒</string>
+    <string name="parent_gate_prompt">Dành riêng người lớn: Giải toán để tiếp tục</string>
+    <string name="parent_gate_error">Đáp án chưa đúng, hãy thử câu hỏi mới nhé!</string>
+    <string name="parent_gate_coppa">🔒 An Toàn Trẻ Em • Chuẩn COPPA</string>
+    <string name="parent_gate_back">Quay Lại Học Tập</string>
+    <string name="offline_mode_banner">⚡ Chế độ ngoại tuyến — Tiến độ được lưu an toàn</string>
+    <string name="splash_tagline">Bạn Đồng Hành Học Ngoại Ngữ Kỳ Diệu ✨</string>
+    <string name="splash_loading">Đang tải thế giới &amp; trò chơi...</string>
+    <string name="splash_tap_skip">Chạm bất kỳ đâu để bắt đầu 🚀</string>
+    <string name="topbar_language">NGÔN NGỮ</string>
+    <string name="break_i_did_it">Bé Đã Làm Xong! 🌟</string>
+    <string name="break_skip">Bỏ qua lúc này</string>
+    <string name="break_hear_lumi">Nghe Lumi 🔊</string>
 </resources>

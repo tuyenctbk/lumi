@@ -43,11 +43,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.R
 import com.example.model.MascotMood
 import com.example.model.PhysicalBreakQuest
 import com.example.ui.theme.SleekEmerald
@@ -236,7 +238,7 @@ fun LumiQuestModal(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = "Hear Lumi 🔊",
+                                text = stringResource(R.string.break_hear_lumi),
                                 fontWeight = FontWeight.Bold,
                                 color = SleekTextDark,
                                 fontSize = 13.sp
@@ -269,7 +271,7 @@ fun LumiQuestModal(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = "I Did It! ⭐",
+                                text = stringResource(R.string.break_i_did_it),
                                 fontWeight = FontWeight.Black,
                                 color = Color.White,
                                 fontSize = 14.sp
@@ -289,7 +291,7 @@ fun LumiQuestModal(
                         .testTag("quest_skip_button")
                 ) {
                     Text(
-                        text = "Skip for Now",
+                        text = stringResource(R.string.break_skip),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = SleekTextMuted
