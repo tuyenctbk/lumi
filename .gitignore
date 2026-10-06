@@ -5,59 +5,91 @@
 .kotlin/
 build/
 */build/
+**/build/
 app/build/
 /build/
 /captures/
-.externalNativeBuild/
+captures/
+.ksp/
 .cxx/
+.externalNativeBuild/
 native-binaries/
+cmake-build-*/
 
-# Package outputs
+# Package & Compilation Outputs
 *.apk
 *.ap_
 *.aab
+*.apks
 *.dex
+*.class
+*.aar
 
-# Profiling & Diagnostics
+# Test Reports, Logs & Profiling Diagnostics
+*/reports/
+*/test-results/
 *.hprof
+*.log
 hs_err_pid*
 replay_pid*
+
+# Windows Scripts & Executables
+*.bat
+*.cmd
+*.exe
 
 # ==========================================
 # Local Configuration & Sensitive Credentials
 # ==========================================
 local.properties
+/local.properties
 local.defaults.properties
 .env
 .env.*
+.env*.local
+!.env.example
 secrets.properties
 signing.properties
 
-# Signing Keys & Certificates (Never commit production keys)
+# Signing Keys & Certificates (Never commit production or upload keys)
 *.jks
 *.keystore
 *.p12
 *.key
+*.pem
+*.pk8
 debug.keystore
 common_release_key.jks
+my-upload-key.jks
+
+# Google Services & Firebase Credentials
+google-services.json
+crashlytics.properties
+crashlytics-build.properties
 
 # ==========================================
 # IDE & Editor Files
 # ==========================================
 # Android Studio / IntelliJ IDEA
-*.iml
-*.iws
-*.ipr
 .idea/
 !.idea/codeStyles/
 !.idea/copyright/
+*.iml
+*.iws
+*.ipr
+out/
 
 # Visual Studio Code & Fleet
 .vscode/
 .fleet/
 
+# Eclipse
+.project
+.settings/
+.classpath
+
 # ==========================================
-# OS Generated Files
+# OS Generated Files & Temporary / Swap Files
 # ==========================================
 .DS_Store
 .DS_Store?
@@ -66,4 +98,20 @@ common_release_key.jks
 .Trashes
 ehthumbs.db
 Thumbs.db
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.temp
 
+# ==========================================
+# Python & Tooling Caches
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+env/
+venv/

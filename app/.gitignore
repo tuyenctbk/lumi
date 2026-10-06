@@ -1,6 +1,24 @@
-/build
+# Module build artifacts & outputs
+build/
+/build/
+*.apk
+*.ap_
+*.aab
+*.apks
+*.dex
+*.class
+*.aar
+
+# Signing keys & keystores
 *.jks
 *.keystore
+*.key
+*.p12
+*.pem
+*.pk8
 common_release_key.jks
-*.apk
-*.aab
+debug.keystore
+
+# Google services credentials
+google-services.json
+crashlytics.properties
