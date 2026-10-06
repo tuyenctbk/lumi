@@ -98,6 +98,7 @@ fun PronunciationPracticeScreen(
     onBack: () -> Unit,
     onFinishLesson: (score: Int, wordsCount: Int) -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = LocalContext.current
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()

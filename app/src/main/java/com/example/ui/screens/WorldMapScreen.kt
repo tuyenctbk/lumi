@@ -114,6 +114,7 @@ fun WorldMapScreen(
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
     sharedTransitionScope: SharedTransitionScope? = null
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val points by viewModel.points.collectAsState()
     val mascotMood by viewModel.mascotMood.collectAsState()

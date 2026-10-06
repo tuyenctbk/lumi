@@ -90,6 +90,7 @@ fun MemoryMatchScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = LocalContext.current
     val soundManager = remember { SoundManager.getInstance(context) }
     val targetLanguage by viewModel.targetLanguage.collectAsState()

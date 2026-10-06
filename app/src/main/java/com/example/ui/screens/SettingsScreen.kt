@@ -87,6 +87,7 @@ fun SettingsScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()
     val streakDays by viewModel.streakDays.collectAsState()

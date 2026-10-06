@@ -88,6 +88,7 @@ fun QuizScreen(
     onBack: () -> Unit,
     onFinishQuiz: (score: Int, total: Int) -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = androidx.compose.ui.platform.LocalContext.current
     val soundManager = remember { com.example.audio.SoundManager.getInstance(context) }
     

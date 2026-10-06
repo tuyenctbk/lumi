@@ -80,6 +80,9 @@ interface VocabularyDao {
     @Query("SELECT COUNT(*) FROM vocabulary_items WHERE languageCode = :languageCode")
     fun getTotalCount(languageCode: String): Flow<Int>
 
+    @Query("SELECT COUNT(*) FROM vocabulary_items WHERE languageCode = :languageCode")
+    suspend fun getTotalCountDirect(languageCode: String): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertVocabulary(item: VocabularyItemEntity)
 

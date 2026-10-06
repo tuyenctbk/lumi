@@ -79,6 +79,7 @@ fun AchievementGalleryScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val unlockedBadges by viewModel.badges.collectAsState()
     val streakDays by viewModel.streakDays.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()

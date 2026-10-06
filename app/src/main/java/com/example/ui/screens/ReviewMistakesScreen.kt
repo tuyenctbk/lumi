@@ -73,6 +73,7 @@ fun ReviewMistakesScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    androidx.activity.compose.BackHandler { onNavigateBack() }
     val missedWords by viewModel.missedWords.collectAsState()
     val targetLanguage by viewModel.targetLanguage.collectAsState()
 

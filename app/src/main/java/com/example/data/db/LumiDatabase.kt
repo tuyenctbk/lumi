@@ -16,7 +16,7 @@ import androidx.room.RoomDatabase
         Lesson::class,
         Progress::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class LumiDatabase : RoomDatabase() {

@@ -114,6 +114,7 @@ fun BalloonPopGameScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val coroutineScope = androidx.compose.runtime.rememberCoroutineScope()
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val words = remember { viewModel.getAllWords() }

@@ -74,10 +74,10 @@ class LumiViewModel(
     private val _activeCategory = MutableStateFlow<LearningCategory?>(null)
     val activeCategory: StateFlow<LearningCategory?> = _activeCategory.asStateFlow()
 
-    private val _points = MutableStateFlow(40)
+    private val _points = MutableStateFlow(0)
     val points: StateFlow<Int> = _points.asStateFlow()
 
-    private val _streakDays = MutableStateFlow(3)
+    private val _streakDays = MutableStateFlow(0)
     val streakDays: StateFlow<Int> = _streakDays.asStateFlow()
 
     private val _activeMilestone = MutableStateFlow<LearningMilestoneType?>(null)
@@ -169,7 +169,7 @@ class LumiViewModel(
     private val _isGameOrQuizActive = MutableStateFlow(false)
     val isGameOrQuizActive: StateFlow<Boolean> = _isGameOrQuizActive.asStateFlow()
 
-    private val _physicalBreaksCompleted = MutableStateFlow(1)
+    private val _physicalBreaksCompleted = MutableStateFlow(0)
     val physicalBreaksCompleted: StateFlow<Int> = _physicalBreaksCompleted.asStateFlow()
 
     private var periodicBreakJob: Job? = null
@@ -186,13 +186,15 @@ class LumiViewModel(
             speakLumi("Hi! I'm Lumi! Let's explore the world map together!")
         }
 
-        // Observe Room DB User Preferences for language and audio settings
+        // Observe Room DB User Preferences for language, points, breaks, and audio settings
         viewModelScope.launch {
             userPreferences.collect { pref ->
                 val lang = TargetLanguage.fromCode(pref.activeLanguageCode)
                 if (_targetLanguage.value != lang) {
                     _targetLanguage.value = lang
                 }
+                _points.value = pref.totalStarsEarned
+                _physicalBreaksCompleted.value = pref.physicalBreaksCount
                 SoundFxHelper.setSoundEffectsEnabled(pref.isSoundEnabled)
             }
         }
@@ -201,7 +203,7 @@ class LumiViewModel(
         viewModelScope.launch {
             repository.getAllDailyStats().collect { statsList ->
                 val streak = repository.calculateConsecutiveStreak(statsList)
-                _streakDays.value = streak.coerceAtLeast(1)
+                _streakDays.value = streak
             }
         }
 
@@ -244,6 +246,13 @@ class LumiViewModel(
         speechHelper.speakLumi("Fantastic moving! You earned ${quest.rewardPoints} bonus stars!")
 
         viewModelScope.launch {
+            val pref = userPreferences.value
+            repository.saveUserPreferences(
+                pref.copy(
+                    totalStarsEarned = _points.value,
+                    physicalBreaksCount = _physicalBreaksCompleted.value
+                )
+            )
             repository.logSession(
                 gameType = "physical_break",
                 wordsPracticed = 1,
@@ -386,6 +395,9 @@ class LumiViewModel(
                 setMascotMood(MascotMood.ENCOURAGING, 2200)
             }
 
+            val pref = userPreferences.value
+            repository.saveUserPreferences(pref.copy(totalStarsEarned = _points.value))
+
             questionsAnsweredCounter++
         }
     }
@@ -398,6 +410,8 @@ class LumiViewModel(
         viewModelScope.launch {
             repository.logSession(gameType, practicedCount, accuracy, durationSeconds)
             _points.value += correctCount * 15
+            val pref = userPreferences.value
+            repository.saveUserPreferences(pref.copy(totalStarsEarned = _points.value))
             HapticFeedbackHelper.vibrateCelebration()
             val masteredCount = wordProgressList.value.count { it.isMastered }
             val newlyUnlocked = repository.evaluateAndUnlockAchievements(

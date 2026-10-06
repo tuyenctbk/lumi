@@ -25,7 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
 import com.example.model.TargetLanguage
+import androidx.compose.foundation.layout.Box
 import com.example.ui.theme.SleekCoral
+import com.example.ui.theme.SleekOcean
 import com.example.ui.theme.SleekEmerald
 import com.example.ui.theme.SleekGold
 import com.example.ui.theme.SleekSurface
@@ -33,12 +35,17 @@ import com.example.ui.theme.SleekSurfaceBorder
 import com.example.ui.theme.SleekTextDark
 import com.example.ui.theme.SleekTextSubtle
 
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Shield
+
 @Composable
 fun TopBarHeader(
     targetLanguage: TargetLanguage,
     points: Int,
     streakDays: Int,
     onOpenLanguagePicker: () -> Unit,
+    onNavigateParentHub: (() -> Unit)? = null,
+    onNavigateSettings: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     BoxWithConstraints(
@@ -128,6 +135,29 @@ fun TopBarHeader(
                                 color = SleekTextDark,
                                 fontSize = 12.sp
                             )
+                        }
+                    }
+
+                    if (onNavigateParentHub != null) {
+                        FocusableCard(
+                            onClick = onNavigateParentHub,
+                            shape = RoundedCornerShape(14.dp),
+                            backgroundColor = SleekSurface,
+                            unfocusedBorderColor = SleekSurfaceBorder,
+                            focusedBorderColor = SleekOcean,
+                            testTag = "topbar_parent_hub_button"
+                        ) {
+                            Box(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Shield,
+                                    contentDescription = "Parents",
+                                    tint = SleekOcean,
+                                    modifier = Modifier.size(15.dp)
+                                )
+                            }
                         }
                     }
                 }
@@ -223,6 +253,59 @@ fun TopBarHeader(
                                 color = SleekTextDark,
                                 fontSize = 15.sp
                             )
+                        }
+                    }
+
+                    if (onNavigateParentHub != null) {
+                        FocusableCard(
+                            onClick = onNavigateParentHub,
+                            shape = RoundedCornerShape(20.dp),
+                            backgroundColor = SleekSurface,
+                            unfocusedBorderColor = SleekSurfaceBorder,
+                            focusedBorderColor = SleekOcean,
+                            testTag = "topbar_parent_hub_button_expanded"
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Shield,
+                                    contentDescription = "Parents",
+                                    tint = SleekOcean,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Text(
+                                    text = "Parents",
+                                    fontWeight = FontWeight.Bold,
+                                    color = SleekTextDark,
+                                    fontSize = 13.sp
+                                )
+                            }
+                        }
+                    }
+
+                    if (onNavigateSettings != null) {
+                        FocusableCard(
+                            onClick = onNavigateSettings,
+                            shape = RoundedCornerShape(20.dp),
+                            backgroundColor = SleekSurface,
+                            unfocusedBorderColor = SleekSurfaceBorder,
+                            focusedBorderColor = SleekGold,
+                            testTag = "topbar_settings_button_expanded"
+                        ) {
+                            Box(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Settings,
+                                    contentDescription = "Settings",
+                                    tint = SleekTextDark,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
                         }
                     }
                 }

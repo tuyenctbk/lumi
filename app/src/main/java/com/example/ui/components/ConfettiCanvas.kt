@@ -26,7 +26,7 @@ data class Particle(
 
 @Composable
 fun ConfettiCanvas(
-    trigger: Boolean,
+    trigger: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     if (!trigger) return

@@ -38,6 +38,7 @@ import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.filled.RecordVoiceOver
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Insights
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Visibility
@@ -258,6 +259,15 @@ fun HomeScreen(
                 color = SleekOcean,
                 colorDark = SleekOceanDark,
                 badge = "NEW! 🚂"
+            ),
+            GameShowItem(
+                id = "star_catcher",
+                title = "Star Catcher Arcade",
+                subtitle = "Catch Falling Word Stars",
+                icon = Icons.Default.Star,
+                color = SleekGold,
+                colorDark = SleekGoldDark,
+                badge = "HOT! ⭐"
             )
         )
     }
@@ -304,10 +314,148 @@ fun HomeScreen(
                 targetLanguage = targetLanguage,
                 points = points,
                 streakDays = streakDays,
-                onOpenLanguagePicker = onOpenLanguagePicker
+                onOpenLanguagePicker = onOpenLanguagePicker,
+                onNavigateParentHub = onNavigateParentHub,
+                onNavigateSettings = { onNavigateGame("settings") }
             )
 
-            Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Quick Navigation Hub (World Map, Stickers, Badges, Parent Hub, Settings)
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = if (isMobile) 14.dp else 24.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 6.dp)
+            ) {
+                item {
+                    TvFocusableCard(
+                        onClick = onNavigateWorldMap,
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = SleekSurface,
+                        focusedBorderColor = SleekOcean,
+                        unfocusedBorderColor = SleekSurfaceBorder,
+                        testTag = "home_quick_world_map"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(text = "🗺️", fontSize = 16.sp)
+                            Text(
+                                text = "World Map",
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark,
+                                fontSize = 13.sp
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    TvFocusableCard(
+                        onClick = { onNavigateGame("sticker_book") },
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = SleekSurface,
+                        focusedBorderColor = SleekCoral,
+                        unfocusedBorderColor = SleekSurfaceBorder,
+                        testTag = "home_quick_sticker_book"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(text = "🎨", fontSize = 16.sp)
+                            Text(
+                                text = "Stickers",
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark,
+                                fontSize = 13.sp
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    TvFocusableCard(
+                        onClick = { onNavigateGame("achievement_gallery") },
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = SleekSurface,
+                        focusedBorderColor = SleekGold,
+                        unfocusedBorderColor = SleekSurfaceBorder,
+                        testTag = "home_quick_achievements"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(text = "🏆", fontSize = 16.sp)
+                            Text(
+                                text = "Badges",
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark,
+                                fontSize = 13.sp
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    TvFocusableCard(
+                        onClick = onNavigateParentHub,
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = SleekSurface,
+                        focusedBorderColor = SleekEmerald,
+                        unfocusedBorderColor = SleekSurfaceBorder,
+                        testTag = "home_quick_parent_hub"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(text = "👨‍👩‍👧", fontSize = 16.sp)
+                            Text(
+                                text = "Parent Hub",
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark,
+                                fontSize = 13.sp
+                            )
+                        }
+                    }
+                }
+
+                item {
+                    TvFocusableCard(
+                        onClick = { onNavigateGame("settings") },
+                        shape = RoundedCornerShape(16.dp),
+                        backgroundColor = SleekSurface,
+                        focusedBorderColor = SleekTextDark,
+                        unfocusedBorderColor = SleekSurfaceBorder,
+                        testTag = "home_quick_settings"
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 9.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text(text = "⚙️", fontSize = 16.sp)
+                            Text(
+                                text = "Settings",
+                                fontWeight = FontWeight.Bold,
+                                color = SleekTextDark,
+                                fontSize = 13.sp
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
 
             // Daily Progress Summary (Visual Canvas & Progress Metrics)
             Box(

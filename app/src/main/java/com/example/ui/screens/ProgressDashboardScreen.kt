@@ -54,6 +54,7 @@ fun ProgressDashboardScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val wordProgressList by viewModel.wordProgressList.collectAsState()
     val dailyStats by viewModel.dailyStats.collectAsState()
     val streakDays by viewModel.streakDays.collectAsState()

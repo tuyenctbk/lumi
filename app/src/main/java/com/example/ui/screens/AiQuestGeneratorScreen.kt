@@ -84,6 +84,7 @@ fun AiQuestGeneratorScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = LocalContext.current
     val soundManager = remember { SoundManager.getInstance(context) }
     val openApiRepo = remember { OpenApiLessonRepository() }

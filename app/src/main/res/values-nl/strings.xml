@@ -70,7 +70,7 @@
     <string name="lumi_speech_high_five">Correct! High five!</string>
     <string name="lumi_speech_tap_answer">Tap the correct answer!</string>
     <string name="game_sound_match_prompt">Which picture matches the sound you heard?</string>
-    <string name="game_round_counter">Round %1 of %2</string>
+    <string name="game_round_counter">Round %1$d of %2$d</string>
     <string name="game_finish">Finish Game 🎉</string>
     <string name="game_play_again">Play Again 🔄</string>
     <string name="game_score_pts">⭐ %1$d pts</string>
@@ -99,7 +99,7 @@
     <string name="parent_study_streak">Study Streak</string>
     <string name="parent_active_breaks">Active Breaks Taken</string>
     <string name="game_show_complete">Show Complete!</string>
-    <string name="game_score_summary">Score: %1 / %2</string>
+    <string name="game_score_summary">Score: %1$d / %2$d</string>
     <string name="game_back_to_islands">Back to Islands</string>
     <string name="game_balloon_pop_title">Balloon Pop! 🎈</string>
     <string name="game_balloon_pop_prompt">Pop the matching balloon! 🎈</string>

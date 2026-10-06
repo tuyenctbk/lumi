@@ -68,6 +68,7 @@ fun SoundMatchScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val mascotMood by viewModel.mascotMood.collectAsState()
     val mascotBubble by viewModel.mascotSpeechBubble.collectAsState()

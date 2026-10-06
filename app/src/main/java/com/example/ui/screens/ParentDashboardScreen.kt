@@ -100,6 +100,7 @@ fun ParentDashboardScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = LocalContext.current
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()
@@ -130,14 +131,16 @@ fun ParentDashboardScreen(
 
     var showMobilePreviewModal by remember { mutableStateOf(false) }
 
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(SleekBackground)
     ) {
+        val isMobile = maxWidth < 600.dp
+
         LazyColumn(
-            contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp),
+            contentPadding = PaddingValues(start = if (isMobile) 14.dp else 24.dp, end = if (isMobile) 14.dp else 24.dp, top = 8.dp, bottom = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize().statusBarsPadding()
         ) {
             // Header Bar

@@ -99,7 +99,7 @@
     <string name="parent_study_streak">Chuỗi ngày học tập</string>
     <string name="parent_active_breaks">Số lần nghỉ giải lao</string>
     <string name="game_show_complete">Hoàn Thành Trò Chơi!</string>
-    <string name="game_score_summary">Bé đạt %1 trên %2 ngôi sao!</string>
+    <string name="game_score_summary">Bé đạt %1$d trên %2$d ngôi sao!</string>
     <string name="game_back_to_islands">Quay Lại Quần Đảo</string>
     <string name="game_balloon_pop_title">Bắn Bóng Bay! 🎈</string>
     <string name="game_balloon_pop_prompt">Bắn trúng bóng bay chính xác! 🎈</string>

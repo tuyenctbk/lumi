@@ -229,7 +229,21 @@ fun LumiApp(viewModel: LumiViewModel) {
                     )
                 }
 
+                composable("mystery_spotlight") {
+                    MysterySpotlightScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
                 composable("game/sound_match") {
+                    SoundMatchScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable("sound_match") {
                     SoundMatchScreen(
                         viewModel = viewModel,
                         onBack = { navController.popBackStack() }
@@ -243,7 +257,21 @@ fun LumiApp(viewModel: LumiViewModel) {
                     )
                 }
 
+                composable("shadow_guess") {
+                    ShadowGuessScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
                 composable("game/color_mixer") {
+                    ColorMixerScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable("color_mixer") {
                     ColorMixerScreen(
                         viewModel = viewModel,
                         onBack = { navController.popBackStack() }
@@ -257,12 +285,26 @@ fun LumiApp(viewModel: LumiViewModel) {
                     )
                 }
 
-            composable("game/movement_quest") {
-                MovementQuestScreen(
-                    viewModel = viewModel,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+                composable("review_mistakes") {
+                    com.example.ui.screens.ReviewMistakesScreen(
+                        viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable("game/movement_quest") {
+                    MovementQuestScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable("movement_quest") {
+                    MovementQuestScreen(
+                        viewModel = viewModel,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
 
             composable("game/find_it") {
                 com.example.ui.screens.FindItGameScreen(
@@ -339,6 +381,13 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
 
+            composable("spelling_bee") {
+                com.example.ui.screens.SpellingBeeScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
             composable("game/memory_match") {
                 com.example.ui.screens.MemoryMatchScreen(
                     viewModel = viewModel,
@@ -346,7 +395,21 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
 
+            composable("memory_match") {
+                com.example.ui.screens.MemoryMatchScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
             composable("game/ai_quest") {
+                com.example.ui.screens.AiQuestGeneratorScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("ai_quest") {
                 com.example.ui.screens.AiQuestGeneratorScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }
@@ -376,6 +439,20 @@ fun LumiApp(viewModel: LumiViewModel) {
 
             composable("word_sorter") {
                 WordSorterGameScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/star_catcher") {
+                com.example.ui.screens.StarCatcherGameScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("star_catcher") {
+                com.example.ui.screens.StarCatcherGameScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }
                 )
@@ -441,7 +518,28 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
 
+            composable("game/analytics") {
+                com.example.ui.screens.ProgressDashboardScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("analytics") {
+                com.example.ui.screens.ProgressDashboardScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
             composable("game/sticker_book") {
+                StickerBookScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("sticker_book") {
                 StickerBookScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }
@@ -474,7 +572,21 @@ fun LumiApp(viewModel: LumiViewModel) {
                 )
             }
 
+            composable("game/parent_hub") {
+                ParentHubScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
             composable("parent_dashboard") {
+                ParentDashboardScreen(
+                    viewModel = viewModel,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable("game/parent_dashboard") {
                 ParentDashboardScreen(
                     viewModel = viewModel,
                     onBack = { navController.popBackStack() }

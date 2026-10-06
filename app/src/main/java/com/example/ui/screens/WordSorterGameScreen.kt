@@ -93,6 +93,7 @@ fun WordSorterGameScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val coroutineScope = rememberCoroutineScope()
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val allWords = remember { viewModel.getAllWords() }

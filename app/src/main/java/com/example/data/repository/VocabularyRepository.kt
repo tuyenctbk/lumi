@@ -1354,69 +1354,101 @@ class VocabularyRepository(
     suspend fun seedInitialDataIfNeeded() {
         // Seed Vocabulary Items into Room DB if empty
         vocabularyDao?.let { vDao ->
-            val total = vDao.getTotalCount("es")
-            // Seed all default vocabulary items for all languages
-            val entities = mutableListOf<VocabularyItemEntity>()
-            for (item in allVocabulary) {
-                for ((lang, trans) in item.translations) {
-                    entities.add(
-                        VocabularyItemEntity(
-                            id = "${item.id}_${lang}",
-                            englishWord = item.englishWord,
-                            categoryId = item.category.id,
-                            emoji = item.emoji,
-                            phonetic = item.phonetic,
-                            soundPrompt = item.soundPrompt,
-                            translation = trans,
+            val total = vDao.getTotalCountDirect("es")
+            if (total == 0) {
+                // Seed all default vocabulary items for all languages
+                val entities = mutableListOf<VocabularyItemEntity>()
+                for (item in allVocabulary) {
+                    for ((lang, trans) in item.translations) {
+                        entities.add(
+                            VocabularyItemEntity(
+                                id = "${item.id}_${lang}",
+                                englishWord = item.englishWord,
+                                categoryId = item.category.id,
+                                emoji = item.emoji,
+                                phonetic = item.phonetic,
+                                soundPrompt = item.soundPrompt,
+                                translation = trans,
+                                languageCode = lang,
+                                colorHex = item.colorHex
+                            )
+                        )
+                    }
+                }
+                vDao.insertVocabularyList(entities)
+            }
+        }
+
+        // Seed Structured Lessons for each category and language
+        val languages = listOf("es", "fr", "de", "it", "ja", "ko", "zh", "en", "vi")
+        val lessonEntities = mutableListOf<Lesson>()
+        for (category in LearningCategory.entries) {
+            for (lang in languages) {
+                val stage1Id = "lesson_${category.id}_${lang}_stage1"
+                val stage2Id = "lesson_${category.id}_${lang}_stage2"
+                val stage3Id = "lesson_${category.id}_${lang}_stage3"
+
+                if (dao.getLessonById(stage1Id) == null) {
+                    lessonEntities.add(
+                        Lesson(
+                            id = stage1Id,
+                            title = "${category.title}: Stage 1 (Beginner)",
+                            category = category.id,
                             languageCode = lang,
-                            colorHex = item.colorHex
+                            totalExercises = 5,
+                            completedExercises = 0,
+                            isCompleted = false,
+                            score = 0
+                        )
+                    )
+                }
+                if (dao.getLessonById(stage2Id) == null) {
+                    lessonEntities.add(
+                        Lesson(
+                            id = stage2Id,
+                            title = "${category.title}: Stage 2 (Explorer)",
+                            category = category.id,
+                            languageCode = lang,
+                            totalExercises = 6,
+                            completedExercises = 0,
+                            isCompleted = false,
+                            score = 0
+                        )
+                    )
+                }
+                if (dao.getLessonById(stage3Id) == null) {
+                    lessonEntities.add(
+                        Lesson(
+                            id = stage3Id,
+                            title = "${category.title}: Stage 3 (Master)",
+                            category = category.id,
+                            languageCode = lang,
+                            totalExercises = 8,
+                            completedExercises = 0,
+                            isCompleted = false,
+                            score = 0
                         )
                     )
                 }
             }
-            vDao.insertVocabularyList(entities)
+        }
+        if (lessonEntities.isNotEmpty()) {
+            dao.insertLessons(lessonEntities)
         }
 
-        // Seed 7-day initial stats for a realistic streak preview
-        val cal = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val dayLabelFormat = SimpleDateFormat("EEE", Locale.getDefault())
-
-        val mockDays = listOf(
-            Triple(12, 10, 0.92f),
-            Triple(16, 14, 0.95f),
-            Triple(10, 8, 0.88f),
-            Triple(14, 12, 0.94f),
-            Triple(18, 15, 0.96f),
-            Triple(20, 18, 0.98f),
-            Triple(15, 13, 0.95f)
-        )
-
-        val initialStats = mutableListOf<DailyLearningStatsEntity>()
-        for (i in 6 downTo 0) {
-            val dateCal = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -i) }
-            val dateStr = dateFormat.format(dateCal.time)
-            val dayLbl = dayLabelFormat.format(dateCal.time)
-            val stat = mockDays[6 - i]
-
-            val existing = dao.getDailyStatForDate(dateStr)
-            if (existing == null) {
-                initialStats.add(
-                    DailyLearningStatsEntity(
-                        dateString = dateStr,
-                        dayLabel = dayLbl,
-                        wordsPracticed = stat.first,
-                        minutesPracticed = stat.second,
-                        accuracy = stat.third,
-                        sessionsCompleted = 2,
-                        isGoalMet = true,
-                        timestamp = dateCal.timeInMillis
-                    )
+        // Ensure default user preference is initialized
+        if (dao.getUserPreferencesSnapshot() == null) {
+            dao.saveUserPreferences(
+                UserPreferencesEntity(
+                    id = 1,
+                    activeLanguageCode = "es",
+                    dailyGoalMinutes = 10,
+                    isSoundEnabled = true,
+                    isNotificationsEnabled = true,
+                    totalStarsEarned = 0,
+                    physicalBreaksCount = 0
                 )
-            }
-        }
-        if (initialStats.isNotEmpty()) {
-            dao.insertDailyStatsList(initialStats)
+            )
         }
     }
 

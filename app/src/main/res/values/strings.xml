@@ -133,6 +133,8 @@
     <string name="game_balloon_pop_prompt">Pop the matching balloon! 🎈</string>
     <string name="game_word_sorter_title">Word Train Sorter 🚂</string>
     <string name="game_word_sorter_prompt">Sort the card into the right train car! 🚂</string>
+    <string name="game_star_catcher_title">Star Catcher Arcade ⭐</string>
+    <string name="game_star_catcher_prompt">Catch the falling star! ⭐</string>
     <string name="game_color_mixer_title">Color Magic Mixer 🎨</string>
     <string name="game_shadow_guess_title">Shadow Silhouette Guess 👤</string>
     <string name="game_mystery_spotlight_title">Mystery Spotlight 🔦</string>
@@ -161,6 +163,8 @@
     <string name="splash_tagline">Your Magical Animated Language Playmate ✨</string>
     <string name="splash_loading">Loading fun worlds &amp; games...</string>
     <string name="splash_tap_skip">Tap anywhere to jump in 🚀</string>
+    <string name="splash_mascot_greeting">Hello! Let\'s Learn Together! ✨</string>
+    <string name="splash_press_enter_tv">Press OK on Remote or Tap to Start 🎮</string>
 
     <!-- Top Bar -->
     <string name="topbar_language">LANGUAGE</string>

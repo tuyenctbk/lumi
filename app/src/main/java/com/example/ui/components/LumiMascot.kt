@@ -25,7 +25,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -485,23 +488,43 @@ fun LumiMascot(
         label = "lumi_mascot_focus_scale"
     )
 
+    var isTapped by remember { mutableStateOf(false) }
+    val tapScale by animateFloatAsState(
+        targetValue = if (isTapped) 1.22f else 1.0f,
+        animationSpec = androidx.compose.animation.core.spring(
+            dampingRatio = androidx.compose.animation.core.Spring.DampingRatioMediumBouncy,
+            stiffness = androidx.compose.animation.core.Spring.StiffnessLow
+        ),
+        label = "lumi_tap_scale"
+    )
+
     val isFullTextSpeech = !speechBubble.isNullOrBlank()
 
     androidx.compose.foundation.layout.Column(
         modifier = modifier
             .testTag("lumi_mascot")
             .graphicsLayer {
-                scaleX = focusScale
-                scaleY = focusScale
+                scaleX = focusScale * tapScale
+                scaleY = focusScale * tapScale
             }
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
-                onClick = onClick
+                onClick = {
+                    isTapped = true
+                    com.example.audio.SoundFxHelper.playPop()
+                    onClick()
+                }
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        LaunchedEffect(isTapped) {
+            if (isTapped) {
+                delay(300)
+                isTapped = false
+            }
+        }
         // Speech Bubble Banner (Above Mascot)
         if (isFullTextSpeech && speechBubble != null) {
             Surface(

@@ -72,7 +72,9 @@ data class UserPreferencesEntity(
     val activeLanguageCode: String = "es",
     val dailyGoalMinutes: Int = 10,
     val isSoundEnabled: Boolean = true,
-    val isNotificationsEnabled: Boolean = true
+    val isNotificationsEnabled: Boolean = true,
+    val totalStarsEarned: Int = 0,
+    val physicalBreaksCount: Int = 0
 )
 
 /**

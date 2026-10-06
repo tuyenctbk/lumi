@@ -58,19 +58,41 @@ import com.example.ui.theme.SleekOcean
 import com.example.ui.theme.SleekOceanDark
 import kotlinx.coroutines.delay
 
+import android.view.KeyEvent
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.foundation.focusable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.BorderStroke
+
 /**
  * SplashScreen
  *
  * Custom animated splash screen showing Lumi mascot with radiant ambient glow,
- * twinkling stardust canvas, floating bobbing animation, and smooth navigation.
+ * twinkling stardust canvas, floating bobbing animation, TV remote support, and smooth navigation.
  */
 @Composable
 fun SplashScreen(
     onSplashFinished: () -> Unit
 ) {
+    val context = LocalContext.current
+    val isTv = remember {
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
+        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
+        (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
+    }
+
+    val focusRequester = remember { FocusRequester() }
     val scale = remember { Animatable(0.85f) }
     var currentMood by remember { mutableStateOf(MascotMood.HAPPY) }
     var isSkipping by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        if (isTv) {
+            focusRequester.requestFocus()
+        }
+    }
 
     val infiniteTransition = rememberInfiniteTransition(label = "splash_stars")
     val starGlow by infiniteTransition.animateFloat(
@@ -84,8 +106,8 @@ fun SplashScreen(
     )
 
     val mascotBob by infiniteTransition.animateFloat(
-        initialValue = -6f,
-        targetValue = 6f,
+        initialValue = -8f,
+        targetValue = 8f,
         animationSpec = infiniteRepeatable(
             animation = tween(1500, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
@@ -114,6 +136,15 @@ fun SplashScreen(
         }
     }
 
+    fun triggerSkip() {
+        if (!isSkipping) {
+            isSkipping = true
+            currentMood = MascotMood.SUPERSTAR
+            SoundFxHelper.playPop()
+            onSplashFinished()
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -126,16 +157,26 @@ fun SplashScreen(
                     )
                 )
             )
+            .focusRequester(focusRequester)
+            .focusable()
+            .onKeyEvent { keyEvent ->
+                if (keyEvent.nativeKeyEvent.action == KeyEvent.ACTION_DOWN &&
+                    (keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_DPAD_CENTER ||
+                     keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_ENTER ||
+                     keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_BUTTON_A ||
+                     keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_SPACE)
+                ) {
+                    triggerSkip()
+                    true
+                } else {
+                    false
+                }
+            }
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
             ) {
-                if (!isSkipping) {
-                    isSkipping = true
-                    currentMood = MascotMood.SUPERSTAR
-                    SoundFxHelper.playPop()
-                    onSplashFinished()
-                }
+                triggerSkip()
             }
             .testTag("splash_screen")
     ) {
@@ -192,7 +233,7 @@ fun SplashScreen(
             ) {
                 LumiMascot(
                     mood = currentMood,
-                    speechBubble = "Hello! Let's Learn Together! ✨",
+                    speechBubble = stringResource(R.string.splash_mascot_greeting),
                     size = 150.dp
                 )
 
@@ -250,22 +291,18 @@ fun SplashScreen(
 
                 Surface(
                     shape = RoundedCornerShape(16.dp),
-                    color = Color.White.copy(alpha = 0.12f),
+                    color = Color.White.copy(alpha = 0.15f),
+                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.25f)),
                     modifier = Modifier.clickable {
-                        if (!isSkipping) {
-                            isSkipping = true
-                            currentMood = MascotMood.SUPERSTAR
-                            SoundFxHelper.playPop()
-                            onSplashFinished()
-                        }
+                        triggerSkip()
                     }
                 ) {
                     Text(
-                        text = stringResource(R.string.splash_tap_skip),
-                        fontSize = 11.sp,
-                        color = Color.White.copy(alpha = 0.9f),
+                        text = if (isTv) stringResource(R.string.splash_press_enter_tv) else stringResource(R.string.splash_tap_skip),
+                        fontSize = 12.sp,
+                        color = Color.White,
                         fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                     )
                 }
             }

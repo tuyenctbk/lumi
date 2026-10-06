@@ -90,6 +90,7 @@ fun ParentQrSyncScreen(
     viewModel: LumiViewModel,
     onBack: () -> Unit
 ) {
+    androidx.activity.compose.BackHandler { onBack() }
     val context = LocalContext.current
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()
