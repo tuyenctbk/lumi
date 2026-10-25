@@ -92,6 +92,7 @@ fun ExploreCategoryScreen(
 
     val words = remember(category) { viewModel.getWordsForCategory(category) }
     var selectedWord by remember { mutableStateOf<VocabularyItem?>(words.firstOrNull()) }
+    var wordForDetailsDialog by remember { mutableStateOf<VocabularyItem?>(null) }
     var confettiTrigger by remember { mutableStateOf(false) }
 
     var visualMode by remember { mutableStateOf(CardVisualMode.EMOJI) }
@@ -248,6 +249,7 @@ fun ExploreCategoryScreen(
                                 selectedWord = item
                                 viewModel.speakWord(item)
                                 confettiTrigger = true
+                                wordForDetailsDialog = item
                             },
                             onPlayRealSound = {
                                 selectedWord = item
@@ -285,6 +287,7 @@ fun ExploreCategoryScreen(
                                 selectedWord = item
                                 viewModel.speakWord(item)
                                 confettiTrigger = true
+                                wordForDetailsDialog = item
                             },
                             onPlayRealSound = {
                                 selectedWord = item
@@ -310,6 +313,7 @@ fun ExploreCategoryScreen(
                 size = if (isMobilePortrait) 85.dp else 110.dp,
                 onClick = {
                     selectedWord?.let {
+                        wordForDetailsDialog = it
                         viewModel.speakWord(it)
                     } ?: viewModel.speakLumi("Pick a card to hear its sound!")
                 }
@@ -317,5 +321,16 @@ fun ExploreCategoryScreen(
         }
 
         ConfettiCanvas(trigger = confettiTrigger)
+
+        wordForDetailsDialog?.let { item ->
+            com.example.ui.components.EnrichedWordDetailDialog(
+                item = item,
+                targetLanguage = targetLanguage,
+                viewModel = viewModel,
+                isMastered = wordProgressList.find { it.wordId == item.id }?.isMastered == true,
+                categoryColor = categoryColor,
+                onDismiss = { wordForDetailsDialog = null }
+            )
+        }
     }
 }

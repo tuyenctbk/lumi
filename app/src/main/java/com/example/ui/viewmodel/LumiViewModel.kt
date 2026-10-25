@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class LumiViewModel(
@@ -48,6 +49,36 @@ class LumiViewModel(
     val pixabayRepository: PixabayRepository = PixabayRepository(),
     val freeDictionaryRepository: FreeDictionaryRepository = FreeDictionaryRepository()
 ) : ViewModel() {
+
+    private val _enrichedWordDetails = MutableStateFlow<Map<String, EnrichedWordDetails>>(emptyMap())
+    val enrichedWordDetails: StateFlow<Map<String, EnrichedWordDetails>> = _enrichedWordDetails.asStateFlow()
+
+    private val _wordSentencePairs = MutableStateFlow<Map<String, List<SentencePair>>>(emptyMap())
+    val wordSentencePairs: StateFlow<Map<String, List<SentencePair>>> = _wordSentencePairs.asStateFlow()
+
+    fun loadWordDetails(word: String) {
+        val clean = word.lowercase().trim()
+        if (clean.isBlank() || _enrichedWordDetails.value.containsKey(clean)) return
+        viewModelScope.launch {
+            val details = freeDictionaryRepository.fetchEnrichedWordDetails(clean)
+            if (details != null) {
+                _enrichedWordDetails.update { current -> current + (clean to details) }
+            }
+        }
+    }
+
+    fun loadSentencePairs(word: String) {
+        val clean = word.lowercase().trim()
+        val langCode = _targetLanguage.value.code
+        val key = "${clean}_${langCode}"
+        if (clean.isBlank() || _wordSentencePairs.value.containsKey(key)) return
+        viewModelScope.launch {
+            val pairs = freeDictionaryRepository.fetchSentencePairs(clean, langCode)
+            if (pairs.isNotEmpty()) {
+                _wordSentencePairs.update { current -> current + (key to pairs) }
+            }
+        }
+    }
 
     private val _targetLanguage = MutableStateFlow(TargetLanguage.SPANISH)
     val targetLanguage: StateFlow<TargetLanguage> = _targetLanguage.asStateFlow()

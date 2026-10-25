@@ -24,10 +24,10 @@ data class FreesoundSoundItem(
 
 @JsonClass(generateAdapter = true)
 data class FreesoundPreviews(
-    @Json(name = "preview-hq-mp3") val previewHqMp3: String? = null,
-    @Json(name = "preview-lq-mp3") val previewLqMp3: String? = null,
-    @Json(name = "preview-hq-ogg") val previewHqOgg: String? = null,
-    @Json(name = "preview-lq-ogg") val previewLqOgg: String? = null
+    @param:Json(name = "preview-hq-mp3") val previewHqMp3: String? = null,
+    @param:Json(name = "preview-lq-mp3") val previewLqMp3: String? = null,
+    @param:Json(name = "preview-hq-ogg") val previewHqOgg: String? = null,
+    @param:Json(name = "preview-lq-ogg") val previewLqOgg: String? = null
 )
 
 // ==========================================
@@ -48,8 +48,8 @@ data class GiphyGifItem(
 
 @JsonClass(generateAdapter = true)
 data class GiphyImages(
-    @Json(name = "fixed_height") val fixedHeight: GiphyImageData? = null,
-    @Json(name = "downsized_medium") val downsizedMedium: GiphyImageData? = null,
+    @param:Json(name = "fixed_height") val fixedHeight: GiphyImageData? = null,
+    @param:Json(name = "downsized_medium") val downsizedMedium: GiphyImageData? = null,
     val original: GiphyImageData? = null
 )
 

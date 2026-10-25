@@ -31,9 +31,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.MicOff
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -44,6 +44,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -102,6 +103,7 @@ fun PronunciationPracticeScreen(
     val context = LocalContext.current
     val targetLanguage by viewModel.targetLanguage.collectAsState()
     val wordProgressList by viewModel.wordProgressList.collectAsState()
+    val enrichedDetailsMap by viewModel.enrichedWordDetails.collectAsState()
 
     // Pick 5 vocabulary items for practice
     val practiceItems: List<VocabularyItem> = remember(wordProgressList, targetLanguage) {
@@ -113,6 +115,15 @@ fun PronunciationPracticeScreen(
     val targetTranslation: String = currentItem?.translations?.get(targetLanguage.code)
         ?: currentItem?.englishWord
         ?: "Hello"
+
+    val cleanCurrentWord = currentItem?.englishWord?.lowercase()?.trim() ?: ""
+    val enriched = enrichedDetailsMap[cleanCurrentWord]
+
+    LaunchedEffect(cleanCurrentWord) {
+        if (cleanCurrentWord.isNotBlank()) {
+            viewModel.loadWordDetails(cleanCurrentWord)
+        }
+    }
 
     // Speech recognition states
     var isListening by remember { mutableStateOf(false) }
@@ -319,11 +330,36 @@ fun PronunciationPracticeScreen(
                             fontWeight = FontWeight.Medium
                         )
 
+                        val phonetic = enriched?.phonetic?.ifBlank { item.phonetic } ?: item.phonetic
+                        if (phonetic.isNotBlank()) {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = com.example.ui.theme.SleekPurple.copy(alpha = 0.12f),
+                                modifier = Modifier.padding(top = 4.dp)
+                            ) {
+                                Text(
+                                    text = phonetic,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = com.example.ui.theme.SleekPurple,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                                )
+                            }
+                        }
+
                         Spacer(modifier = Modifier.height(14.dp))
 
                         // Audio Playback
                         FocusableCard(
-                            onClick = { viewModel.speakLumi(targetTranslation, MascotMood.HAPPY) },
+                            onClick = {
+                                if (!enriched?.audioUrl.isNullOrBlank()) {
+                                    com.example.audio.SoundFxHelper.playSoundUrl(enriched.audioUrl!!) {
+                                        viewModel.speakLumi(targetTranslation, MascotMood.HAPPY)
+                                    }
+                                } else {
+                                    viewModel.speakLumi(targetTranslation, MascotMood.HAPPY)
+                                }
+                            },
                             shape = RoundedCornerShape(16.dp),
                             backgroundColor = SleekOcean.copy(alpha = 0.12f),
                             unfocusedBorderColor = SleekOcean.copy(alpha = 0.3f),
@@ -335,7 +371,7 @@ fun PronunciationPracticeScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Icon(imageVector = Icons.Default.VolumeUp, contentDescription = null, tint = SleekOceanDark)
+                                Icon(imageVector = Icons.AutoMirrored.Filled.VolumeUp, contentDescription = null, tint = SleekOceanDark)
                                 Text(stringResource(R.string.quiz_listen_audio), fontWeight = FontWeight.Bold, color = SleekOceanDark, fontSize = 13.sp)
                             }
                         }

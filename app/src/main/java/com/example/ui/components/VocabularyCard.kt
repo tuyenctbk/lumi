@@ -27,9 +27,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -88,7 +88,6 @@ fun VocabularyCard(
     val inputModeManager = androidx.compose.ui.platform.LocalInputModeManager.current
     val isTvDevice = remember {
         context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
-        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
         (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
     }
 
@@ -252,7 +251,7 @@ fun VocabularyCard(
                     ) {
                         Box(contentAlignment = Alignment.Center) {
                             Icon(
-                                imageVector = Icons.Default.VolumeUp,
+                                imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                                 contentDescription = "Pronounce Word",
                                 tint = if (isFocused) Color.White else primaryColor,
                                 modifier = Modifier.size(18.dp)

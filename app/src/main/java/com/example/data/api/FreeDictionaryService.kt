@@ -11,6 +11,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
 data class DictionaryPhonetic(
@@ -114,13 +115,26 @@ class FreeDictionaryRepository(
             .create(TatoebaApi::class.java)
     }
 
-    private val detailsCache = mutableMapOf<String, EnrichedWordDetails>()
+    private val detailsCache = ConcurrentHashMap<String, EnrichedWordDetails>()
+    private val sentenceCache = ConcurrentHashMap<String, List<SentencePair>>()
+
+    fun mapToTatoebaLangCode(code: String): String = when (code.lowercase().trim()) {
+        "es" -> "spa"
+        "fr" -> "fra"
+        "de" -> "deu"
+        "it" -> "ita"
+        "ja" -> "jpn"
+        "ko" -> "kor"
+        "zh" -> "cmn"
+        "vi" -> "vie"
+        "en" -> "eng"
+        else -> code.lowercase().trim()
+    }
 
     suspend fun fetchEnrichedWordDetails(word: String): EnrichedWordDetails? = withContext(Dispatchers.IO) {
         val cleanWord = word.lowercase().trim()
-        if (detailsCache.containsKey(cleanWord)) {
-            return@withContext detailsCache[cleanWord]
-        }
+        if (cleanWord.isBlank()) return@withContext null
+        detailsCache[cleanWord]?.let { return@withContext it }
 
         try {
             val entries = dictionaryApi.getWordInfo(cleanWord)
@@ -155,18 +169,29 @@ class FreeDictionaryRepository(
     }
 
     suspend fun fetchSentencePairs(word: String, targetLangCode: String): List<SentencePair> = withContext(Dispatchers.IO) {
+        val cleanWord = word.lowercase().trim()
+        if (cleanWord.isBlank()) return@withContext emptyList()
+        val tatoebaLang = mapToTatoebaLangCode(targetLangCode)
+        val cacheKey = "${cleanWord}_$tatoebaLang"
+
+        sentenceCache[cacheKey]?.let { return@withContext it }
+
         try {
-            val response = tatoebaApi.searchSentences(query = word, to = targetLangCode, limit = 5)
+            val response = tatoebaApi.searchSentences(query = cleanWord, to = tatoebaLang, limit = 5)
             val pairs = mutableListOf<SentencePair>()
             response.results?.forEach { item ->
                 val source = item.text ?: return@forEach
                 val translatedList = item.translations?.flatten() ?: emptyList()
-                val translation = translatedList.firstOrNull { it.lang == targetLangCode }?.text
-                    ?: translatedList.firstOrNull()?.text ?: ""
+                val translation = translatedList.firstOrNull {
+                    it.lang.equals(tatoebaLang, ignoreCase = true) || it.lang.equals(targetLangCode, ignoreCase = true)
+                }?.text ?: translatedList.firstOrNull()?.text ?: ""
                 val audioUrl = item.audios?.flatten()?.firstOrNull()?.url
                 if (source.isNotBlank() && translation.isNotBlank()) {
                     pairs.add(SentencePair(source, translation, audioUrl))
                 }
+            }
+            if (pairs.isNotEmpty()) {
+                sentenceCache[cacheKey] = pairs
             }
             pairs
         } catch (e: Exception) {

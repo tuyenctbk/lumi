@@ -79,16 +79,16 @@ fun SplashScreen(
     val context = LocalContext.current
     val isTv = remember {
         context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
-        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
         (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
     }
 
     val focusRequester = remember { FocusRequester() }
-    val scale = remember { Animatable(0.85f) }
+    val scale = remember { Animatable(0.75f) }
     var currentMood by remember { mutableStateOf(MascotMood.HAPPY) }
     var isSkipping by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
+        SoundFxHelper.playStarBurst()
         if (isTv) {
             focusRequester.requestFocus()
         }
@@ -105,11 +105,21 @@ fun SplashScreen(
         label = "star_glow"
     )
 
-    val mascotBob by infiniteTransition.animateFloat(
-        initialValue = -8f,
-        targetValue = 8f,
+    val orbitRotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = tween(1500, easing = FastOutSlowInEasing),
+            animation = tween(12000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "orbit_rotation"
+    )
+
+    val mascotBob by infiniteTransition.animateFloat(
+        initialValue = -10f,
+        targetValue = 10f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1400, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         ),
         label = "mascot_bob"
@@ -128,7 +138,10 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         scale.animateTo(
             targetValue = 1f,
-            animationSpec = tween(400, easing = FastOutSlowInEasing)
+            animationSpec = androidx.compose.animation.core.spring(
+                dampingRatio = androidx.compose.animation.core.Spring.DampingRatioMediumBouncy,
+                stiffness = androidx.compose.animation.core.Spring.StiffnessLow
+            )
         )
         delay(2200)
         if (!isSkipping) {
@@ -200,6 +213,20 @@ fun SplashScreen(
                 radius = size.width * 0.35f * starGlow,
                 center = Offset(size.width * 0.5f, size.height * 0.42f)
             )
+
+            val centerX = size.width * 0.5f
+            val centerY = size.height * 0.42f
+            val orbitRadius = size.width * 0.28f
+            for (i in 0..3) {
+                val angleRad = Math.toRadians((orbitRotation + (i * 90.0))).toFloat()
+                val ox = centerX + orbitRadius * kotlin.math.cos(angleRad)
+                val oy = centerY + (orbitRadius * 0.42f) * kotlin.math.sin(angleRad)
+                drawCircle(
+                    color = Color(0xFFFDE047).copy(alpha = 0.85f * starGlow),
+                    radius = 4f * starGlow,
+                    center = Offset(ox, oy)
+                )
+            }
 
             starPositions.forEachIndexed { index, pos ->
                 val radius = if (index % 2 == 0) 3.5f * starGlow else 2.5f * starGlow

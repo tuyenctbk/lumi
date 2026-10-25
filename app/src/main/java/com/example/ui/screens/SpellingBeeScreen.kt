@@ -22,10 +22,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.icons.automirrored.filled.Backspace
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -218,7 +218,7 @@ fun SpellingBeeScreen(
                                 modifier = Modifier.size(40.dp)
                             ) {
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    Icon(Icons.Default.VolumeUp, contentDescription = "Listen", tint = SleekOcean)
+                                    Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Listen", tint = SleekOcean)
                                 }
                             }
                             Spacer(modifier = Modifier.width(8.dp))
@@ -334,7 +334,7 @@ fun SpellingBeeScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = SleekCoral),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(Icons.Default.Backspace, contentDescription = stringResource(R.string.button_delete), tint = Color.White)
+                    Icon(Icons.AutoMirrored.Filled.Backspace, contentDescription = stringResource(R.string.button_delete), tint = Color.White)
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(stringResource(R.string.button_delete))
                 }

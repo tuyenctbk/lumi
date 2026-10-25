@@ -155,7 +155,6 @@ class SmartEngagementManager(private val context: Context) {
 
         // On Android TV leanback devices, suppress mobile sharing / rate prompts and only show updates if available
         val isTv = context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
-                   context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
                    (context.resources.configuration.uiMode.and(android.content.res.Configuration.UI_MODE_TYPE_MASK)) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
 
         if (isTv) {

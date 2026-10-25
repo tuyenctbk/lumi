@@ -105,15 +105,15 @@ class SpeechHelper(context: Context) {
         if (!isInitialized) return
 
         val locale = when (targetLanguage) {
-            TargetLanguage.SPANISH -> Locale("es", "ES")
-            TargetLanguage.FRENCH -> Locale("fr", "FR")
-            TargetLanguage.GERMAN -> Locale("de", "DE")
-            TargetLanguage.ITALIAN -> Locale("it", "IT")
-            TargetLanguage.JAPANESE -> Locale("ja", "JP")
-            TargetLanguage.KOREAN -> Locale("ko", "KR")
-            TargetLanguage.MANDARIN -> Locale("zh", "CN")
-            TargetLanguage.ENGLISH -> Locale("en", "US")
-            TargetLanguage.VIETNAMESE -> Locale("vi", "VN")
+            TargetLanguage.SPANISH -> Locale.forLanguageTag("es-ES")
+            TargetLanguage.FRENCH -> Locale.forLanguageTag("fr-FR")
+            TargetLanguage.GERMAN -> Locale.forLanguageTag("de-DE")
+            TargetLanguage.ITALIAN -> Locale.forLanguageTag("it-IT")
+            TargetLanguage.JAPANESE -> Locale.forLanguageTag("ja-JP")
+            TargetLanguage.KOREAN -> Locale.forLanguageTag("ko-KR")
+            TargetLanguage.MANDARIN -> Locale.forLanguageTag("zh-CN")
+            TargetLanguage.ENGLISH -> Locale.forLanguageTag("en-US")
+            TargetLanguage.VIETNAMESE -> Locale.forLanguageTag("vi-VN")
         }
 
         // Set clear native pronunciation

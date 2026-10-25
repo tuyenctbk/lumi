@@ -526,7 +526,7 @@ fun LumiMascot(
             }
         }
         // Speech Bubble Banner (Above Mascot)
-        if (isFullTextSpeech && speechBubble != null) {
+        if (isFullTextSpeech) {
             Surface(
                 shape = RoundedCornerShape(16.dp),
                 color = Color.White,

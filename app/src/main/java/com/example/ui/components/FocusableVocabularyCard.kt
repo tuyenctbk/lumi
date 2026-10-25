@@ -105,7 +105,6 @@ fun FocusableVocabularyCard(
     val inputModeManager = LocalInputModeManager.current
     val isTvDevice = remember {
         context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_LEANBACK) ||
-        context.packageManager.hasSystemFeature(android.content.pm.PackageManager.FEATURE_TELEVISION) ||
         (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_TYPE_MASK) == android.content.res.Configuration.UI_MODE_TYPE_TELEVISION
     }
 
