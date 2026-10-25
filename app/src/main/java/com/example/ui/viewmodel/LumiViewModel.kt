@@ -5,9 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.audio.SoundFxHelper
 import com.example.audio.SpeechHelper
+import com.example.data.api.FreeDictionaryRepository
 import com.example.data.api.FreesoundRepository
 import com.example.data.api.GiphyRepository
 import com.example.data.api.PixabayRepository
+import com.example.data.api.EnrichedWordDetails
+import com.example.data.api.SentencePair
 import com.example.data.db.BadgeEntity
 import com.example.data.db.DailyLearningStatsEntity
 import com.example.data.db.LearningSessionEntity
@@ -42,7 +45,8 @@ class LumiViewModel(
     private val speechHelper: SpeechHelper,
     val freesoundRepository: FreesoundRepository = FreesoundRepository(),
     val giphyRepository: GiphyRepository = GiphyRepository(),
-    val pixabayRepository: PixabayRepository = PixabayRepository()
+    val pixabayRepository: PixabayRepository = PixabayRepository(),
+    val freeDictionaryRepository: FreeDictionaryRepository = FreeDictionaryRepository()
 ) : ViewModel() {
 
     private val _targetLanguage = MutableStateFlow(TargetLanguage.SPANISH)
@@ -610,7 +614,8 @@ class LumiViewModel(
         private val speechHelper: SpeechHelper,
         private val freesoundRepository: FreesoundRepository = FreesoundRepository(),
         private val giphyRepository: GiphyRepository = GiphyRepository(),
-        private val pixabayRepository: PixabayRepository = PixabayRepository()
+        private val pixabayRepository: PixabayRepository = PixabayRepository(),
+        private val freeDictionaryRepository: FreeDictionaryRepository = FreeDictionaryRepository()
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -619,7 +624,8 @@ class LumiViewModel(
                 speechHelper,
                 freesoundRepository,
                 giphyRepository,
-                pixabayRepository
+                pixabayRepository,
+                freeDictionaryRepository
             ) as T
         }
     }

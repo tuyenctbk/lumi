@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.audio.SoundFxHelper
 import com.example.audio.SoundManager
 import com.example.audio.SpeechHelper
+import com.example.data.api.FreeDictionaryRepository
 import com.example.data.api.FreesoundRepository
 import com.example.data.api.GiphyRepository
 import com.example.data.api.PixabayRepository
@@ -33,6 +34,9 @@ class LumiApplication : Application() {
     lateinit var pixabayRepository: PixabayRepository
         private set
 
+    lateinit var freeDictionaryRepository: FreeDictionaryRepository
+        private set
+
     override fun onCreate() {
         super.onCreate()
         SoundFxHelper.initialize(this)
@@ -44,6 +48,7 @@ class LumiApplication : Application() {
         freesoundRepository = FreesoundRepository()
         giphyRepository = GiphyRepository()
         pixabayRepository = PixabayRepository()
+        freeDictionaryRepository = FreeDictionaryRepository()
 
         // Asynchronously seed initial vocabulary into Room DB
         kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {

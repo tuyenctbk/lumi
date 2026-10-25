@@ -66,7 +66,8 @@ class MainActivity : ComponentActivity() {
             speechHelper = app.speechHelper,
             freesoundRepository = app.freesoundRepository,
             giphyRepository = app.giphyRepository,
-            pixabayRepository = app.pixabayRepository
+            pixabayRepository = app.pixabayRepository,
+            freeDictionaryRepository = app.freeDictionaryRepository
         )
     }
 
